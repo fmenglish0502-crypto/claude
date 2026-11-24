@@ -18,7 +18,7 @@
 | 편 | 제목 | 대본 | 영상 | 게시 |
 |---|---|---|---|---|
 | 02 | 할머니를 밀친 여자의 충격적인 최후 | `scripts/02-karma-interview.md` | `output/02-karma-interview.mp4` | 유튜브 https://www.youtube.com/watch?v=xep_XDk6Ibs · 인스타 https://www.instagram.com/reel/DgHvfxTjwk5/ · 틱톡: 아래 참고 |
-| 03 | 할머니 밀친 여자의 복수, 라이브로 자폭하다 | `video/episodes/ep03.py` | `output/03-jimin-revenge.mp4` | 아직 (승인 대기) |
+| 03 | 할머니 밀친 여자의 복수, 라이브로 자폭하다 | `video/episodes/ep03.py` | `output/03-jimin-revenge.mp4` | 아직 (Uplika 업로드 완료 media id med_63f225a413b28cf2, 2026-11-26까지 유효. 승인 대기) |
 | 04 | 회장님의 진짜 정체? (03편 엔딩 떡밥) | 아직 | | |
 
 별도: `scripts/01-no-name-on-the-door.md`(좀비 벙커, 영상 없음), 소재 목록 `scripts/ideas.md`.

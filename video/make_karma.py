@@ -179,7 +179,7 @@ def bg_lobby(d, t):
     d.rectangle((0, 0, W, 1250), fill=(236, 226, 205))
     d.rectangle((0, 1250, W, H), fill=(170, 140, 110))
     d.rounded_rectangle((140, 480, 940, 640), radius=16, fill=(30, 60, 110))
-    d.text((540, 560), "한결그룹 최종 면접 대기실", font=font(54, "XB"), fill="white", anchor="mm")
+    d.text((540, 560), LOBBY_TEXT, font=font(54, "XB"), fill="white", anchor="mm")
     for x in (60, 330, 600, 870):
         d.rectangle((x, 1180, x + 150, 1210), fill=(90, 70, 60))
 
@@ -332,6 +332,7 @@ def caption(d, speaker, text, lt):
 SPK_COLOR = {"지민": (200, 40, 60), "서연": (50, 110, 210), "할머니": (120, 70, 160), "회장": (120, 70, 160),
              "비서": (40, 40, 50), "팀장": (90, 90, 100)}
 TITLE = ("할머니를 밀친 여자의", "충격적인 최후")
+LOBBY_TEXT = "한결그룹 최종 면접 대기실"
 END = ("다음 편", "지민의 복수?", "팔로우하고 다음 편 보기")
 
 
@@ -415,6 +416,7 @@ if os.environ.get("EP"):
     _spec.loader.exec_module(_ep)
     CHARS.update(getattr(_ep, "CHARS", {}))
     S, TITLE, END = _ep.S, _ep.TITLE, _ep.END
+    LOBBY_TEXT = getattr(_ep, "LOBBY_TEXT", LOBBY_TEXT)
 
 
 def render_scene(sc, lt):
