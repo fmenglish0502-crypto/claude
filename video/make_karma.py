@@ -4,6 +4,7 @@
 블록 캐릭터를 직접 그리고, 자막을 올리고, ffmpeg로 mp4를 만든다. 소리는 무음 트랙.
 """
 import math
+import os
 import subprocess
 import sys
 from functools import lru_cache
@@ -202,20 +203,43 @@ def bg_dark(d, t):
     d.rectangle((0, 0, W, H), fill=(15, 15, 20))
 
 
-BGS = {"bus": bg_busstop, "street": bg_street, "lobby": bg_lobby, "room": bg_room, "dark": bg_dark}
+def bg_office(d, t):
+    d.rectangle((0, 0, W, 1250), fill=(232, 236, 240))
+    d.rectangle((0, 1250, W, H), fill=(150, 150, 155))
+    d.rounded_rectangle((300, 380, 780, 470), radius=14, fill=(30, 60, 110))
+    d.text((540, 425), "한결그룹 마케팅팀", font=font(44, "XB"), fill="white", anchor="mm")
+    for x in (40, 380, 720):
+        d.rectangle((x + 60, 900, x + 260, 1040), fill=(40, 40, 50))
+        d.rectangle((x + 75, 915, x + 245, 1025), fill=(120, 180, 230))
+        d.rectangle((x + 145, 1040, x + 175, 1100), fill=(80, 80, 90))
+        d.rectangle((x, 1100, x + 320, 1140), fill=(190, 160, 120))
+
+
+def bg_night(d, t):
+    d.rectangle((0, 0, W, H), fill=(25, 28, 50))
+    d.rectangle((0, 1250, W, H), fill=(40, 35, 45))
+    d.rectangle((640, 520, 980, 760), fill=(90, 200, 255))
+    d.rectangle((700, 760, 920, 800), fill=(60, 60, 70))
+    d.text((810, 640), "편집중…", font=font(44, "XB"), fill=(20, 30, 60), anchor="mm")
+    d.polygon([(640, 760), (980, 760), (1080, 1250), (540, 1250)], fill=(45, 60, 95))
+
+
+BGS = {"bus": bg_busstop, "street": bg_street, "lobby": bg_lobby, "room": bg_room, "dark": bg_dark,
+       "office": bg_office, "night": bg_night}
 
 
 # ---------- 휴대폰 화면 ----------
-def overlay_phone(d, kind, lt):
+def overlay_phone(d, kind, lt, sc=None):
+    sc = sc or {}
     d.rounded_rectangle((220, 380, 860, 1320), radius=50, fill=(20, 20, 25), outline=(90, 90, 100), width=8)
     d.rounded_rectangle((250, 430, 830, 1280), radius=24, fill=(250, 250, 252))
     if kind == "views":
         d.rectangle((250, 430, 830, 780), fill=(60, 60, 70))
         d.polygon([(500, 540), (500, 680), (610, 610)], fill="white")
-        d.text((270, 810), "할머니 밀친 학생 실화냐", font=font(40, "XB"), fill="black")
-        views = int(min(1, lt / 1.5) * 100000)
+        d.text((270, 810), sc.get("feed_title", "할머니 밀친 학생 실화냐"), font=font(40, "XB"), fill="black")
+        views = int(min(1, lt / 1.5) * sc.get("feed_views", 100000))
         d.text((270, 870), f"조회수 {views:,}회", font=font(36), fill=(120, 120, 120))
-        for i, c in enumerate(["진짜 인성 무슨 일", "얼굴 다 나왔네 ㅋㅋ", "요즘 애들 무섭다"]):
+        for i, c in enumerate(sc.get("feed_comments", ["진짜 인성 무슨 일", "얼굴 다 나왔네 ㅋㅋ", "요즘 애들 무섭다"])):
             d.text((270, 960 + i * 90), "💬 " + c if False else "· " + c, font=font(36), fill=(60, 60, 60))
     elif kind == "blackbox":
         d.rectangle((250, 430, 830, 1280), fill=(30, 30, 30))
@@ -229,15 +253,46 @@ def overlay_phone(d, kind, lt):
         dd.ellipse((40, 230, 320, 680), outline=(255, 60, 60), width=10)
         d._image.paste(im.convert("RGB"), (250, 560))
     elif kind == "comments":
-        d.text((270, 460), "댓글 12,483개", font=font(40, "XB"), fill="black")
-        cm = ["진짜 범인 따로 있었네", "학생 미안해요ㅠㅠ 오해했어요", "새치기녀 최종 탈락ㅋㅋㅋ",
-              "회장님 레전드", "이게 인과응보지"]
+        d.text((270, 460), sc.get("comments_head", "댓글 12,483개"), font=font(40, "XB"), fill="black")
+        cm = sc.get("comments", ["진짜 범인 따로 있었네", "학생 미안해요ㅠㅠ 오해했어요", "새치기녀 최종 탈락ㅋㅋㅋ",
+                                 "회장님 레전드", "이게 인과응보지"])
         n = min(len(cm), int(lt / 0.6) + 1)
         for i in range(n):
             y = 540 + i * 140
             d.rounded_rectangle((270, y, 810, y + 115), radius=20, fill=(238, 240, 245))
             d.text((295, y + 57), cm[i], font=font(36), fill=(30, 30, 30), anchor="lm")
             d.text((780, y + 57), "♥", font=font(36), fill=(240, 60, 90), anchor="rm")
+    elif kind == "live":  # 라이브 방송 화면: 방송하는 사람 + 실시간 채팅
+        d.rectangle((250, 430, 830, 1280), fill=(35, 35, 45))
+        who = sc.get("live_char", "jimin")
+        im = char_final(who, "point", sc.get("live_expr", "angry"), 0, False, 0.75)
+        d._image.paste(im, (540 - im.width // 2, 1000 - im.height), im)
+        d.rounded_rectangle((270, 450, 380, 500), radius=10, fill=(230, 30, 50))
+        d.text((325, 475), "LIVE", font=font(32, "XB"), fill="white", anchor="mm")
+        d.text((400, 475), f"👁 {int(300 + lt * 900):,}" if False else f"시청 {int(300 + lt * 900):,}명",
+               font=font(30, "XB"), fill="white", anchor="lm")
+        chat = sc.get("chat", [])
+        n = min(len(chat), int(lt / 0.5) + 1)
+        for i, c in enumerate(chat[max(0, n - 4):n]):
+            y = 1010 + i * 64
+            d.rounded_rectangle((265, y, 815, y + 54), radius=14, fill=(0, 0, 0, 0) if False else (60, 60, 75))
+            d.text((285, y + 27), c, font=font(32, "XB"), fill="white", anchor="lm")
+    elif kind == "post":  # 커뮤니티 폭로글
+        d.rectangle((250, 430, 830, 520), fill=(40, 90, 200))
+        d.text((540, 475), sc.get("post_site", "직장인 커뮤니티"), font=font(36, "XB"), fill="white", anchor="mm")
+        f = font(42, "XB")
+        y = 560
+        for ln in wrap(sc.get("post_title", ""), f, 540):
+            d.text((275, y), ln, font=f, fill=(20, 20, 20))
+            y += 58
+        d.text((275, y + 10), sc.get("post_meta", ""), font=font(30), fill=(130, 130, 130))
+        y += 80
+        for ln in sc.get("post_body", []):
+            for l2 in wrap(ln, font(34), 540):
+                d.text((275, y), l2, font=font(34), fill=(50, 50, 50))
+                y += 50
+        likes = int(min(1, lt / 1.2) * sc.get("post_likes", 0))
+        d.text((275, 1220), f"추천 {likes:,}   댓글 {likes // 3:,}", font=font(34, "XB"), fill=(220, 50, 60))
 
 
 # ---------- 자막 ----------
@@ -275,13 +330,15 @@ def caption(d, speaker, text, lt):
 
 
 SPK_COLOR = {"지민": (200, 40, 60), "서연": (50, 110, 210), "할머니": (120, 70, 160), "회장": (120, 70, 160),
-             "비서": (40, 40, 50)}
+             "비서": (40, 40, 50), "팀장": (90, 90, 100)}
+TITLE = ("할머니를 밀친 여자의", "충격적인 최후")
+END = ("다음 편", "지민의 복수?", "팔로우하고 다음 편 보기")
 
 
 def title_bar(d, t):
     d.rectangle((0, 0, W, 300), fill=(0, 0, 0))
-    d.text((540, 120), "할머니를 밀친 여자의", font=font(70, "XB"), fill="white", anchor="mm")
-    d.text((540, 215), "충격적인 최후", font=font(84, "XB"), fill=(255, 60, 60), anchor="mm")
+    d.text((540, 120), TITLE[0], font=font(70, "XB"), fill="white", anchor="mm")
+    d.text((540, 215), TITLE[1], font=font(84, "XB"), fill=(255, 60, 60), anchor="mm")
 
 
 # ---------- 장면 ----------
@@ -349,6 +406,17 @@ S = [
 ]
 
 
+# 다른 편: EP=episodes/epXX.py 로 장면·제목·엔딩을 바꿔 끼운다.
+if os.environ.get("EP"):
+    import importlib.util
+
+    _spec = importlib.util.spec_from_file_location("episode", os.environ["EP"])
+    _ep = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(_ep)
+    CHARS.update(getattr(_ep, "CHARS", {}))
+    S, TITLE, END = _ep.S, _ep.TITLE, _ep.END
+
+
 def render_scene(sc, lt):
     img = Image.new("RGB", (W, H))
     d = ImageDraw.Draw(img)
@@ -379,11 +447,11 @@ def render_scene(sc, lt):
     if sc.get("fg"):
         fg_table(d, lt)
     if sc.get("phone"):
-        overlay_phone(d, sc["phone"], lt)
+        overlay_phone(d, sc["phone"], lt, sc)
     if sc.get("end"):
-        d.text((540, 820), "다음 편", font=font(70, "XB"), fill=(200, 200, 200), anchor="mm")
-        d.text((540, 960), "지민의 복수?", font=font(110, "XB"), fill=(255, 60, 60), anchor="mm")
-        d.text((540, 1180), "팔로우하고 다음 편 보기", font=font(56, "XB"), fill="white", anchor="mm")
+        d.text((540, 820), END[0], font=font(70, "XB"), fill=(200, 200, 200), anchor="mm")
+        d.text((540, 960), END[1], font=font(110 if len(END[1]) < 9 else 80, "XB"), fill=(255, 60, 60), anchor="mm")
+        d.text((540, 1180), END[2], font=font(56, "XB"), fill="white", anchor="mm")
     z = sc.get("zoom")
     if z:
         k = z[0] + (z[1] - z[0]) * min(1, lt / sc["dur"])
