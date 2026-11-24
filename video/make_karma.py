@@ -161,6 +161,9 @@ def bg_busstop(d, t):
     d.text((110, 845), "버스", font=font(52, "XB"), fill="white", anchor="mm")
 
 
+CUR_SC = {}
+
+
 def bg_street(d, t):
     d.rectangle((0, 0, W, H), fill=(150, 205, 245))
     off = int(t * 1400) % 400
@@ -171,6 +174,8 @@ def bg_street(d, t):
     for y in (300, 700, 1000, 1350):
         lx = (int(t * 2000) + y) % W
         d.line((lx, y, lx + 220, y), fill=(255, 255, 255), width=6)
+    if not CUR_SC.get("clock", True):
+        return
     d.rounded_rectangle((700, 330, 1000, 470), radius=20, fill=(255, 255, 255))
     d.text((850, 400), "09:58", font=font(80, "XB"), fill=(220, 40, 40), anchor="mm")
 
@@ -224,7 +229,22 @@ def bg_night(d, t):
     d.polygon([(640, 760), (980, 760), (1080, 1250), (540, 1250)], fill=(45, 60, 95))
 
 
-BGS = {"bus": bg_busstop, "street": bg_street, "lobby": bg_lobby, "room": bg_room, "dark": bg_dark,
+def bg_mansion(d, t):
+    d.rectangle((0, 0, W, 1250), fill=(120, 30, 45))
+    for x in range(0, W, 120):
+        d.rectangle((x, 300, x + 8, 1250), fill=(150, 45, 60))
+    d.rectangle((0, 1250, W, H), fill=(200, 170, 120))
+    d.polygon([(380, 1250), (700, 1250), (820, H), (260, H)], fill=(170, 25, 40))
+    d.line((540, 300, 540, 380), fill=(220, 190, 90), width=6)
+    d.ellipse((400, 370, 680, 470), fill=(240, 210, 100))
+    for i in range(7):
+        x = 420 + i * 40
+        d.polygon([(x, 465), (x + 14, 465), (x + 7, 505)], fill=(255, 245, 200))
+    d.rounded_rectangle((290, 560, 790, 660), radius=16, fill=(250, 235, 200))
+    d.text((540, 610), "회장님 팔순 생신 축하연", font=font(46, "XB"), fill=(120, 30, 45), anchor="mm")
+
+
+BGS = {"mansion": bg_mansion, "bus": bg_busstop, "street": bg_street, "lobby": bg_lobby, "room": bg_room, "dark": bg_dark,
        "office": bg_office, "night": bg_night}
 
 
@@ -243,14 +263,13 @@ def overlay_phone(d, kind, lt, sc=None):
             d.text((270, 960 + i * 90), "💬 " + c if False else "· " + c, font=font(36), fill=(60, 60, 60))
     elif kind == "blackbox":
         d.rectangle((250, 430, 830, 1280), fill=(30, 30, 30))
-        d.text((540, 500), "● REC  버스 블랙박스  08:12", font=font(34, "XB"), fill=(255, 70, 70), anchor="mm")
-        g = char_final("grandma", "fall", "shock", 0, False, 0.5)
-        j = char_final("jimin", "push", "angry", 0, False, 0.55)
+        d.text((540, 500), sc.get("bb_label", "● REC  버스 블랙박스  08:12"), font=font(34, "XB"), fill=(255, 70, 70), anchor="mm")
         im = Image.new("RGBA", (580, 700), (70, 75, 70, 255))
-        im.alpha_composite(j, (20, 260))
-        im.alpha_composite(g, (250, 440))
+        bb = sc.get("bb_chars") or [("jimin", "push", "angry", False, 0.55, 20, 260), ("grandma", "fall", "shock", False, 0.5, 250, 440)]
+        for (nm, po, ex, lf, scl, bx, by) in bb:
+            im.alpha_composite(char_final(nm, po, ex, 0, lf, scl), (bx, by))
         dd = ImageDraw.Draw(im)
-        dd.ellipse((40, 230, 320, 680), outline=(255, 60, 60), width=10)
+        dd.ellipse(sc.get("bb_circle", (40, 230, 320, 680)), outline=(255, 60, 60), width=10)
         d._image.paste(im.convert("RGB"), (250, 560))
     elif kind == "comments":
         d.text((270, 460), sc.get("comments_head", "댓글 12,483개"), font=font(40, "XB"), fill="black")
@@ -277,6 +296,21 @@ def overlay_phone(d, kind, lt, sc=None):
             y = 1010 + i * 64
             d.rounded_rectangle((265, y, 815, y + 54), radius=14, fill=(0, 0, 0, 0) if False else (60, 60, 75))
             d.text((285, y + 27), c, font=font(32, "XB"), fill="white", anchor="lm")
+    elif kind == "necklace":  # 가방 속에서 나온 목걸이
+        d.rectangle((250, 430, 830, 1280), fill=(245, 240, 230))
+        d.rounded_rectangle((330, 760, 750, 1160), radius=40, fill=(60, 110, 200), outline=(30, 60, 130), width=8)
+        d.arc((420, 640, 660, 880), 180, 360, fill=(30, 60, 130), width=14)
+        k = min(1, lt / 0.6)
+        cy = int(900 - 260 * k)
+        for i in range(14):
+            a = math.pi * (0.1 + 0.8 * i / 13)
+            x = 540 + int(150 * math.cos(a))
+            y = cy + int(150 * math.sin(a)) - 150
+            d.ellipse((x - 14, y - 14, x + 14, y + 14), fill=(230, 240, 255), outline=(150, 170, 220), width=3)
+        d.polygon([(540, cy + 30), (575, cy + 80), (540, cy + 140), (505, cy + 80)], fill=(120, 200, 255), outline=(255, 255, 255))
+        if int(lt * 6) % 2:
+            d.text((610, cy + 40), "✦", font=font(60, "XB"), fill=(255, 230, 120))
+        d.text((540, 520), "가방 안에서 나온 것은…", font=font(40, "XB"), fill=(40, 40, 40), anchor="mm")
     elif kind == "post":  # 커뮤니티 폭로글
         d.rectangle((250, 430, 830, 520), fill=(40, 90, 200))
         d.text((540, 475), sc.get("post_site", "직장인 커뮤니티"), font=font(36, "XB"), fill="white", anchor="mm")
@@ -330,7 +364,7 @@ def caption(d, speaker, text, lt):
 
 
 SPK_COLOR = {"지민": (200, 40, 60), "서연": (50, 110, 210), "할머니": (120, 70, 160), "회장": (120, 70, 160),
-             "비서": (40, 40, 50), "팀장": (90, 90, 100)}
+             "비서": (40, 40, 50), "팀장": (90, 90, 100), "사모님": (30, 30, 35), "태준": (40, 90, 70)}
 TITLE = ("할머니를 밀친 여자의", "충격적인 최후")
 LOBBY_TEXT = "한결그룹 최종 면접 대기실"
 END = ("다음 편", "지민의 복수?", "팔로우하고 다음 편 보기")
@@ -420,6 +454,8 @@ if os.environ.get("EP"):
 
 
 def render_scene(sc, lt):
+    CUR_SC.clear()
+    CUR_SC.update(sc)
     img = Image.new("RGB", (W, H))
     d = ImageDraw.Draw(img)
     BGS[sc["bg"]](d, lt)
@@ -460,6 +496,11 @@ def render_scene(sc, lt):
         cw, ch = int(W / k), int(H / k)
         x0, y0 = (W - cw) // 2, (H - ch) // 2
         img = img.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H), Image.BILINEAR)
+        d = ImageDraw.Draw(img)
+    if sc.get("sepia"):  # 회상 장면
+        g = img.convert("L")
+        img = Image.merge("RGB", (g.point(lambda v: min(255, int(v * 1.08 + 20))), g.point(lambda v: int(v * 0.95 + 10)),
+                                  g.point(lambda v: int(v * 0.75))))
         d = ImageDraw.Draw(img)
     if sc.get("flash") and lt < 0.25:
         img = Image.blend(img, Image.new("RGB", (W, H), "white"), 1 - lt / 0.25)

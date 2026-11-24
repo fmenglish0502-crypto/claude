@@ -19,16 +19,18 @@
 |---|---|---|---|---|
 | 02 | 할머니를 밀친 여자의 충격적인 최후 | `scripts/02-karma-interview.md` | `output/02-karma-interview.mp4` | 유튜브 https://www.youtube.com/watch?v=xep_XDk6Ibs · 인스타 https://www.instagram.com/reel/DgHvfxTjwk5/ · 틱톡: 아래 참고 |
 | 03 | 할머니 밀친 여자의 복수, 라이브로 자폭하다 | `video/episodes/ep03.py` | `output/03-jimin-revenge.mp4` | 유튜브 https://www.youtube.com/watch?v=jlTr04L14mo · 인스타 https://www.instagram.com/reel/DgHzJXiGbzD/ · 틱톡: 아래 참고 |
-| 04 | 회장님의 진짜 정체? (03편 엔딩 떡밥) | 아직 | | |
+| 04 | 목걸이 도둑으로 몰린 신입, 회장님의 충격 고백 | `video/episodes/ep04.py` | `output/04-chairman-secret-x1.5.mp4`(1.5배 63초) | 승인 대기 (Uplika 업로드 완료 med_57518f9011d5edcb, 2026-11-26 16:05Z까지 유효) |
+| 05 | 쫓겨난 손자의 역습? (04편 엔딩 떡밥: 태준·사모님) | 아직 | | |
 
 별도: `scripts/01-no-name-on-the-door.md`(좀비 벙커, 영상 없음), 소재 목록 `scripts/ideas.md`.
 
 ## 새 편 만드는 법 (그대로 따라 하면 됨)
 1. `video/episodes/ep03.py`를 복사해 `epXX.py`를 만든다. TITLE(상단 2줄), END(엔딩 3줄), S(장면 목록)만 바꾼다.
-   - 장면: dur, bg(bus/street/lobby/room/office/night/dark), chars[(이름,x,발y,크기,포즈,표정,왼쪽보기,움직임)], lines[(화자 또는 None=내레이션, 대사)]
+   - 장면: dur, bg(bus/street/lobby/room/office/night/mansion/dark), chars[(이름,x,발y,크기,포즈,표정,왼쪽보기,움직임)], lines[(화자 또는 None=내레이션, 대사)]
    - 포즈: stand/walk/point/push/phone/help/shock/fall. 표정: normal/smile/smirk/angry/shock/sad/sweat/calm. 움직임: bob/shake/run/("slide",거리)/None
    - 휴대폰 화면: phone="views"(feed_title,feed_views,feed_comments) / "comments"(comments_head,comments) / "live"(chat) / "post"(post_title,post_body…) / "blackbox"
-   - 연출: zoom=(시작,끝), flash=True(효과음 '둥'), fg=True(면접실 책상)
+   - 연출: zoom=(시작,끝), flash=True(효과음 '둥'), fg=True(면접실 책상), sepia=True(회상), clock=False(거리 배경 시계 숨김)
+   - blackbox는 bb_label, bb_chars[(이름,포즈,표정,왼쪽보기,크기,x,y)], bb_circle로 CCTV처럼 바꿀 수 있음. phone="necklace"(가방 속 목걸이)
    - 새 캐릭터는 파일 안 CHARS에 추가. 새 화자는 `video/tts_karma.py`의 VOICE(F1~F5 여성, M1~M5 남성)에 추가.
 2. 폰트: `pip download --no-deps koreanize-matplotlib` 후 whl을 풀면 NanumGothic ttf가 나옴 (스크래치 폴더에).
 3. 목소리 + 영상:
@@ -68,5 +70,5 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 
 ## 다음 할 일
 1. 02·03편 틱톡 예약 결과 확인 (list_posts). 실패했으면 다시 예약.
-2. 04편 「회장님의 진짜 정체?」 대본+영상 → 승인 → 게시.
+2. 04편 게시 승인받기 → 게시. 그다음 05편 「쫓겨난 손자의 역습?」.
 4. 반응 보기: 게시 후 하루 지나면 get_insights / list_replies로 조회수·댓글 정리해서 알려주기.
