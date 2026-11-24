@@ -24,8 +24,12 @@
   필요하면 `https://docs.vibemake.kr/downloads/<파일명>`으로 다시 받는다.
   예: reels-automation-5step.pdf, uplika-yt-start.pdf, video-6channels.pdf
 - 대본 1편 완성: `scripts/01-no-name-on-the-door.md`
+- 인과응보 편 대본 `scripts/02-karma-interview.md` + 영상 초안 `output/02-karma-interview.mp4`(78초, 소리 없음).
+  영상은 `video/make_karma.py`로 만든다(블록 캐릭터 + 자막, 나눔고딕 폰트는 pip의 koreanize-matplotlib 패키지에서 꺼내 씀).
+  사용자 반응: 인과응보 막장 드라마를 아주 좋아함 → 이 장르 위주로.
 
 ## 다음 할 일 후보
-- 1편 파트 2, 또는 인과응보 편 대본 (소재 목록은 `scripts/ideas.md`)
+- 인과응보 편 파트 2(지민의 복수), 음성·배경음 넣기
+- 1편 파트 2, 또는 다른 인과응보 대본 (소재 목록은 `scripts/ideas.md`)
 - 대본 → 영상 만들기 방법 정하기 (로블록스 녹화 + 음성 + 자막)
 - Uplika로 첫 영상 올리기 (먼저 보여주고 승인받기)
