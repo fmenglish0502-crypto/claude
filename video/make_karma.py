@@ -395,7 +395,11 @@ def render_scene(sc, lt):
         img = Image.blend(img, Image.new("RGB", (W, H), "white"), 1 - lt / 0.25)
         d = ImageDraw.Draw(img)
     lines = sc["lines"]
-    if lines:
+    if lines and sc.get("starts"):
+        idx = max(i for i, s in enumerate(sc["starts"]) if s <= lt)
+        spk, txt = lines[idx]
+        caption(d, spk, txt, lt - sc["starts"][idx])
+    elif lines:
         split = sc.get("lt_split")
         if split and len(lines) == 2:
             idx = 0 if lt < sc["dur"] * split else 1
@@ -410,11 +414,66 @@ def render_scene(sc, lt):
     return img
 
 
+def apply_voice(vdir):
+    """녹음 길이에 맞춰 장면·자막 시간을 다시 잡고, 대사를 한 줄로 이어 붙인 wav를 만든다."""
+    import json
+    import wave
+
+    import numpy as np
+
+    timing = json.load(open(f"{vdir}/timing.json"))
+    sr = 44100
+    clips = []  # (시작초, 파일)
+    t0 = 0.0
+    for si, sc in enumerate(S):
+        if sc["lines"]:
+            starts, cur = [], 0.25
+            for li in range(len(sc["lines"])):
+                key = f"{si}_{li}"
+                starts.append(cur if li else 0.0)
+                if key in timing:
+                    clips.append((t0 + max(cur if li else 0.25, 0.0), f"{vdir}/{key}.wav"))
+                    cur += timing[key] + 0.35
+                else:
+                    cur += 2.6
+            sc["starts"] = starts
+            sc["dur"] = max(cur + 0.25, 2.0)
+        if sc.get("flash"):
+            clips.append((t0, "BOOM"))
+        t0 += sc["dur"]
+    mix = np.zeros(int((t0 + 1) * sr), dtype=np.float32)
+    for st, path in clips:
+        if path == "BOOM":  # 반전 효과음: 낮은 '둥'
+            n = int(1.6 * sr)
+            tt = np.arange(n) / sr
+            clip = 0.6 * np.sin(2 * np.pi * 48 * tt) * np.exp(-tt * 2.2)
+        else:
+            with wave.open(path) as w:
+                rate = w.getframerate()
+                clip = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32767
+            if rate != sr:
+                clip = np.interp(np.arange(int(len(clip) * sr / rate)) * rate / sr, np.arange(len(clip)), clip)
+        a = int(st * sr)
+        mix[a:a + len(clip)] += clip[: len(mix) - a]
+    mix = np.clip(mix / max(1.0, np.abs(mix).max() / 0.95), -1, 1)
+    out = f"{vdir}/mix.wav"
+    with wave.open(out, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(sr)
+        w.writeframes((mix * 32767).astype(np.int16).tobytes())
+    return out
+
+
 def main():
+    import os
+
+    vdir = os.environ.get("VOICE_DIR")
+    audio = ["-i", apply_voice(vdir)] if vdir else ["-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo"]
     total = sum(s["dur"] for s in S)
     ff = subprocess.Popen(
         ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
-         "-i", "-", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo", "-shortest",
+         "-i", "-", *audio, "-shortest",
          "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
          "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", OUT], stdin=subprocess.PIPE)
     for sc in S:
