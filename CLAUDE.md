@@ -18,7 +18,7 @@
 | 편 | 제목 | 대본 | 영상 | 게시 |
 |---|---|---|---|---|
 | 02 | 할머니를 밀친 여자의 충격적인 최후 | `scripts/02-karma-interview.md` | `output/02-karma-interview.mp4` | 유튜브 https://www.youtube.com/watch?v=xep_XDk6Ibs · 인스타 https://www.instagram.com/reel/DgHvfxTjwk5/ · 틱톡: 아래 참고 |
-| 03 | 할머니 밀친 여자의 복수, 라이브로 자폭하다 | `video/episodes/ep03.py` | `output/03-jimin-revenge.mp4` | 아직 (Uplika 업로드 완료 media id med_63f225a413b28cf2, 2026-11-26까지 유효. 승인 대기) |
+| 03 | 할머니 밀친 여자의 복수, 라이브로 자폭하다 | `video/episodes/ep03.py` | `output/03-jimin-revenge.mp4` | 유튜브 https://www.youtube.com/watch?v=jlTr04L14mo · 인스타 https://www.instagram.com/reel/DgHzJXiGbzD/ · 틱톡 예약 post_ced911fbaa3fe419 (11:26Z, 자동 재시도) |
 | 04 | 회장님의 진짜 정체? (03편 엔딩 떡밥) | 아직 | | |
 
 별도: `scripts/01-no-name-on-the-door.md`(좀비 벙커, 영상 없음), 소재 목록 `scripts/ideas.md`.
@@ -48,7 +48,10 @@
 - 인스타: contentType reel, shareToFeed true, isAiGenerated true.
 - publish가 시간 초과되면 다시 올리지 말고 list_posts / get_post로 먼저 확인(중복 방지).
 - 틱톡 실패 코드 tiktok_creator_cap = Uplika 전체 한도 초과. scheduledAt 15분 뒤로 틱톡만 다시 publish하면 Uplika가 12시간 동안 매시간 자동 재시도. retry_post는 자동 재시도를 멈추니 쓰지 말 것.
-- 02편 틱톡: 예약 post_66a15d3b0b8a2b6d (10:49Z 첫 시도 실패, 2026-11-24 22:49Z까지 자동 재시도). 그 뒤에도 failed면 다시 예약.
+- 02편 틱톡: 예약 post_66a15d3b0b8a2b6d (10:49Z 첫 시도 실패, 2026-11-24 22:49Z까지 자동 재시도).
+- 03편 틱톡: 예약 post_ced911fbaa3fe419 (11:26Z, 2026-11-24 23:26Z까지 자동 재시도).
+- 둘 다 그 뒤에도 failed면 같은 media id로 틱톡만 다시 예약 (media는 2026-11-26까지 유효: 02=med_00a0ef8fbc904ddb, 03=med_63f225a413b28cf2).
+- scheduledAt은 반드시 '지금+20분'으로 (date 명령으로 계산 직후 바로 호출, 10분 미만이면 거절됨).
 - 게시 설명 예시: 훅 한 줄 + "파트 N 보고 싶으면 댓글로 'OO'" + 해시태그(#인과응보 #사이다 #숏드라마 #막장드라마 #반전 #shorts)
 
 ## 클라우드 환경 (이미 설정됨)
@@ -59,7 +62,6 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 저장소 `fmenglish0502-crypto/claude`(공개). 사용자가 main에 올리는 것을 승인함. 작업이 끝날 때마다 커밋하고 push.
 
 ## 다음 할 일
-1. 03편 게시 승인받고 3곳에 올리기.
+1. 02·03편 틱톡 예약 결과 확인 (list_posts). 실패했으면 다시 예약.
 2. 04편 「회장님의 진짜 정체?」 대본+영상 → 승인 → 게시.
-3. 02편 틱톡 재시도 결과 확인.
 4. 반응 보기: 게시 후 하루 지나면 get_insights / list_replies로 조회수·댓글 정리해서 알려주기.
