@@ -38,7 +38,10 @@
    python3 tts_karma.py <녹음폴더>
    VOICE_DIR=<녹음폴더> python3 make_karma.py <폰트폴더> ../output/XX-이름.mp4
    ```
-4. 장면 몇 개를 PNG로 뽑아 직접 눈으로 확인(`make_karma.py <폰트> <출력접두어> 2,5,9`)한 뒤 사용자에게 보낸다.
+4. **속도: 시청자 피드백 '느리다' → 1.5배속이 기본.** 완성 후 아래로 변환해서 올린다(목소리 높낮이 유지):
+   `ffmpeg -i XX.mp4 -filter_complex "[0:v]setpts=PTS/1.5,fps=30[v];[0:a]atempo=1.5[a]" -map "[v]" -map "[a]" -c:v libx264 -crf 20 -pix_fmt yuv420p -c:a aac -movflags +faststart XX-x1.5.mp4`
+   02·03편 1.5배 버전: `output/02-karma-interview-x1.5.mp4`(64초), `output/03-jimin-revenge-x1.5.mp4`(68초). 사용자 확인 대기.
+5. 장면 몇 개를 PNG로 뽑아 직접 눈으로 확인(`make_karma.py <폰트> <출력접두어> 2,5,9`)한 뒤 사용자에게 보낸다.
 
 ## 게시하는 법 (Uplika 커넥터)
 - 계정(전부 active): 유튜브 레이지오너 `conn_80fcdb1e67921088`, 틱톡 동그란아보카도 `conn_a2e4d86dacf4fc0d`, 인스타 penguin.4736671 `conn_e7d4400461ac67f8`.
