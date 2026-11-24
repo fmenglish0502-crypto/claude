@@ -18,7 +18,7 @@
 | 편 | 제목 | 대본 | 영상 | 게시 |
 |---|---|---|---|---|
 | 02 | 할머니를 밀친 여자의 충격적인 최후 | `scripts/02-karma-interview.md` | `output/02-karma-interview.mp4` | 유튜브 https://www.youtube.com/watch?v=xep_XDk6Ibs · 인스타 https://www.instagram.com/reel/DgHvfxTjwk5/ · 틱톡: 아래 참고 |
-| 03 | 할머니 밀친 여자의 복수, 라이브로 자폭하다 | `video/episodes/ep03.py` | `output/03-jimin-revenge.mp4` | 유튜브 https://www.youtube.com/watch?v=jlTr04L14mo · 인스타 https://www.instagram.com/reel/DgHzJXiGbzD/ · 틱톡 예약 post_ced911fbaa3fe419 (11:26Z, 자동 재시도) |
+| 03 | 할머니 밀친 여자의 복수, 라이브로 자폭하다 | `video/episodes/ep03.py` | `output/03-jimin-revenge.mp4` | 유튜브 https://www.youtube.com/watch?v=jlTr04L14mo · 인스타 https://www.instagram.com/reel/DgHzJXiGbzD/ · 틱톡: 아래 참고 |
 | 04 | 회장님의 진짜 정체? (03편 엔딩 떡밥) | 아직 | | |
 
 별도: `scripts/01-no-name-on-the-door.md`(좀비 벙커, 영상 없음), 소재 목록 `scripts/ideas.md`.
@@ -40,7 +40,7 @@
    ```
 4. **속도: 시청자 피드백 '느리다' → 1.5배속이 기본.** 완성 후 아래로 변환해서 올린다(목소리 높낮이 유지):
    `ffmpeg -i XX.mp4 -filter_complex "[0:v]setpts=PTS/1.5,fps=30[v];[0:a]atempo=1.5[a]" -map "[v]" -map "[a]" -c:v libx264 -crf 20 -pix_fmt yuv420p -c:a aac -movflags +faststart XX-x1.5.mp4`
-   02·03편 1.5배 버전: `output/02-karma-interview-x1.5.mp4`(64초), `output/03-jimin-revenge-x1.5.mp4`(68초). 사용자 확인 대기.
+   02·03편 1.5배 버전: `output/02-karma-interview-x1.5.mp4`(64초), `output/03-jimin-revenge-x1.5.mp4`(68초). 틱톡에 이 버전 사용 중.
 5. 장면 몇 개를 PNG로 뽑아 직접 눈으로 확인(`make_karma.py <폰트> <출력접두어> 2,5,9`)한 뒤 사용자에게 보낸다.
 
 ## 게시하는 법 (Uplika 커넥터)
@@ -51,9 +51,11 @@
 - 인스타: contentType reel, shareToFeed true, isAiGenerated true.
 - publish가 시간 초과되면 다시 올리지 말고 list_posts / get_post로 먼저 확인(중복 방지).
 - 틱톡 실패 코드 tiktok_creator_cap = Uplika 전체 한도 초과. scheduledAt 15분 뒤로 틱톡만 다시 publish하면 Uplika가 12시간 동안 매시간 자동 재시도. retry_post는 자동 재시도를 멈추니 쓰지 말 것.
-- 02편 틱톡: 예약 post_66a15d3b0b8a2b6d (10:49Z 첫 시도 실패, 2026-11-24 22:49Z까지 자동 재시도).
-- 03편 틱톡: 예약 post_ced911fbaa3fe419 (11:26Z, 2026-11-24 23:26Z까지 자동 재시도).
-- 둘 다 그 뒤에도 failed면 같은 media id로 틱톡만 다시 예약 (media는 2026-11-26까지 유효: 02=med_00a0ef8fbc904ddb, 03=med_63f225a413b28cf2).
+- 틱톡은 1.5배 버전으로 교체함(옛 예약 2개는 삭제). 계속 tiktok_creator_cap(Uplika 쪽 한도)으로 실패 중.
+  - 02편 1.5배: post_b39c6bbc216503fd (16:19Z 예약, media med_be0a8ba6b1b1b367)
+  - 03편 1.5배: post_7f3645d9030ddf5e (16:34Z 예약, media med_6bfba9f6fd5c70a0)
+  - 예약 후 12시간 동안 매시간 자동 재시도. 그 뒤에도 failed면: 옛 예약을 delete_post로 지우고 같은 media로 틱톡만 다시 예약 (media는 2026-11-26 15:58Z까지 유효, 지나면 다시 업로드).
+  - 며칠째 계속 안 되면 사용자에게 "틱톡 앱에서 직접 올리기"를 제안(그때는 Uplika 예약을 먼저 지워서 중복 방지).
 - scheduledAt은 반드시 '지금+20분'으로 (date 명령으로 계산 직후 바로 호출, 10분 미만이면 거절됨).
 - 게시 설명 예시: 훅 한 줄 + "파트 N 보고 싶으면 댓글로 'OO'" + 해시태그(#인과응보 #사이다 #숏드라마 #막장드라마 #반전 #shorts)
 
