@@ -30,6 +30,13 @@
   모델 받기는 HF_HUB_DISABLE_XET=1 필요. 네트워크에 huggingface.co, us.aws.cdn.hf.co, cas-bridge.xethub.hf.co 허용됨.
   사용자 반응: 인과응보 막장 드라마를 아주 좋아함 → 이 장르 위주로.
 
+## 게시 기록
+- 02편 (2026-11-24): 유튜브 https://www.youtube.com/watch?v=xep_XDk6Ibs , 인스타 https://www.instagram.com/reel/DgHvfxTjwk5/
+  틱톡은 Uplika 틱톡 한도(tiktok_creator_cap)로 실패 → 예약 게시 post_66a15d3b0b8a2b6d 로 Uplika가 자동 재시도 중. get_post로 확인.
+- 업로드: media_presign → curl PUT(네트워크에 s3.us-west-004.backblazeb2.com 허용됨) → media_complete → publish.
+- 유튜브 채널의 "아동용 여부"가 미설정 → 사용자가 YouTube Studio(설정→채널→고급 설정)에서 정해야 함.
+- GitHub 저장소는 공개. 사용자가 올리는 것 승인함.
+
 ## 다음 할 일 후보
 - 목소리 버전 피드백 받기(목소리 바꾸기, 속도, 길이 줄이기)
 - 인과응보 편 파트 2(지민의 복수)
