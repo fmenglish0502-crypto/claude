@@ -88,17 +88,33 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 ## GitHub
 저장소 `fmenglish0502-crypto/claude`(공개). 사용자가 main에 올리는 것을 승인함. 작업이 끝날 때마다 커밋하고 push.
 
-## 다음 할 일
-1. (틱톡은 사용자가 직접 올림. 확인할 것 없음)
-2. **보복운전 빌런 1화** 게시 완료: 유튜브 https://www.youtube.com/watch?v=BQR4tfNIzos · 인스타 https://www.instagram.com/reel/DgKG49rh8S8/ (AI 합성 표시 켬). 영상 `output/road01-x1.5.mp4`, 그림 `output/photos/road01/`. 다음 화 떡밥: 버스 쩍벌 빌런.
-   지금 진행: 알박기 1화(`video/episodes/alba01.py`) AI 실사 제작 → 사용자 승인 → 게시.
-   **AI 실사 만드는 법:** 편 파일 장면에 photo="영어 설명", move=zoomin/zoomout/panl/panr/shake, sfx=[(글자,x,y,크기,기울기)].
-   `EP=episodes/xx.py HF_HUB_DISABLE_XET=1 python3 gen_photos.py <그림폴더>` (한 장 약 40초) → tts_karma.py → `PHOTO_DIR=<그림폴더> VOICE_DIR=... make_karma.py`.
-   인물 생김새는 편 파일 맨 위 변수(예: SANG="...")로 매 장면 같은 문장을 넣어 비슷하게 유지. 유튜브 containsSyntheticMedia=true.
-   다음 대본들: `scripts/series-batch-01.md`(9개, 장면표 완성) + `scripts/series-batch-02-todo.md`(6개, 줄거리만 — 장면표로 써야 함)
-   batch-01 목록:(알박기, 새치기, 종량제, 악플, AI커닝, 시집살이, 돈지랄, 허세, 바람둥이) — 순서대로 AI 실사로 만들기.
-   그다음 시리즈 후보(Claude 제안): 식당 별점 협박 진상 손님 (scripts/ideas.md 맨 아래).
-   - 웹툰풍 시험 코드 `video/style_test_webtoon.py`, AI 시험 코드 `video/style_test_ai.py`(LCM_Dreamshaper_v7, MIT, CPU. pip install torch diffusers transformers accelerate 필요). AI 실사로 가면 유튜브 containsSyntheticMedia=true.
-3. 주차 빌런 5화(최사장의 복수) 만들어두기 — 게시는 반응 보고.
-4. 인과응보 06편(5화)은 보류 중. 1~4화 반응(get_insights)을 보고 좋아지면 사용자에게 올릴지 물어본다.
-5. 반응 보기: 게시 후 하루 지나면 get_insights / list_replies로 조회수·댓글 정리해서 알려주기.
+## 다음 할 일 (2026-11-25 인계 시점 기준, 위에서부터 순서대로)
+
+### 지금 진행 중이던 것
+1. **알박기 1화** (`video/episodes/alba01.py`, AI 실사): 그림 15장 중 일부만 그려진 채 세션이 끝났을 수 있음.
+   - 그려진 그림은 `output/photos/alba01/`에 저장해 둠(00.png~). gen_photos.py는 이미 있는 그림은 건너뛰니까
+     `cd video && EP=episodes/alba01.py HF_HUB_DISABLE_XET=1 python3 gen_photos.py ../output/photos/alba01` 로 이어서 그리면 됨.
+   - 그다음 tts_karma.py → `PHOTO_DIR=../output/photos/alba01 VOICE_DIR=<녹음폴더> python3 make_karma.py <폰트> ../output/alba01.mp4` → 1.5배.
+   - 장면 몇 장 눈으로 확인 → 사용자에게 영상 + 제목·설명 보여주고 "네" 받으면 유튜브·인스타 게시(containsSyntheticMedia=true), 틱톡은 파일+글 전달.
+   - 게시 글: 제목 "국가사업에 알박기한 집주인, 결국 0원 된 사연 #shorts" / 설명 "협상 일곱 번, 열 배 아니면 안 판다던 집주인… 각서 한 장이 모든 걸 바꿨다 😱 여러분이 본 알박기 썰 댓글로 👇 #알박기 #참교육 #사이다 #인과응보 #숏드라마 #shorts"
+
+### 시리즈별 다음 화 (틀: 시리즈당 1~4화 게시 + 틱톡 합본, 5화는 만들어두고 반응 보고 게시)
+| 시리즈 | 그림체 | 게시된 화 | 다음 할 일 |
+|---|---|---|---|
+| 인과응보 (서연·회장님) | 블록 | 1~4화 (+합본) | 5화(06) 완성·보류. 반응 좋으면 사용자에게 물어보고 게시 |
+| 주차 빌런 (하은·최사장) | 블록 | 1~4화 (+합본) | 5화 「최사장의 복수?」 만들어두기(게시 보류) |
+| 보복운전 (강상철) | AI 실사 | 1화 | 2~4화 만들기 (2화 떡밥: 버스 쩍벌 빌런) → 게시 → 합본 |
+| 알박기 | AI 실사 | 0 | 1화 마무리(위) → 2~4화 (2화 떡밥: 상가 알박기 빌런) |
+| batch-01 나머지 8개 | AI 실사 | 0 | `scripts/series-batch-01.md` 순서대로 (새치기, 종량제, 악플, AI커닝, 시집살이, 돈지랄, 허세, 바람둥이) |
+| batch-02 6개 | AI 실사 | 0 | `scripts/series-batch-02-todo.md` 줄거리 → 장면표 대본으로 쓰기 |
+
+### AI 실사 만드는 법 (요약)
+- 편 파일 장면에 photo="영어 설명"(인물 생김새 문장은 맨 위 변수로 매 장면 반복), move=zoomin/zoomout/panl/panr/shake, sfx=[(글자,x,y,크기,기울기)].
+- 필요 설치: `pip install torch diffusers transformers accelerate supertonic==1.3.1` (모델은 huggingface에서 자동 다운로드, HF_HUB_DISABLE_XET=1).
+- 그림 1장 약 40초(다른 작업과 동시에 돌리면 느려짐). 그린 그림은 `output/photos/<편>/`에 저장해 두기(세션 끝나면 스크래치는 사라짐).
+- 새 화자는 `video/tts_karma.py` VOICE에, 이름표 색은 make_karma.py SPK_COLOR에 추가.
+
+### 늘 할 일
+- 반응 보기: get_insights / list_replies로 조회수·댓글 정리해서 알려주기 (특히 5화 보류분 판단용).
+- 매 작업 끝에 인계 메모 업데이트 + 커밋 + push.
+- 새 세션 시작 문장은 `START.md`.
