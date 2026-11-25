@@ -96,6 +96,8 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
   - 알박기 1화: 유튜브 https://www.youtube.com/watch?v=mFp75WYrCng · 인스타 https://www.instagram.com/reel/DgKNnugT3vB/
   - 보복운전 2화: 인스타 https://www.instagram.com/reel/DgKOyzrQkVr/ · 유튜브는 채널 하루 한도로 실패 → 예약 post_599336d8d56aa2b5 (11-26 10:00Z)
   - 알박기 2화: 인스타 post_f5c6b05871678df1 · 유튜브 예약 post_08f79e898b06cc83 (11-26 11:00Z)
+  - 보복운전 3화: 인스타 post_3cff4bca9db81ea0 · 유튜브 예약 post_393d5c5cde09cd3e (11-26 12:00Z)
+  - 알박기 3화: 인스타 게시 · 유튜브 예약 11-26 13:00Z
   - **유튜브 채널 하루 업로드 한도** (rate_limited "exceeded the number of videos"): 11-25에 9편쯤 올리고 막힘. 한도는 시간이 지나면 풀림.
     → 하루에 유튜브는 몇 편만. 남은 편은 **인스타는 완성 즉시, 유튜브는 유튜브 전용 예약 글로 다음 날 1시간 간격**
     (road03 11-26 12:00Z, alba03 13:00Z, road04 14:00Z, alba04 15:00Z). 예약 실패 시 retry_post 또는 다음 날로 update_post.
