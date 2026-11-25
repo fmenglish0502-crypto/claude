@@ -85,6 +85,9 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 
 ## 다음 할 일
 1. (틱톡은 사용자가 직접 올림. 확인할 것 없음)
-2. 주차 빌런 2화 만들기 → 1.5배 → 사용자 OK → 유튜브·인스타 게시, 틱톡은 파일+글 전달.
-3. 인과응보 06편(5화)은 보류 중. 1~4화 반응(get_insights)을 보고 좋아지면 사용자에게 올릴지 물어본다.
-4. 반응 보기: 게시 후 하루 지나면 get_insights / list_replies로 조회수·댓글 정리해서 알려주기.
+2. **다음 새 시리즈: 보복운전 빌런 참교육** — 1화 대본 `scripts/road01.md` 완성. 그림체는 사용자가 시험본(웹툰풍 A / AI 실사 B, `output/style-test/`)을 보고 고르면 그 방식으로 영상화.
+   그다음 시리즈 후보(Claude 제안): 식당 별점 협박 진상 손님 (scripts/ideas.md 맨 아래).
+   - 웹툰풍 시험 코드 `video/style_test_webtoon.py`, AI 시험 코드 `video/style_test_ai.py`(LCM_Dreamshaper_v7, MIT, CPU. pip install torch diffusers transformers accelerate 필요). AI 실사로 가면 유튜브 containsSyntheticMedia=true.
+3. 주차 빌런 2화 만들기 → 1.5배 → 사용자 OK → 유튜브·인스타 게시, 틱톡은 파일+글 전달.
+4. 인과응보 06편(5화)은 보류 중. 1~4화 반응(get_insights)을 보고 좋아지면 사용자에게 올릴지 물어본다.
+5. 반응 보기: 게시 후 하루 지나면 get_insights / list_replies로 조회수·댓글 정리해서 알려주기.
