@@ -19,7 +19,7 @@ OFF = "korean man in his 30s, district office enforcement officer, navy vest wit
 S = [
     # --- 첫 장면: 오해로 몰아붙이기 (훅) ---
     dict(dur=3.0, photos=[f"{NB1} yelling and pointing at {JI}, face to face, villa entrance at night",
-                          f"extreme close-up of {NB1}, furious, mouth wide open yelling!"],
+                          f"close-up portrait of {NB1}, furious, mouth wide open yelling, single person!*"],
          lines=[("이웃1", "1층 아가씨! 분리수거 안 할 거야?!")]),
     dict(dur=2.5, photos=[f"close-up portrait of {JI}, shocked and hurt, teary eyes"],
          lines=[("지원", "저 아니에요… 제 봉투에 누가…")]),

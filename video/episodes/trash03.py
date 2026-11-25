@@ -17,8 +17,8 @@ YO = "young korean man in his 30s, glasses, plain gray sweater, accountant"
 
 S = [
     # --- 첫 장면: 대화 훅 ---
-    dict(dur=3.0, photos=[f"{HAN} shouting at {JI} in front of neighbors at a villa meeting, finger pointing",
-                          f"extreme close-up of {HAN}, angry, yelling!"],
+    dict(dur=3.0, photos=[f"wide shot, {HAN} shouting and pointing her finger at {JI}, two women facing each other in a villa hallway",
+                          f"close-up portrait of {HAN}, angry, mouth open yelling, single person!*"],
          lines=[("한미숙", "너 지금 내가 돈 빼돌렸다는 거야?!")]),
     dict(dur=2.5, photos=[f"close-up portrait of {JI}, calm but tense"],
          lines=[("지원", "장부만 보여달라는 거예요.")]),
@@ -53,7 +53,7 @@ S = [
          lines=[("한미숙", "빌린 거야! 갚으려고 했어!")]),
     dict(dur=3.0, photos=[f"{NB1} and {NB2} glaring at {HAN}, villa meeting room", f"close-up portrait of {NB1}, furious"],
          lines=[("이웃1", "당장 돌려놔요! 총무도 내려놓고!")]),
-    dict(dur=3.0, photos=[f"{NB1} bowing to {JI} apologetically", f"close-up portrait of {JI}, gentle smile"],
+    dict(dur=3.0, photos=[f"wide shot, {NB1} bowing apologetically to {JI}, two women in a villa hallway", f"close-up portrait of {JI}, gentle smile"],
          lines=[("이웃1", "지원 씨, 또 오해했네. 미안해요."), ("지원", "모두의 돈은 모두가 볼 수 있어야죠.")]),
     # --- 떡밥 ---
     dict(dur=3.0, photos=["rooftop door of a korean villa locked with a heavy new padlock and chain, staircase, no people"],

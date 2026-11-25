@@ -26,7 +26,7 @@ pipe, STYLE, STEPS, GS, NEG = g["pipe"], g["STYLE"], g["STEPS"], g["GS"], g["NEG
 for key in keys:
     name, _, seed = key.partition(":")
     i, k = map(int, name.split("_"))
-    prompt = ep.S[i]["photos"][k]
+    prompt = ep.S[i]["photos"][k].rstrip("!<*")
     seed = int(seed) if seed else 1000 + i * 10 + k + 500
     kw = {"negative_prompt": NEG} if NEG else {}
     style = STYLE

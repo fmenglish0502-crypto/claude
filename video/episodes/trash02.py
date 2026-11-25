@@ -18,7 +18,7 @@ AG = "kind korean man in his 40s, real estate agent, navy suit, glasses"
 S = [
     # --- 첫 장면: 대화 훅 ---
     dict(dur=3.0, photos=[f"{MJ} glaring down at {JI} at a villa doorway, tense confrontation",
-                          f"extreme close-up of {MJ}, cold arrogant glare!"],
+                          f"close-up portrait of {MJ}, cold arrogant glare, single person!*"],
          lines=[("한미자", "우리 동생 과태료 물게 한 게 너야?")]),
     dict(dur=2.5, photos=[f"close-up portrait of {JI}, nervous but standing firm"],
          lines=[("지원", "잘못은 동생분이 하셨잖아요.")]),

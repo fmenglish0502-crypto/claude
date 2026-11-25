@@ -19,7 +19,7 @@ FF = "korean male firefighter in his 40s, orange fire uniform, helmet under arm"
 S = [
     # --- 첫 장면: 대화 훅 ---
     dict(dur=3.0, photos=[f"{HAN} blocking a locked rooftop door with her arms spread, {JI} in front of her, narrow staircase",
-                          f"extreme close-up of {HAN}, hostile glare!"],
+                          f"close-up portrait of {HAN}, hostile glare, single person!*"],
          lines=[("한미숙", "내 장독 건드리기만 해 봐!")]),
     dict(dur=2.5, photos=[f"close-up portrait of {JI}, serious, worried"],
          lines=[("지원", "옥상은 모두가 쓰는 공간이에요.")]),
@@ -35,7 +35,7 @@ S = [
     dict(dur=2.5, sepia=True, photos=[f"close-up portrait of {JI}, worried, looking up at a locked door"],
          lines=[("지원", "불이라도 나면 어디로 피하지…")]),
     # --- 소방 점검 날 ---
-    dict(dur=3.0, flash=True, photos=[f"{FF} walking up a villa staircase with a clipboard", f"close-up portrait of {FF}, serious"],
+    dict(dur=3.0, flash=True, photos=[f"{FF} walking up a quiet villa staircase with a clipboard, daytime, no fire, no smoke", f"close-up portrait of {FF}, serious, plain indoor background, no fire"],
          lines=[("소방관", "정기 소방 점검 나왔습니다. 옥상 문 열어 주세요.")]),
     dict(dur=2.5, photos=[f"close-up portrait of {HAN}, angry, pointing at someone off-screen!"],
          lines=[("한미숙", "너지? 네가 신고했지?!")]),
