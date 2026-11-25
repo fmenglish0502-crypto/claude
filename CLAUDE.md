@@ -94,7 +94,8 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 1. **참조 스타일 2차 시험판(배우 사진 + 대화 훅) → 사용자 반응 받기.** 생활 민폐 5화 「구태만이 이사 왔다?」(독서실 자리 맡기)
    `video/episodes/line05.py`, 영상 `output/line05-ref-x1.5.mp4`(55초). **게시 안 함(5화 보류 규칙).**
    - 사용자가 "좋다"고 하면 이후 새 시리즈는 STYLE="ref"로 만든다. "별로"면 무엇이 별로인지 듣고 고친다.
-1-2. **종량제 봉투 빌런 1~4화 제작 (2026-11-26).** `video/episodes/trash01~04.py`, 영상 `output/trash0X-x1.5.mp4`, 그림 `output/photos/trash0X/`.
+1-2. **종량제 봉투 빌런 1~4화 완성 (2026-11-25 저녁) → 사용자에게 보냄, 반응 대기.** 영상 `output/trash0X-x1.5.mp4`(각 53~55초), 합본 `output/trash-ep1-4-compilation.mp4`(3분 34초), 틱톡 글은 tiktok-captions.txt 끝. 사용자가 좋다고 하면 인스타 1~4화 + 유튜브 합본 게시(승인 후). 이상한 컷은 `video/redraw.py`로 다시 그림(얼굴 겹침은 "extreme close-up" 대신 "close-up portrait of …, single person!*"으로 해결, 물건 컷엔 꼭 "no people"). 아래는 제작 메모.
+   (원래 항목) **종량제 봉투 빌런 1~4화 제작 (2026-11-26).** `video/episodes/trash01~04.py`, 영상 `output/trash0X-x1.5.mp4`, 그림 `output/photos/trash0X/`.
    - **사용자 결정:** 고정된 배우 사진(output/cast) 방식은 "인물이 고정돼서 더 별로" → **폐기.** 장면마다 인물이 행동하는 그림을 새로 그리는 방식으로 돌아가되,
      얼굴이 선명하게 **`PHOTO_MODEL = "rv"`** (Realistic Vision 5.1 + LCM-LoRA, 1장 약 80초)로 그린다. 대사·대화 훅(첫 장면 두 사람 맞붙기)은 좋다고 함.
    - 줄거리: 1 남의 봉투 무단투기(→떡밥 건물주 언니) / 2 언니 한미자의 보복 퇴거·거짓 실거주(→관리비) / 3 총무 한미숙 관리비 횡령(→옥상) / 4 옥상 잠금·소방 점검(→5화 떡밥: 빌라 통째로 팔기 = 「한미숙 자매의 마지막 카드?」).

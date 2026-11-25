@@ -36,7 +36,7 @@ S = [
     dict(dur=3.0, sepia=True, photos=[f"{HAN} secretly untying someone else's white garbage bag at night, looking around",
                                       f"close-up portrait of {HAN}, greedy grin, at night"],
          lines=[("한미숙", "봉투값 아깝게 뭐하러 사?")]),
-    dict(dur=3.0, sepia=True, photos=["close-up inside a garbage bag, crushed cans, plastic bottles and food waste mixed together, messy"],
+    dict(dur=3.0, sepia=True, photos=["close-up inside an open white garbage bag, crushed cans, plastic bottles and food waste mixed together, messy, no people"],
          lines=[("지원", "캔에 음식물까지… 이거 내 쓰레기 아닌데?")]),
     dict(dur=3.0, sepia=True, photos=["white garbage bag with a big yellow rejection sticker attached, villa garbage area, daytime, no people",
                                       f"close-up portrait of {JI}, frustrated, holding a yellow sticker"],

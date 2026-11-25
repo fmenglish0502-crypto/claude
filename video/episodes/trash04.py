@@ -35,7 +35,7 @@ S = [
     dict(dur=2.5, sepia=True, photos=[f"close-up portrait of {JI}, worried, looking up at a locked door"],
          lines=[("지원", "불이라도 나면 어디로 피하지…")]),
     # --- 소방 점검 날 ---
-    dict(dur=3.0, flash=True, photos=[f"{FF} walking up a quiet villa staircase with a clipboard, daytime, no fire, no smoke", f"close-up portrait of {FF}, serious, plain indoor background, no fire"],
+    dict(dur=3.0, flash=True, photos=["=07_1"],
          lines=[("소방관", "정기 소방 점검 나왔습니다. 옥상 문 열어 주세요.")]),
     dict(dur=2.5, photos=[f"close-up portrait of {HAN}, angry, pointing at someone off-screen!"],
          lines=[("한미숙", "너지? 네가 신고했지?!")]),
