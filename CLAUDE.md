@@ -5,6 +5,8 @@
 2. 이번 일에 몇 단계를 따를지 사용자에게 한 줄로 말하고 바로 시작한다.
 
 ## 사용자
+- **시리즈는 절대 완결 내지 않는다.** 매 화 끝은 항상 다음 화 떡밥. "최종화/완결" 금지.
+- 주제 취향: 배려 없이 사는 사람에게 상식을 직접 알려주는 이야기(배려하는 사람이 손해 보는 게 싫음).
 - 한국어, 쉬운 말. 코딩 모름. 터미널 명령을 시키지 말고 내가 직접 한다.
 - 쉽게 지친다. 선택지 나열 대신 하나 추천하고 바로 해준다.
 - Claude 앱(클라우드 세션)으로 쓴다.
@@ -23,7 +25,17 @@
 | 03 | 할머니 밀친 여자의 복수, 라이브로 자폭하다 | `video/episodes/ep03.py` | `output/03-jimin-revenge.mp4` | 유튜브 https://www.youtube.com/watch?v=jlTr04L14mo · 인스타 https://www.instagram.com/reel/DgHzJXiGbzD/ · 틱톡: 아래 참고 |
 | 04 | 목걸이 도둑으로 몰린 신입, 회장님의 충격 고백 | `video/episodes/ep04.py` | `output/04-chairman-secret-x1.5.mp4`(1.5배 63초) | 유튜브 https://www.youtube.com/watch?v=U5N_-yPZQho · 인스타 https://www.instagram.com/reel/DgJkYWNI0ss/ · 틱톡: 사용자가 직접 |
 | 05 | 후계자 쫓아내려던 손자, 이사회에서 벌어진 일 | `video/episodes/ep05.py` | `output/05-grandson-revenge-x1.5.mp4`(1.5배 51초) | 유튜브 https://www.youtube.com/watch?v=P8ohcR7NP-Q · 인스타 https://www.instagram.com/reel/DgJsffih4AS/ · 틱톡: 사용자가 직접 |
-| 06 | 두 악녀의 AI 조작 영상 [최종화·완결] | `video/episodes/ep06.py` | `output/06-finale-ai-fake-x1.5.mp4`(1.5배 59초) | **아직 안 올림** (사용자가 "만들어두기만" 요청). 올리라고 하면 유튜브·인스타는 Uplika, 틱톡은 파일+글 전달 |
+| 06 | 두 악녀의 AI 조작 영상 (엔딩 떡밥: 지민이 일으킨 할아버지의 정체?) | `video/episodes/ep06.py` | `output/06-ai-fake-x1.5.mp4`(1.5배 59초) | **보류**: 1~4화 댓글·좋아요 반응이 좋아지면 올리기로 함 |
+
+반응 기록 (2026-11-25 05:30Z): 유튜브 조회 237/16/8/0, 인스타 112/130/153/116, 좋아요는 1화 유튜브 4개뿐, 댓글 0.
+
+## 주차 빌런 참교육 시리즈 (지어낸 이야기: 하은=2층 세입자, 최사장=빌런, 건물주 할아버지)
+| 화 | 제목 | 파일 | 영상 | 게시 |
+|---|---|---|---|---|
+| 1 | 꼬깔 치우고 주차한 빌런, CCTV 요구했다가 생긴 일 | `video/episodes/parking01.py` | `output/parking01-x1.5.mp4`(52초) | 유튜브 https://www.youtube.com/watch?v=dlnrvzVB8jE · 인스타 https://www.instagram.com/reel/DgJyK7jBUe3/ · 틱톡: 사용자가 직접 |
+| 2 | 두 번째 주차 빌런? (1화 엔딩: 새벽에 회색 차가 꼬깔을 치움) | 아직 | | |
+- 배경 bg="parking": cars=[(x,색,번호판)], cones=[x...], stones=[x...], night_park=True(밤), sign="간판 글자". CCTV는 phone="blackbox"에 bb_car=색, bb_cones=[x].
+- 인물 발 위치는 y=1430 (더 낮으면 자막과 겹침).
 
 별도: `scripts/01-no-name-on-the-door.md`(좀비 벙커, 영상 없음), 소재 목록 `scripts/ideas.md`.
 
@@ -72,6 +84,6 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 
 ## 다음 할 일
 1. (틱톡은 사용자가 직접 올림. 확인할 것 없음)
-2. 06편(5화, 최종화)은 완성됨. 사용자가 올리라고 하면 게시 (설명글은 output/tiktok-captions.txt 맨 아래).
-3. 인과응보 시리즈는 06으로 **완결**. 다음 시리즈: **주차 빌런 참교육** (설정은 scripts/ideas.md 맨 아래). 같은 영상 도구로 새 episodes 파일을 만들면 됨(새 배경: 주차장 필요).
+2. 주차 빌런 2화 만들기 → 1.5배 → 사용자 OK → 유튜브·인스타 게시, 틱톡은 파일+글 전달.
+3. 인과응보 06편(5화)은 보류 중. 1~4화 반응(get_insights)을 보고 좋아지면 사용자에게 올릴지 물어본다.
 4. 반응 보기: 게시 후 하루 지나면 get_insights / list_replies로 조회수·댓글 정리해서 알려주기.

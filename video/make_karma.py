@@ -244,7 +244,56 @@ def bg_mansion(d, t):
     d.text((540, 610), "회장님 팔순 생신 축하연", font=font(46, "XB"), fill=(120, 30, 45), anchor="mm")
 
 
-BGS = {"mansion": bg_mansion, "bus": bg_busstop, "street": bg_street, "lobby": bg_lobby, "room": bg_room, "dark": bg_dark,
+def draw_car(d, x, y, color, plate=""):
+    """x=가운데, y=바퀴 바닥. 옆에서 본 박스형 자동차."""
+    dark = tuple(max(0, c - 50) for c in color)
+    d.rounded_rectangle((x - 210, y - 150, x + 210, y - 40), radius=30, fill=color)
+    d.polygon([(x - 130, y - 150), (x - 80, y - 230), (x + 90, y - 230), (x + 150, y - 150)], fill=color)
+    d.polygon([(x - 110, y - 155), (x - 70, y - 215), (x - 5, y - 215), (x - 5, y - 155)], fill=(170, 210, 235))
+    d.polygon([(x + 10, y - 155), (x + 10, y - 215), (x + 80, y - 215), (x + 125, y - 155)], fill=(170, 210, 235))
+    d.rectangle((x - 210, y - 90, x + 210, y - 80), fill=dark)
+    for wx in (x - 120, x + 120):
+        d.ellipse((wx - 50, y - 95, wx + 50, y + 5), fill=(30, 30, 30))
+        d.ellipse((wx - 22, y - 67, wx + 22, y - 23), fill=(160, 160, 165))
+    if plate:
+        d.rectangle((x - 60, y - 75, x + 60, y - 45), fill="white", outline=(40, 40, 40), width=3)
+        d.text((x, y - 60), plate, font=font(24, "XB"), fill=(20, 20, 20), anchor="mm")
+
+
+def draw_cone(d, x, y, k=1.0):
+    d.polygon([(x - 45 * k, y), (x + 45 * k, y), (x + 14 * k, y - 120 * k), (x - 14 * k, y - 120 * k)], fill=(255, 120, 20))
+    d.rectangle((x - 30 * k, y - 75 * k, x + 30 * k, y - 55 * k), fill="white")
+    d.rectangle((x - 55 * k, y - 8 * k, x + 55 * k, y + 6 * k), fill=(230, 100, 10))
+
+
+def draw_stone(d, x, y):
+    d.ellipse((x - 55, y - 60, x + 55, y + 5), fill=(140, 135, 125), outline=(100, 95, 90), width=4)
+
+
+def bg_parking(d, t):
+    night = CUR_SC.get("night_park")
+    d.rectangle((0, 0, W, 1250), fill=(25, 30, 55) if night else (150, 205, 245))
+    d.rectangle((90, 330, 990, 1250), fill=(215, 200, 175) if not night else (90, 85, 80))
+    for wx in (160, 420, 680):
+        d.rectangle((wx, 420, wx + 200, 600), fill=(255, 230, 150) if night else (200, 225, 245), outline=(250, 250, 250), width=8)
+    d.text((540, 380), "2층", font=font(36, "XB"), fill=(110, 100, 90), anchor="mm")
+    d.rectangle((90, 680, 990, 1250), fill=(70, 70, 75) if not night else (40, 40, 45))
+    for px in (90, 380, 680, 960):
+        d.rectangle((px, 680, px + 30, 1250), fill=(190, 180, 165))
+    d.rounded_rectangle((280, 700, 800, 790), radius=12, fill=(30, 90, 180))
+    d.text((540, 745), CUR_SC.get("sign", "세입자 전용 주차장"), font=font(44, "XB"), fill="white", anchor="mm")
+    d.rectangle((0, 1250, W, H), fill=(95, 95, 100))
+    for lx in (90, 380, 680, 990):
+        d.line((lx, 1260, lx - 60, 1500), fill=(240, 240, 240), width=8)
+    for (cx, col, plate) in CUR_SC.get("cars", []):
+        draw_car(d, cx, 1400, col, plate)
+    for cx in CUR_SC.get("cones", []):
+        draw_cone(d, cx, 1420)
+    for sx in CUR_SC.get("stones", []):
+        draw_stone(d, sx, 1420)
+
+
+BGS = {"parking": bg_parking, "mansion": bg_mansion, "bus": bg_busstop, "street": bg_street, "lobby": bg_lobby, "room": bg_room, "dark": bg_dark,
        "office": bg_office, "night": bg_night}
 
 
@@ -266,6 +315,11 @@ def overlay_phone(d, kind, lt, sc=None):
         d.text((540, 500), sc.get("bb_label", "● REC  버스 블랙박스  08:12"), font=font(34, "XB"), fill=(255, 70, 70), anchor="mm")
         im = Image.new("RGBA", (580, 700), (70, 75, 70, 255))
         bb = sc.get("bb_chars") or [("jimin", "push", "angry", False, 0.55, 20, 260), ("grandma", "fall", "shock", False, 0.5, 250, 440)]
+        dd = ImageDraw.Draw(im)
+        if sc.get("bb_car"):
+            draw_car(dd, 400, 640, sc["bb_car"], "")
+        for cx in sc.get("bb_cones", []):
+            draw_cone(dd, cx, 650, 0.6)
         for (nm, po, ex, lf, scl, bx, by) in bb:
             im.alpha_composite(char_final(nm, po, ex, 0, lf, scl), (bx, by))
         dd = ImageDraw.Draw(im)
@@ -365,7 +419,7 @@ def caption(d, speaker, text, lt):
 
 
 SPK_COLOR = {"지민": (200, 40, 60), "서연": (50, 110, 210), "할머니": (120, 70, 160), "회장": (120, 70, 160),
-             "비서": (40, 40, 50), "팀장": (90, 90, 100), "사모님": (30, 30, 35), "태준": (40, 90, 70), "경찰": (30, 50, 110)}
+             "비서": (40, 40, 50), "팀장": (90, 90, 100), "사모님": (30, 30, 35), "태준": (40, 90, 70), "경찰": (30, 50, 110), "하은": (60, 150, 110), "최사장": (190, 140, 20), "건물주": (60, 70, 120)}
 TITLE = ("할머니를 밀친 여자의", "충격적인 최후")
 LOBBY_TEXT = "한결그룹 최종 면접 대기실"
 ROOM_TEXT = "면접실"
