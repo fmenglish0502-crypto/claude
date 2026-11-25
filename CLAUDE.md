@@ -91,7 +91,10 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 ## 다음 할 일 (2026-11-25 인계 시점 기준, 위에서부터 순서대로)
 
 ### 지금 진행 중이던 것 (2026-11-25 09:30Z)
-- 알박기 1화 게시: 유튜브 https://www.youtube.com/watch?v=mFp75WYrCng · 인스타 post_897b9909710ea4bd (get_post로 링크 확인).
+- **AI 실사 게시 기록** (post id로 get_post 하면 링크 나옴)
+  - 보복운전 1화: 유튜브 https://www.youtube.com/watch?v=BQR4tfNIzos · 인스타 https://www.instagram.com/reel/DgKG49rh8S8/
+  - 알박기 1화: 유튜브 https://www.youtube.com/watch?v=mFp75WYrCng · 인스타 https://www.instagram.com/reel/DgKNnugT3vB/
+  - 보복운전 2화: post_772b02d44e3f920b (2026-11-25 09:41Z)
 - 사용자 지시: **보복운전 2~4화 + 알박기 2~4화 만들어서 게시** (사용자가 "올려"라고 함 → 완성되는 대로 유튜브·인스타 게시, AI 표시 켬, 틱톡은 파일+글).
   - 편 파일: `video/episodes/road02~04.py`, `alba02~04.py` (전부 작성 완료).
   - 제작 스크립트(스크래치) batch6.sh가 순서대로 그림→목소리→영상→1.5배: road02, alba02, road03, alba03, road04, alba04.
