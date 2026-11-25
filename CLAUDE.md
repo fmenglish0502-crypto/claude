@@ -91,7 +91,7 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 ## 다음 할 일 (2026-11-25 인계 시점 기준, 위에서부터 순서대로)
 
 ### 지금 진행 중이던 것
-1. **알박기 1화** (`video/episodes/alba01.py`, AI 실사): 그림 15장 중 일부만 그려진 채 세션이 끝났을 수 있음.
+1. **알박기 1화** (`video/episodes/alba01.py`, AI 실사): **영상 완성** `output/alba01-x1.5.mp4`(53초), 그림 15장 전부 `output/photos/alba01/`. 사용자 게시 승인 대기. (아래 이어 그리기 안내는 다시 만들 때만 필요)
    - 그려진 그림은 `output/photos/alba01/`에 저장해 둠(00.png~). gen_photos.py는 이미 있는 그림은 건너뛰니까
      `cd video && EP=episodes/alba01.py HF_HUB_DISABLE_XET=1 python3 gen_photos.py ../output/photos/alba01` 로 이어서 그리면 됨.
    - 그다음 tts_karma.py → `PHOTO_DIR=../output/photos/alba01 VOICE_DIR=<녹음폴더> python3 make_karma.py <폰트> ../output/alba01.mp4` → 1.5배.
