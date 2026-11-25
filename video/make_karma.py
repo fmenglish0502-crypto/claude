@@ -419,7 +419,8 @@ def caption(d, speaker, text, lt):
 
 
 SPK_COLOR = {"지민": (200, 40, 60), "서연": (50, 110, 210), "할머니": (120, 70, 160), "회장": (120, 70, 160),
-             "비서": (40, 40, 50), "팀장": (90, 90, 100), "사모님": (30, 30, 35), "태준": (40, 90, 70), "경찰": (30, 50, 110), "하은": (60, 150, 110), "최사장": (190, 140, 20), "건물주": (60, 70, 120)}
+             "비서": (40, 40, 50), "팀장": (90, 90, 100), "사모님": (30, 30, 35), "태준": (40, 90, 70), "경찰": (30, 50, 110), "하은": (60, 150, 110), "최사장": (190, 140, 20), "건물주": (60, 70, 120),
+             "강상철": (200, 40, 40), "수아": (60, 130, 200), "형님": (20, 20, 20)}
 TITLE = ("할머니를 밀친 여자의", "충격적인 최후")
 LOBBY_TEXT = "한결그룹 최종 면접 대기실"
 ROOM_TEXT = "면접실"
@@ -506,8 +507,46 @@ if os.environ.get("EP"):
     _spec.loader.exec_module(_ep)
     CHARS.update(getattr(_ep, "CHARS", {}))
     S, TITLE, END = _ep.S, _ep.TITLE, _ep.END
+    for _i, _sc in enumerate(S):
+        _sc["_idx"] = _i
     LOBBY_TEXT = getattr(_ep, "LOBBY_TEXT", LOBBY_TEXT)
     ROOM_TEXT = getattr(_ep, "ROOM_TEXT", ROOM_TEXT)
+
+
+@lru_cache(None)
+def _photo(idx):
+    return Image.open(f"{os.environ['PHOTO_DIR']}/{idx:02d}.png").convert("RGB").resize((1080, 1620), Image.LANCZOS)
+
+
+def photo_frame(sc, lt):
+    """사진 한 장에 움직임 주기: zoomin(기본) / zoomout / panl / panr / shake."""
+    im = _photo(sc["_idx"])
+    k = min(1.0, lt / max(sc["dur"], 0.1))
+    mv = sc.get("move", "zoomin")
+    z = {"zoomin": 1.0 + 0.12 * k, "zoomout": 1.12 - 0.12 * k}.get(mv, 1.08)
+    cw, ch = int(1080 / z), int(1620 / z)
+    x0, y0 = (1080 - cw) // 2, (1620 - ch) // 2
+    if mv == "panl":
+        x0 = int((1080 - cw) * (1 - k))
+    elif mv == "panr":
+        x0 = int((1080 - cw) * k)
+    elif mv == "shake":
+        x0 += int(12 * math.sin(lt * 55))
+        y0 += int(8 * math.cos(lt * 47))
+    x0 = max(0, min(1080 - cw, x0))
+    y0 = max(0, min(1620 - ch, y0))
+    return im.crop((x0, y0, x0 + cw, y0 + ch)).resize((1080, 1620), Image.BILINEAR)
+
+
+def draw_sfx(img, sc, lt):
+    """효과음 글자: sfx=[(글자, x, y, 크기, 기울기)]"""
+    for (txt, x, y, sz, rot) in sc.get("sfx", []):
+        pop = min(1.0, lt / 0.15)
+        layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        ImageDraw.Draw(layer).text((x, y), txt, font=font(int(sz * (0.6 + 0.4 * pop)), "XB"), fill=(255, 220, 40),
+                                   anchor="mm", stroke_width=10, stroke_fill=(25, 20, 25))
+        layer = layer.rotate(rot, center=(x, y))
+        img.paste(layer, (0, 0), layer)
 
 
 def render_scene(sc, lt):
@@ -515,7 +554,11 @@ def render_scene(sc, lt):
     CUR_SC.update(sc)
     img = Image.new("RGB", (W, H))
     d = ImageDraw.Draw(img)
-    BGS[sc["bg"]](d, lt)
+    if sc.get("photo") is not None and os.environ.get("PHOTO_DIR"):
+        img.paste(photo_frame(sc, lt), (0, 300))  # AI 실사 장면: 천천히 확대/이동하는 사진
+        d = ImageDraw.Draw(img)
+    else:
+        BGS[sc["bg"]](d, lt)
     if sc.get("bus"):
         bx = int(-900 + min(1, lt / 1.2) * 1000)
         d.rounded_rectangle((bx, 900, bx + 900, 1420), radius=40, fill=(60, 170, 90))
@@ -553,6 +596,9 @@ def render_scene(sc, lt):
         cw, ch = int(W / k), int(H / k)
         x0, y0 = (W - cw) // 2, (H - ch) // 2
         img = img.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H), Image.BILINEAR)
+        d = ImageDraw.Draw(img)
+    if sc.get("sfx"):
+        draw_sfx(img, sc, lt)
         d = ImageDraw.Draw(img)
     if sc.get("sepia"):  # 회상 장면
         g = img.convert("L")
