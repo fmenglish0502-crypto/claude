@@ -35,7 +35,11 @@
 | 화 | 제목 | 파일 | 영상 | 게시 |
 |---|---|---|---|---|
 | 1 | 꼬깔 치우고 주차한 빌런, CCTV 요구했다가 생긴 일 | `video/episodes/parking01.py` | `output/parking01-x1.5.mp4`(52초) | 유튜브 https://www.youtube.com/watch?v=dlnrvzVB8jE · 인스타 https://www.instagram.com/reel/DgJyK7jBUe3/ · 틱톡: 사용자가 직접 |
-| 2 | 두 번째 주차 빌런? (1화 엔딩: 새벽에 회색 차가 꼬깔을 치움) | 아직 | | |
+| 2 | "잠깐이면 돼요" 이중주차 빌런, 8시간 갇힌 사연 | `video/episodes/parking02.py` | `output/parking02-x1.5.mp4` | 유튜브 https://www.youtube.com/watch?v=YqpyXDKlYnQ · 인스타 https://www.instagram.com/reel/DgKIXkcp8C1/ |
+| 3 | 전기차 충전 자리 차지한 기름차 빌런의 최후 | `video/episodes/parking03.py` | `output/parking03-x1.5.mp4` | 유튜브 https://www.youtube.com/watch?v=slezT-_obV8 · 인스타 post_ac9588c49c6193f3 |
+| 4 | 주차장에 캠핑카 버려둔 주인, 알고 보니 그 사람이었다(최사장) | `video/episodes/parking04.py` | `output/parking04-x1.5.mp4` | 유튜브 https://www.youtube.com/watch?v=RLbqDZDJfsA · 인스타 post_56105a1de9482e73 |
+| 5 | 최사장의 복수? ("이번엔 건물을 통째로 사버릴 테니까") | 아직 — 만들어두고 반응 보고 게시 | | |
+- 틱톡용 1~4화 합본: `output/parking-ep1-4-compilation.mp4`(3분 28초).
 - 배경 bg="parking": cars=[(x,색,번호판)], cones=[x...], stones=[x...], night_park=True(밤), sign="간판 글자". CCTV는 phone="blackbox"에 bb_car=색, bb_cones=[x].
 - 인물 발 위치는 y=1430 (더 낮으면 자막과 겹침).
 
@@ -95,6 +99,6 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
    batch-01 목록:(알박기, 새치기, 종량제, 악플, AI커닝, 시집살이, 돈지랄, 허세, 바람둥이) — 순서대로 AI 실사로 만들기.
    그다음 시리즈 후보(Claude 제안): 식당 별점 협박 진상 손님 (scripts/ideas.md 맨 아래).
    - 웹툰풍 시험 코드 `video/style_test_webtoon.py`, AI 시험 코드 `video/style_test_ai.py`(LCM_Dreamshaper_v7, MIT, CPU. pip install torch diffusers transformers accelerate 필요). AI 실사로 가면 유튜브 containsSyntheticMedia=true.
-3. 주차 빌런 2화 만들기 → 1.5배 → 사용자 OK → 유튜브·인스타 게시, 틱톡은 파일+글 전달.
+3. 주차 빌런 5화(최사장의 복수) 만들어두기 — 게시는 반응 보고.
 4. 인과응보 06편(5화)은 보류 중. 1~4화 반응(get_insights)을 보고 좋아지면 사용자에게 올릴지 물어본다.
 5. 반응 보기: 게시 후 하루 지나면 get_insights / list_replies로 조회수·댓글 정리해서 알려주기.
