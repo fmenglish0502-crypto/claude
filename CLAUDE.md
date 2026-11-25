@@ -97,7 +97,7 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
   인과응보 합본 11-26 10:00Z post_9dba19ca64cf83ea · 주차빌런 합본 11-26 11:00Z post_9d082d26ac545661
   · 보복운전 합본 11-27 10:00Z post_24a92a30052685e6 · 알박기 합본 11-27 11:00Z post_75c00a28a05e2ed8
   → 날짜 지나면 list_posts로 확인. rate_limited면 다음 날로 update_post.
-- **지금 제작 중: 생활 민폐 빌런 1~4화** (AI 실사, `video/episodes/line01~04.py`): 1 새치기(구태만) → 2 엘리베이터 독점 → 3 복도 짐 → 4 택배 뜯는 이웃. 5화 떡밥: 구태만이 이사 왔다.
+- **생활 민폐 빌런 1~4화 제작 완료 (게시 승인 대기)** (AI 실사, `video/episodes/line01~04.py`): 1 새치기(구태만) → 2 엘리베이터 독점 → 3 복도 짐 → 4 택배 뜯는 이웃. 5화 떡밥: 구태만이 이사 왔다.
   사용자 지시는 "미리 만들어두기" → **게시는 사용자에게 물어보고**. 제작 스크립트(스크래치) batch_line.sh, 그림은 `output/photos/line0X/`.
   다 되면 1~4화 합본(`output/line-ep1-4-compilation.mp4`) + 틱톡 글까지 준비.
 
