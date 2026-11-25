@@ -19,7 +19,7 @@
 |---|---|---|---|---|
 | 02 | 할머니를 밀친 여자의 충격적인 최후 | `scripts/02-karma-interview.md` | `output/02-karma-interview.mp4` | 유튜브 https://www.youtube.com/watch?v=xep_XDk6Ibs · 인스타 https://www.instagram.com/reel/DgHvfxTjwk5/ · 틱톡: 아래 참고 |
 | 03 | 할머니 밀친 여자의 복수, 라이브로 자폭하다 | `video/episodes/ep03.py` | `output/03-jimin-revenge.mp4` | 유튜브 https://www.youtube.com/watch?v=jlTr04L14mo · 인스타 https://www.instagram.com/reel/DgHzJXiGbzD/ · 틱톡: 아래 참고 |
-| 04 | 목걸이 도둑으로 몰린 신입, 회장님의 충격 고백 | `video/episodes/ep04.py` | `output/04-chairman-secret-x1.5.mp4`(1.5배 63초) | 승인 대기 (Uplika 업로드 완료 med_57518f9011d5edcb, 2026-11-26 16:05Z까지 유효) |
+| 04 | 목걸이 도둑으로 몰린 신입, 회장님의 충격 고백 | `video/episodes/ep04.py` | `output/04-chairman-secret-x1.5.mp4`(1.5배 63초) | 유튜브 https://www.youtube.com/watch?v=U5N_-yPZQho · 인스타 post_6a43a55206c4ce8b (get_post로 링크 확인) · 틱톡 예약 post_cb70fa1f4528cdbb (2026-11-25 03:51Z, media med_57518f9011d5edcb) |
 | 05 | 쫓겨난 손자의 역습? (04편 엔딩 떡밥: 태준·사모님) | 아직 | | |
 
 별도: `scripts/01-no-name-on-the-door.md`(좀비 벙커, 영상 없음), 소재 목록 `scripts/ideas.md`.
@@ -56,6 +56,7 @@
 - 틱톡은 1.5배 버전으로 교체함(옛 예약 2개는 삭제). 계속 tiktok_creator_cap(Uplika 쪽 한도)으로 실패 중.
   - 02편 1.5배: post_b39c6bbc216503fd (16:19Z 예약, media med_be0a8ba6b1b1b367)
   - 03편 1.5배: post_7f3645d9030ddf5e (16:34Z 예약, media med_6bfba9f6fd5c70a0)
+  - 2026-11-25 03:30Z 기준 02·03 둘 다 아직 failed(자동 재시도는 각각 04:19Z, 04:34Z까지). 04편 틱톡도 위 표 참고.
   - 예약 후 12시간 동안 매시간 자동 재시도. 그 뒤에도 failed면: 옛 예약을 delete_post로 지우고 같은 media로 틱톡만 다시 예약 (media는 2026-11-26 15:58Z까지 유효, 지나면 다시 업로드).
   - 며칠째 계속 안 되면 사용자에게 "틱톡 앱에서 직접 올리기"를 제안(그때는 Uplika 예약을 먼저 지워서 중복 방지).
 - scheduledAt은 반드시 '지금+20분'으로 (date 명령으로 계산 직후 바로 호출, 10분 미만이면 거절됨).
@@ -70,5 +71,5 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 
 ## 다음 할 일
 1. 02·03편 틱톡 예약 결과 확인 (list_posts). 실패했으면 다시 예약.
-2. 04편 게시 승인받기 → 게시. 그다음 05편 「쫓겨난 손자의 역습?」.
+2. 05편 「쫓겨난 손자의 역습?」(태준·사모님의 복수) 대본+영상 → 1.5배 → 승인 → 게시.
 4. 반응 보기: 게시 후 하루 지나면 get_insights / list_replies로 조회수·댓글 정리해서 알려주기.
