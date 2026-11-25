@@ -1,0 +1,62 @@
+"""주차 빌런 참교육 3화: 전기차 충전 자리 빌런. 지어낸 이야기."""
+
+TITLE = ("전기차 충전 자리 차지한", "기름차 빌런의 최후")
+END = ("다음 편", "몇 달째 방치된 캠핑카?", "팔로우하고 다음 편 보기")
+
+CHARS = {
+    "haeun": dict(hair=(60, 40, 30), style="long", shirt=(60, 150, 110), pants=(60, 60, 80)),
+    "park": dict(hair=(40, 30, 25), style="short", shirt=(200, 200, 210), pants=(40, 40, 55), tie=True),
+    "taxigran": dict(hair=(210, 210, 215), style="bun", shirt=(240, 200, 60), pants=(70, 70, 90)),
+    "ceo": dict(hair=(80, 80, 85), style="short", shirt=(30, 30, 40), pants=(30, 30, 40), tie=True, glasses=True),
+}
+BLACK, YELLOW = (40, 40, 45), (240, 200, 40)
+
+S = [
+    dict(dur=3.5, bg="parking", sign="전기차 충전 구역", cars=[(540, BLACK, "56다 1212")],
+         chars=[], lines=[(None, "건물 앞 전기차 충전 자리. 매일 서 있는 건 기름차였다.")]),
+    dict(dur=4.5, bg="parking", sign="전기차 충전 구역", cars=[(540, BLACK, "56다 1212")],
+         chars=[("park", 880, 1430, 1.0, "stand", "smirk", True, None)],
+         lines=[("박과장", "자리 비었는데 뭐 어때? 회사 바로 앞이라 딱이네.")]),
+    dict(dur=4.5, bg="parking", sign="전기차 충전 구역", cars=[(540, BLACK, "56다 1212")],
+         chars=[("taxigran", 900, 1430, 0.95, "stand", "sad", True, None)],
+         lines=[(None, "충전하러 온 택시기사 할머니."), ("할머니", "충전을 해야 일을 나가는데…")]),
+    dict(dur=4.5, bg="parking", sign="전기차 충전 구역", cars=[(540, BLACK, "56다 1212")],
+         chars=[("haeun", 250, 1430, 0.9, "point", "normal", False, None),
+                ("park", 860, 1430, 1.0, "stand", "smirk", True, None)],
+         lines=[("하은", "여기 전기차 충전 자리예요."), ("박과장", "충전기 놀리면 뭐 해요? 비어 있으면 쓰는 거지.")]),
+    dict(dur=4.5, bg="parking", sign="전기차 충전 구역",
+         chars=[("p1", 200, 1430, 0.85, "stand", "smirk", False, None),
+                ("p2", 450, 1430, 0.85, "point", "angry", False, None),
+                ("haeun", 800, 1430, 0.9, "stand", "sweat", True, "shake")],
+         lines=[("이웃2", "전기차 몇 대나 된다고 유난이야~"), ("이웃1", "아가씨는 신고만 하네.")]),
+    dict(dur=4.0, bg="parking", phone="post", post_site="안전신문고 신고 결과", post_title="충전 방해 신고 접수 완료",
+         post_meta="과태료 부과 예정 · 반복 시 건마다 부과", post_body=["같은 차량 신고 누적: 12건"], chars=[],
+         lines=[(None, "하은은 조용히 신고를 쌓아갔다.")]),
+    dict(dur=4.0, bg="parking", sign="전기차 충전 구역", cars=[(540, BLACK, "56다 1212")],
+         chars=[("park", 860, 1430, 1.0, "phone", "angry", True, "shake")],
+         lines=[("박과장", "과태료가 열두 장?! 누가 신고했어!")]),
+    dict(dur=3.5, bg="parking", sign="전기차 충전 구역", flash=True, cars=[(540, BLACK, "56다 1212")],
+         chars=[("ceo", 300, 1430, 1.0, "walk", "angry", False, ("slide", -300)),
+                ("park", 860, 1430, 1.0, "stand", "shock", True, "shake")],
+         lines=[("대표", "박 과장, 여기서 뭐 하나?")]),
+    dict(dur=5.5, bg="parking", sign="전기차 충전 구역", cars=[(540, BLACK, "56다 1212")],
+         chars=[("ceo", 300, 1430, 1.0, "point", "angry", False, None),
+                ("taxigran", 600, 1430, 0.9, "stand", "calm", False, None),
+                ("park", 880, 1430, 1.0, "stand", "sweat", True, "shake")],
+         lines=[("대표", "우리 어머니가 매일 충전을 못 하셨다던데, 그 차가 자네 차였어?"),
+                ("박과장", "대, 대표님 어머님이셨어요…?")]),
+    dict(dur=4.0, bg="parking", sign="전기차 충전 구역", cars=[(540, BLACK, "56다 1212")],
+         chars=[("ceo", 300, 1430, 1.0, "stand", "calm", False, None),
+                ("park", 860, 1430, 1.0, "stand", "sad", True, None)],
+         lines=[("대표", "회사 주차장 쓰게. 자네 자리는 이제 없지만.")]),
+    dict(dur=5.0, bg="parking", sign="전기차 충전 구역", cars=[(540, YELLOW, "택시")],
+         chars=[("haeun", 250, 1430, 0.9, "stand", "smile", False, "bob"),
+                ("taxigran", 860, 1430, 0.9, "stand", "smile", True, "bob")],
+         lines=[("할머니", "아가씨 덕분에 충전하네, 고마워."), ("하은", "충전 자리는 충전하는 차 자리예요.")]),
+    dict(dur=4.0, bg="parking", phone="comments", comments_head="댓글 13,560개",
+         comments=["충전 자리 기름차 진짜 많음", "대표님 등장 소름", "과태료 12장 ㅋㅋㅋ", "할머니 택시 응원해요",
+                   "다음 편 빨리"], chars=[], lines=[(None, "그날 이후, 충전 자리는 늘 비어 있었다.")]),
+    dict(dur=4.0, bg="parking", night_park=True, cars=[(540, (235, 235, 230), "")],
+         chars=[], lines=[(None, "그런데 주차장 구석에, 몇 달째 움직이지 않는 캠핑카가…")]),
+    dict(dur=3.0, bg="dark", end=True, chars=[], lines=[]),
+]

@@ -91,7 +91,8 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
    **AI 실사 만드는 법:** 편 파일 장면에 photo="영어 설명", move=zoomin/zoomout/panl/panr/shake, sfx=[(글자,x,y,크기,기울기)].
    `EP=episodes/xx.py HF_HUB_DISABLE_XET=1 python3 gen_photos.py <그림폴더>` (한 장 약 40초) → tts_karma.py → `PHOTO_DIR=<그림폴더> VOICE_DIR=... make_karma.py`.
    인물 생김새는 편 파일 맨 위 변수(예: SANG="...")로 매 장면 같은 문장을 넣어 비슷하게 유지. 유튜브 containsSyntheticMedia=true.
-   다음 대본들: `scripts/series-batch-01.md`(알박기, 새치기, 종량제, 악플, AI커닝, 시집살이, 돈지랄, 허세, 바람둥이) — 순서대로 AI 실사로 만들기.
+   다음 대본들: `scripts/series-batch-01.md`(9개, 장면표 완성) + `scripts/series-batch-02-todo.md`(6개, 줄거리만 — 장면표로 써야 함)
+   batch-01 목록:(알박기, 새치기, 종량제, 악플, AI커닝, 시집살이, 돈지랄, 허세, 바람둥이) — 순서대로 AI 실사로 만들기.
    그다음 시리즈 후보(Claude 제안): 식당 별점 협박 진상 손님 (scripts/ideas.md 맨 아래).
    - 웹툰풍 시험 코드 `video/style_test_webtoon.py`, AI 시험 코드 `video/style_test_ai.py`(LCM_Dreamshaper_v7, MIT, CPU. pip install torch diffusers transformers accelerate 필요). AI 실사로 가면 유튜브 containsSyntheticMedia=true.
 3. 주차 빌런 2화 만들기 → 1.5배 → 사용자 OK → 유튜브·인스타 게시, 틱톡은 파일+글 전달.
