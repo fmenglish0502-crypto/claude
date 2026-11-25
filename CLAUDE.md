@@ -21,8 +21,8 @@
 |---|---|---|---|---|
 | 02 | 할머니를 밀친 여자의 충격적인 최후 | `scripts/02-karma-interview.md` | `output/02-karma-interview.mp4` | 유튜브 https://www.youtube.com/watch?v=xep_XDk6Ibs · 인스타 https://www.instagram.com/reel/DgHvfxTjwk5/ · 틱톡: 아래 참고 |
 | 03 | 할머니 밀친 여자의 복수, 라이브로 자폭하다 | `video/episodes/ep03.py` | `output/03-jimin-revenge.mp4` | 유튜브 https://www.youtube.com/watch?v=jlTr04L14mo · 인스타 https://www.instagram.com/reel/DgHzJXiGbzD/ · 틱톡: 아래 참고 |
-| 04 | 목걸이 도둑으로 몰린 신입, 회장님의 충격 고백 | `video/episodes/ep04.py` | `output/04-chairman-secret-x1.5.mp4`(1.5배 63초) | 유튜브 https://www.youtube.com/watch?v=U5N_-yPZQho · 인스타 https://www.instagram.com/reel/DgJkYWNI0ss/ · 틱톡 예약 post_cb70fa1f4528cdbb (2026-11-25 03:51Z, media med_57518f9011d5edcb) |
-| 05 | 후계자 쫓아내려던 손자, 이사회에서 벌어진 일 | `video/episodes/ep05.py` | `output/05-grandson-revenge-x1.5.mp4`(1.5배 51초) | 유튜브 https://www.youtube.com/watch?v=P8ohcR7NP-Q · 인스타 https://www.instagram.com/reel/DgJsffih4AS/ · 틱톡 예약 post_a5b0cde23693eca2 (2026-11-25 05:02Z, media med_0c7639d9649c027f) |
+| 04 | 목걸이 도둑으로 몰린 신입, 회장님의 충격 고백 | `video/episodes/ep04.py` | `output/04-chairman-secret-x1.5.mp4`(1.5배 63초) | 유튜브 https://www.youtube.com/watch?v=U5N_-yPZQho · 인스타 https://www.instagram.com/reel/DgJkYWNI0ss/ · 틱톡: 사용자가 직접 |
+| 05 | 후계자 쫓아내려던 손자, 이사회에서 벌어진 일 | `video/episodes/ep05.py` | `output/05-grandson-revenge-x1.5.mp4`(1.5배 51초) | 유튜브 https://www.youtube.com/watch?v=P8ohcR7NP-Q · 인스타 https://www.instagram.com/reel/DgJsffih4AS/ · 틱톡: 사용자가 직접 |
 | 06 | 손잡은 두 악녀? (05편 엔딩: 사모님이 지민에게 전화 "이제 네 차례야") | 아직 | | |
 
 별도: `scripts/01-no-name-on-the-door.md`(좀비 벙커, 영상 없음), 소재 목록 `scripts/ideas.md`.
@@ -57,12 +57,9 @@
 - 인스타: contentType reel, shareToFeed true, isAiGenerated true.
 - publish가 시간 초과되면 다시 올리지 말고 list_posts / get_post로 먼저 확인(중복 방지).
 - 틱톡 실패 코드 tiktok_creator_cap = Uplika 전체 한도 초과. scheduledAt 15분 뒤로 틱톡만 다시 publish하면 Uplika가 12시간 동안 매시간 자동 재시도. retry_post는 자동 재시도를 멈추니 쓰지 말 것.
-- 틱톡은 1.5배 버전으로 교체함(옛 예약 2개는 삭제). 계속 tiktok_creator_cap(Uplika 쪽 한도)으로 실패 중.
-  - 02편 1.5배: post_b39c6bbc216503fd (16:19Z 예약, media med_be0a8ba6b1b1b367)
-  - 03편 1.5배: post_7f3645d9030ddf5e (16:34Z 예약, media med_6bfba9f6fd5c70a0)
-  - 2026-11-25 03:30Z 기준 02·03 둘 다 아직 failed(자동 재시도는 각각 04:19Z, 04:34Z까지). 04편 틱톡도 위 표 참고.
-  - 예약 후 12시간 동안 매시간 자동 재시도. 그 뒤에도 failed면: 옛 예약을 delete_post로 지우고 같은 media로 틱톡만 다시 예약 (media는 2026-11-26 15:58Z까지 유효, 지나면 다시 업로드).
-  - 며칠째 계속 안 되면 사용자에게 "틱톡 앱에서 직접 올리기"를 제안(그때는 Uplika 예약을 먼저 지워서 중복 방지).
+- **틱톡은 Uplika로 안 됨** (tiktok_creator_cap, Uplika 전체 한도가 며칠째 계속 참). 2026-11-25에 남은 틱톡 예약을 전부 취소하고, 사용자가 틱톡 앱에서 직접 올리기로 함.
+  - 직접 올릴 파일: `output/0X-...-x1.5.mp4` 각 화 + 합본 `output/karma-ep1-4-compilation.mp4`(1~4화, 4분 5초). 붙여 넣을 글: `output/tiktok-captions.txt`.
+  - 새 화를 만들면: 유튜브·인스타는 Uplika로, 틱톡은 영상 파일 + 글을 사용자에게 보내준다(Uplika 틱톡 예약 금지 — 직접 올린 것과 중복될 수 있음). tiktok-captions.txt에도 추가.
 - scheduledAt은 반드시 '지금+20분'으로 (date 명령으로 계산 직후 바로 호출, 10분 미만이면 거절됨).
 - 게시 설명 예시: 훅 한 줄 + "파트 N 보고 싶으면 댓글로 'OO'" + 해시태그(#인과응보 #사이다 #숏드라마 #막장드라마 #반전 #shorts)
 
@@ -74,6 +71,6 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 저장소 `fmenglish0502-crypto/claude`(공개). 사용자가 main에 올리는 것을 승인함. 작업이 끝날 때마다 커밋하고 push.
 
 ## 다음 할 일
-1. 02·03편 틱톡 예약 결과 확인 (list_posts). 실패했으면 다시 예약.
+1. (틱톡은 사용자가 직접 올림. 확인할 것 없음)
 2. 06편 「손잡은 두 악녀?」(사모님+지민) 대본+영상 → 1.5배 → 승인 → 게시.
 4. 반응 보기: 게시 후 하루 지나면 get_insights / list_replies로 조회수·댓글 정리해서 알려주기.
