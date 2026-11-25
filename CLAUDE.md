@@ -82,7 +82,7 @@
 - 게시 설명 예시: 훅 한 줄 + "파트 N 보고 싶으면 댓글로 'OO'" + 해시태그(#인과응보 #사이다 #숏드라마 #막장드라마 #반전 #shorts)
 
 ## 클라우드 환경 (이미 설정됨)
-허용된 주소: docs.vibemake.kr(자료 PDF), huggingface.co / us.aws.cdn.hf.co / cas-bridge.xethub.hf.co(목소리 모델), s3.us-west-004.backblazeb2.com(Uplika 업로드).
+허용된 주소: www.youtube.com / youtube.com(2026-11-25 추가: 유튜브 영상 자막 긁어서 요약 — `pip install yt-dlp` 후 `yt-dlp --skip-download --write-auto-subs --sub-langs ko-orig 주소`. 영어 자막은 429로 막힐 때 있음), docs.vibemake.kr(자료 PDF), huggingface.co / us.aws.cdn.hf.co / cas-bridge.xethub.hf.co(목소리 모델), s3.us-west-004.backblazeb2.com(Uplika 업로드).
 docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 자료라 저장소에는 넣지 않는다.
 
 ## GitHub
