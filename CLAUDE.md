@@ -15,6 +15,7 @@
 대본은 남의 영상을 베끼지 않고 새 이야기로 쓴다.
 
 ## 시리즈 현황 (인과응보 시리즈: 서연 / 지민 / 할머니=한결그룹 회장)
+파일 번호와 화수가 하나씩 어긋남(01은 영상 없는 좀비 대본): 02=1화, 03=2화, 04=3화, 05=4화.
 | 편 | 제목 | 대본 | 영상 | 게시 |
 |---|---|---|---|---|
 | 02 | 할머니를 밀친 여자의 충격적인 최후 | `scripts/02-karma-interview.md` | `output/02-karma-interview.mp4` | 유튜브 https://www.youtube.com/watch?v=xep_XDk6Ibs · 인스타 https://www.instagram.com/reel/DgHvfxTjwk5/ · 틱톡: 아래 참고 |
