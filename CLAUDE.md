@@ -85,7 +85,8 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 
 ## 다음 할 일
 1. (틱톡은 사용자가 직접 올림. 확인할 것 없음)
-2. **보복운전 빌런 1화** AI 실사 영상 완성 `output/road01-x1.5.mp4`(48초), 게시 승인 대기. 그림 `output/photos/road01/`.
+2. **보복운전 빌런 1화** 게시 완료: 유튜브 https://www.youtube.com/watch?v=BQR4tfNIzos · 인스타 https://www.instagram.com/reel/DgKG49rh8S8/ (AI 합성 표시 켬). 영상 `output/road01-x1.5.mp4`, 그림 `output/photos/road01/`. 다음 화 떡밥: 버스 쩍벌 빌런.
+   지금 진행: 알박기 1화(`video/episodes/alba01.py`) AI 실사 제작 → 사용자 승인 → 게시.
    **AI 실사 만드는 법:** 편 파일 장면에 photo="영어 설명", move=zoomin/zoomout/panl/panr/shake, sfx=[(글자,x,y,크기,기울기)].
    `EP=episodes/xx.py HF_HUB_DISABLE_XET=1 python3 gen_photos.py <그림폴더>` (한 장 약 40초) → tts_karma.py → `PHOTO_DIR=<그림폴더> VOICE_DIR=... make_karma.py`.
    인물 생김새는 편 파일 맨 위 변수(예: SANG="...")로 매 장면 같은 문장을 넣어 비슷하게 유지. 유튜브 containsSyntheticMedia=true.
