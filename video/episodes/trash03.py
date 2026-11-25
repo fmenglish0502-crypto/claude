@@ -28,14 +28,14 @@ S = [
          lines=[("이웃2", "총무님이 고생하는데, 너무하네.")]),
     # --- 회상: 한 달 전 ---
     dict(dur=3.0, sepia=True, photos=[f"{HAN} collecting cash envelopes door to door in a villa hallway, fake smile"],
-         lines=[(None, "한 달 전, 총무가 된 한미숙은 관리비부터 올렸다.")]),
+         lines=[("한미숙", "이번 달부터 관리비 두 배예요~")]),
     dict(dur=2.5, sepia=True, photos=[f"close-up portrait of {HAN}, sweet fake smile"],
          lines=[("한미숙", "청소비가 올라서 그래요~ 현금으로 주세요.")]),
     dict(dur=3.0, sepia=True, photos=["dirty villa staircase with dust and trash, not cleaned for weeks, no people",
                                       f"close-up portrait of {JI}, suspicious, looking at a dirty staircase"],
-         lines=[(None, "그런데 계단 청소는 한 번도 되지 않았다.")]),
+         lines=[("지원", "청소비는 올랐는데… 계단은 왜 그대로지?")]),
     dict(dur=3.0, sepia=True, photos=[f"{HAN} coming out of a luxury department store with many shopping bags, happy"],
-         lines=[(None, "대신 한미숙의 손에는 새 명품 가방이 들려 있었다.")]),
+         lines=[("한미숙", "어머, 이 가방? 그냥 하나 샀어~")]),
     # --- 사이다 ---
     dict(dur=3.0, flash=True, photos=[f"{YO} standing up at the villa meeting holding a folder", f"close-up portrait of {YO}, calm, adjusting his glasses"],
          lines=[("3층 총각", "저 회계사입니다. 장부, 제가 같이 봐도 될까요?")]),
@@ -57,7 +57,7 @@ S = [
          lines=[("이웃1", "지원 씨, 또 오해했네. 미안해요."), ("지원", "모두의 돈은 모두가 볼 수 있어야죠.")]),
     # --- 떡밥 ---
     dict(dur=3.0, photos=["rooftop door of a korean villa locked with a heavy new padlock and chain, staircase, no people"],
-         lines=[(None, "그런데 다음 날, 옥상 문에 처음 보는 자물쇠가 걸려 있었다.")]),
+         lines=[("이웃2", "어? 옥상 문이 왜 잠겨 있어?")]),
     dict(dur=3.0, flash=True, photos=[f"extreme close-up of {HAN}, sly smile, dangling a key"],
          lines=[("한미숙", "옥상은 이제 내 거야. 열쇠는 나만 있어~")]),
     dict(dur=3.0, end=True, lines=[]),

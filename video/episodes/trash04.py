@@ -29,9 +29,9 @@ S = [
          lines=[("이웃1", "지원 씨, 이번엔 좀 그냥 넘어가.")]),
     # --- 회상 ---
     dict(dur=3.0, sepia=True, photos=["villa rooftop covered with many korean traditional jars and vegetable pots, private garden, no people"],
-         lines=[(None, "한미숙은 공용 옥상을 장독대와 텃밭으로 바꿔 버렸다.")]),
+         lines=[("한미숙", "옥상 비워두면 뭐 해? 내 장독대로 쓰지~")]),
     dict(dur=3.0, sepia=True, photos=[f"{HAN} snapping a padlock shut on the rooftop door, satisfied smile"],
-         lines=[(None, "그리고 문을 잠갔다. 열쇠는 한미숙에게만 있었다.")]),
+         lines=[("한미숙", "열쇠는 나만 있으면 돼.")]),
     dict(dur=2.5, sepia=True, photos=[f"close-up portrait of {JI}, worried, looking up at a locked door"],
          lines=[("지원", "불이라도 나면 어디로 피하지…")]),
     # --- 소방 점검 날 ---
@@ -59,7 +59,7 @@ S = [
          lines=[("지원", "모두의 길은, 모두를 위해 열어 둬야죠.")]),
     # --- 떡밥 ---
     dict(dur=3.0, photos=[f"{HAN} and {MJ} whispering together in a dark car, scheming"],
-         lines=[(None, "그날 밤, 한미숙 자매는 몰래 만났다.")]),
+         lines=[("한미숙", "언니, 저 1층 아가씨 때문에 못 살겠어.")]),
     dict(dur=3.0, flash=True, photos=[f"extreme close-up of {MJ}, cold smile, holding a sale contract document"],
          lines=[("한미자", "이 빌라, 통째로 팔아 버리면 되지.")]),
     dict(dur=3.0, end=True, lines=[]),

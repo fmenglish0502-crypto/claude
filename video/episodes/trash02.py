@@ -31,14 +31,14 @@ S = [
     # --- 지원의 사정 ---
     dict(dur=3.0, photos=[f"{JI} sitting alone in a small tidy studio apartment at night, looking at a lease contract",
                           "close-up of a korean lease contract document on a table, pen, no people"],
-         lines=[(None, "지원은 이 집에서 2년을 살았다. 월세 한 번 밀린 적 없었다.")]),
+         lines=[("지원", "2년 동안 월세 한 번 안 밀렸는데…")]),
     dict(dur=3.0, photos=[f"close-up portrait of {JI}, determined, reading on a smartphone"],
          lines=[("지원", "세입자는 계약 갱신을 요구할 수 있다고 했어.")]),
     # --- 다음 날: 언니의 두 번째 공격 ---
     dict(dur=3.0, flash=True, photos=[f"{MJ} smirking and holding a paper notice at the villa entrance", f"close-up portrait of {MJ}, smug"],
          lines=[("한미자", "갱신? 거절이야. 내가 직접 들어와 살 거니까!")]),
     dict(dur=2.5, photos=[f"close-up portrait of {JI}, shocked, mouth open"],
-         lines=[(None, "집주인이 직접 산다면, 갱신을 거절할 수 있다.")]),
+         lines=[("지원", "집주인이 직접 살면… 거절할 수 있잖아.")]),
     dict(dur=2.5, photos=[f"close-up portrait of {HAN}, laughing loudly!"],
          lines=[("한미숙", "짐 싸~ 1층 아가씨!")]),
     # --- 사이다 ---
@@ -59,7 +59,7 @@ S = [
          lines=[("한미자", "…계약, 연장해 줄게."), ("지원", "법대로 하시면 돼요.")]),
     # --- 떡밥 ---
     dict(dur=3.0, photos=["close-up of a paper notice on a villa bulletin board about maintenance fee increase, no people"],
-         lines=[(None, "그런데 그날 밤, 게시판에 붙은 공고 한 장.")]),
+         lines=[("이웃1", "지원 씨, 게시판에 이상한 공고 붙었어!")]),
     dict(dur=3.0, flash=True, photos=[f"extreme close-up of {HAN}, evil smirk, holding a cash envelope"],
          lines=[("한미숙", "관리비는 이제 내가 걷을 거야. 총무니까~")]),
     dict(dur=3.0, end=True, lines=[]),
