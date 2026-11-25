@@ -513,8 +513,9 @@ if os.environ.get("EP"):
     LOBBY_TEXT = getattr(_ep, "LOBBY_TEXT", LOBBY_TEXT)
     ROOM_TEXT = getattr(_ep, "ROOM_TEXT", ROOM_TEXT)
     STYLE = getattr(_ep, "STYLE", "")
+    CAST = getattr(_ep, "CAST", {})
 else:
-    STYLE = ""
+    STYLE, CAST = "", {}
 
 
 @lru_cache(None)
@@ -522,29 +523,83 @@ def _photo(idx):
     return Image.open(f"{os.environ['PHOTO_DIR']}/{idx:02d}.png").convert("RGB").resize((1080, 1620), Image.LANCZOS)
 
 
+CAST_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "output", "cast")
+
+
+def _fit(im):
+    """9:16로 맞춰 자르고 1080x1920으로."""
+    w, h = im.size
+    if w / h > W / H:
+        nw = int(h * W / H)
+        im = im.crop(((w - nw) // 2, 0, (w - nw) // 2 + nw, h))
+    else:
+        nh = int(w * H / W)
+        im = im.crop((0, 0, w, nh))
+    return im.resize((W, H), Image.LANCZOS)
+
+
 @lru_cache(None)
-def _cut(idx, k):
-    return Image.open(f"{os.environ['PHOTO_DIR']}/{idx:02d}_{k}.png").convert("RGB").resize((W, H), Image.LANCZOS)
+def _cast(name):
+    """배우 사진(output/cast). 왼쪽 위 여백(로고 자리)을 조금 잘라 얼굴 위주로 맞춘다."""
+    im = Image.open(f"{CAST_DIR}/{CAST[name]}").convert("RGB")
+    w, h = im.size
+    m = int(w * 0.075)
+    return _fit(im.crop((m, m, w, h)))
+
+
+@lru_cache(None)
+def _split(a, b):
+    """두 사람 위아래로 나눈 대화 화면 (위=a, 아래=b)."""
+    out = Image.new("RGB", (W, H), "white")
+    for i, name in enumerate((a, b)):
+        im = _cast(name)
+        off = int(H * (0.05 if i == 0 else 0.16))  # 아래 사람은 얼굴을 위로 올려 자막과 안 겹치게
+        half = im.crop((0, off, W, off + H // 2 - 4))
+        out.paste(half, (0, i * (H // 2 + 4)))
+    return out
+
+
+@lru_cache(None)
+def _cut_img(idx, k, entry):
+    e = entry.rstrip("!")
+    if e.startswith("@") and "|" in e:
+        a, b = e.split("|")
+        return _split(a[1:], b[1:].lstrip("@"))
+    if e.startswith("@"):
+        return _cast(e[1:])
+    if e.startswith("="):  # 이미 그려둔 그림 다시 쓰기: "=02_0"
+        return _fit(Image.open(f"{os.environ['PHOTO_DIR']}/{e[1:]}.png").convert("RGB"))
+    return _fit(Image.open(f"{os.environ['PHOTO_DIR']}/{idx:02d}_{k}.png").convert("RGB"))
 
 
 CUT_MOVES = ["zoomin", "panr", "zoomout", "panl"]
 
 
 def cuts_frame(sc, lt):
-    """참조 스타일: 장면 시간을 그림 수로 나눠 1~2초마다 컷을 바꾸고, 컷마다 살짝 움직인다. 화면 꽉 채움."""
+    """참조 스타일: 장면 시간을 그림 수로 나눠 컷을 바꾸고, 컷마다 살짝 움직인다. 화면 꽉 채움.
+    photos 항목: "@배우"=배우 사진, "@a|@b"=두 사람 위아래 대화 화면, "=02_0"=그려둔 그림, 그 외=영어 설명(새로 그림).
+    끝에 "!"를 붙이면 흔들림(화내는 장면)."""
     n = len(sc["photos"])
     seg = sc["dur"] / n
     k = min(n - 1, int(lt / seg))
     kt = min(1.0, (lt - k * seg) / seg)
-    im = _cut(sc["_idx"], k)
-    mv = CUT_MOVES[(sc["_idx"] + k) % len(CUT_MOVES)]
-    z = {"zoomin": 1.0 + 0.10 * kt, "zoomout": 1.10 - 0.10 * kt}.get(mv, 1.08)
+    entry = sc["photos"][k]
+    im = _cut_img(sc["_idx"], k, entry)
+    mv = "shake" if entry.endswith("!") else CUT_MOVES[(sc["_idx"] + k) % len(CUT_MOVES)]
+    if "|" in entry:
+        mv = "zoomin"
+    z = {"zoomin": 1.0 + 0.10 * kt, "zoomout": 1.10 - 0.10 * kt, "shake": 1.06 + 0.10 * kt}.get(mv, 1.08)
     cw, ch = int(W / z), int(H / z)
     x0, y0 = (W - cw) // 2, (H - ch) // 2
     if mv == "panl":
         x0 = int((W - cw) * (1 - kt))
     elif mv == "panr":
         x0 = int((W - cw) * kt)
+    elif mv == "shake":
+        x0 += int(14 * math.sin(lt * 55))
+        y0 += int(10 * math.cos(lt * 47))
+    x0 = max(0, min(W - cw, x0))
+    y0 = max(0, min(H - ch, y0))
     out = im.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H), Image.BILINEAR)
     if lt - k * seg < 0.08 and k > 0:  # 컷 바뀔 때 아주 짧은 번쩍임
         out = Image.blend(out, Image.new("RGB", (W, H), "white"), 0.25)
@@ -555,6 +610,13 @@ def caption_ref(img, speaker, text, lt):
     """참조 스타일 자막: 화면 아래 가운데, 흰색 기울임 글씨, 얇은 검은 외곽선. 이름표 없음."""
     f = font(64, "XB")
     lines = wrap(text, f, 900)
+    if len(lines) > 1:  # 줄 길이를 비슷하게 나눈다 (한 글자만 다음 줄로 넘어가지 않게)
+        target = f.getlength(text) / len(lines) + 40
+        for extra in range(0, 400, 20):
+            cand = wrap(text, f, target + extra)
+            if len(cand) == len(lines):
+                lines = cand
+                break
     lh = 84
     top = 1500 - (len(lines) * lh) // 2
     pop = min(1.0, lt / 0.12)

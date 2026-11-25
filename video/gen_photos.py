@@ -30,6 +30,8 @@ for i, sc in enumerate(ep.S):
     if sc.get("photo"):
         jobs.append((f"{OUT}/{i:02d}.png", sc["photo"], sc.get("seed", 1000 + i)))
     for k, pr in enumerate(sc.get("photos", [])):  # 빠른 컷: 장면 하나에 그림 여러 장
+        if pr[0] in "@=":  # 배우 사진 / 그려둔 그림은 새로 안 그림
+            continue
         jobs.append((f"{OUT}/{i:02d}_{k}.png", pr, 1000 + i * 10 + k))
 for path, prompt, seed in jobs:
     if os.path.exists(path):
