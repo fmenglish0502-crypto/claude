@@ -90,34 +90,25 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 
 ## 다음 할 일 (2026-11-25 인계 시점 기준, 위에서부터 순서대로)
 
-### 지금 진행 중이던 것 (2026-11-25 09:30Z)
-- **AI 실사 게시 기록** (post id로 get_post 하면 링크 나옴)
-  - 보복운전 1화: 유튜브 https://www.youtube.com/watch?v=BQR4tfNIzos · 인스타 https://www.instagram.com/reel/DgKG49rh8S8/
-  - 알박기 1화: 유튜브 https://www.youtube.com/watch?v=mFp75WYrCng · 인스타 https://www.instagram.com/reel/DgKNnugT3vB/
-  - 보복운전 2화: 인스타 https://www.instagram.com/reel/DgKOyzrQkVr/ · 유튜브는 채널 하루 한도로 실패 → 예약 post_599336d8d56aa2b5 (11-26 10:00Z)
-  - 알박기 2화: 인스타 post_f5c6b05871678df1 · 유튜브 예약 post_08f79e898b06cc83 (11-26 11:00Z)
-  - 보복운전 3화: 인스타 post_3cff4bca9db81ea0 · 유튜브 예약 post_393d5c5cde09cd3e (11-26 12:00Z)
-  - 알박기 3화: 인스타 게시 · 유튜브 예약 11-26 13:00Z
-  - 보복운전 4화: 인스타 게시 · 유튜브 예약 11-26 14:00Z. 틱톡 합본 `output/road-ep1-4-compilation.mp4`(3분 7초) 전달함.
-  - **유튜브 채널 하루 업로드 한도** (rate_limited "exceeded the number of videos"): 11-25에 9편쯤 올리고 막힘. 한도는 시간이 지나면 풀림.
-    → 하루에 유튜브는 몇 편만. 남은 편은 **인스타는 완성 즉시, 유튜브는 유튜브 전용 예약 글로 다음 날 1시간 간격**
-    (road03 11-26 12:00Z, alba03 13:00Z, road04 14:00Z, alba04 15:00Z). 예약 실패 시 retry_post 또는 다음 날로 update_post.
-- 사용자 지시: **보복운전 2~4화 + 알박기 2~4화 만들어서 게시** (사용자가 "올려"라고 함 → 완성되는 대로 유튜브·인스타 게시, AI 표시 켬, 틱톡은 파일+글).
-  - 편 파일: `video/episodes/road02~04.py`, `alba02~04.py` (전부 작성 완료).
-  - 제작 스크립트(스크래치) batch6.sh가 순서대로 그림→목소리→영상→1.5배: road02, alba02, road03, alba03, road04, alba04.
-    그림은 `output/photos/<편>/`에 저장되므로 세션이 끊기면 같은 순서로 gen_photos.py를 다시 돌리면 이어서 그림.
-  - 결과 파일: `output/<편>-x1.5.mp4`. 게시 글은 각 편 TITLE을 제목으로, 설명은 훅 한 줄 + 댓글 유도 + 해시태그.
-  - 4화까지 올리면 시리즈별 틱톡용 1~4화 합본(`output/road-ep1-4-compilation.mp4`, `output/alba-ep1-4-compilation.mp4`) 만들어서 사용자에게 전달.
+### 최근 상태 (2026-11-25 10:40Z)
+- 보복운전 1~4화, 알박기 1~4화 **전부 제작·인스타 게시 완료**. 틱톡 합본 2개 사용자에게 전달
+  (`output/road-ep1-4-compilation.mp4`, `output/alba-ep1-4-compilation.mp4`), 글은 `output/tiktok-captions.txt`.
+- 유튜브는 채널 하루 업로드 한도(11-25에 약 9편 후 rate_limited)에 걸려서 **유튜브 전용 예약 글**로 11-26에 1시간 간격 업로드:
+  보복운전2 10:00Z(post_599336d8d56aa2b5) · 알박기2 11:00Z(post_08f79e898b06cc83) · 보복운전3 12:00Z(post_393d5c5cde09cd3e)
+  · 알박기3 13:00Z(post_f1f37f8501a3dcb0) · 보복운전4 14:00Z(post_29f020c34c4a61e9) · 알박기4 15:00Z.
+  → 11-26 이후 list_posts로 확인. 실패(rate_limited)하면 다음 날로 update_post 하거나 retry_post.
+- 이미 유튜브에 올라간 것: 보복운전 1화 https://www.youtube.com/watch?v=BQR4tfNIzos , 알박기 1화 https://www.youtube.com/watch?v=mFp75WYrCng
+- **앞으로 유튜브는 하루 3~4편 이하**로. 나머지는 예약.
 
 ### 시리즈별 다음 화 (틀: 시리즈당 1~4화 게시 + 틱톡 합본, 5화는 만들어두고 반응 보고 게시)
 | 시리즈 | 그림체 | 게시된 화 | 다음 할 일 |
 |---|---|---|---|
 | 인과응보 (서연·회장님) | 블록 | 1~4화 (+합본) | 5화(06) 완성·보류. 반응 좋으면 사용자에게 물어보고 게시 |
 | 주차 빌런 (하은·최사장) | 블록 | 1~4화 (+합본) | 5화 「최사장의 복수?」 만들어두기(게시 보류) |
-| 보복운전 (강상철) | AI 실사 | 1화 | 2~4화 제작 중(위) → 게시 → 합본. 5화 떡밥: 면허 다시 따려는 강상철 |
-| 알박기 | AI 실사 | 1화 | 2~4화 제작 중(위) → 게시 → 합본. 5화 떡밥: 브로커의 진짜 보스 |
-| batch-01 나머지 8개 | AI 실사 | 0 | `scripts/series-batch-01.md` 순서대로 (새치기, 종량제, 악플, AI커닝, 시집살이, 돈지랄, 허세, 바람둥이) |
-| batch-02 6개 | AI 실사 | 0 | `scripts/series-batch-02-todo.md` 줄거리 → 장면표 대본으로 쓰기 |
+| 보복운전 (강상철) | AI 실사 | 1~4화 (+합본, 유튜브 2~4는 예약) | 5화 「면허 다시 따려는 강상철?」 만들어두기(게시 보류) |
+| 알박기 | AI 실사 | 1~4화 (+합본, 유튜브 2~4는 예약) | 5화 「브로커의 진짜 보스?」 만들어두기(게시 보류) |
+| batch-01 나머지 8개 | AI 실사 | 0 | **다음 새 시리즈:** `scripts/series-batch-01.md` 순서대로 (새치기, 종량제, 악플, AI커닝, 시집살이, 돈지랄, 허세, 바람둥이) |
+| batch-02 7개 | AI 실사 | 0 | `scripts/series-batch-02-todo.md` (7번 편백찜 피해자 코스프레는 장면표 완성, 1~6은 줄거리 → 장면표로 쓰기) |
 
 ### AI 실사 만드는 법 (요약)
 - 편 파일 장면에 photo="영어 설명"(인물 생김새 문장은 맨 위 변수로 매 장면 반복), move=zoomin/zoomout/panl/panr/shake, sfx=[(글자,x,y,크기,기울기)].
