@@ -36,8 +36,8 @@
 |---|---|---|---|---|
 | 1 | 꼬깔 치우고 주차한 빌런, CCTV 요구했다가 생긴 일 | `video/episodes/parking01.py` | `output/parking01-x1.5.mp4`(52초) | 유튜브 https://www.youtube.com/watch?v=dlnrvzVB8jE · 인스타 https://www.instagram.com/reel/DgJyK7jBUe3/ · 틱톡: 사용자가 직접 |
 | 2 | "잠깐이면 돼요" 이중주차 빌런, 8시간 갇힌 사연 | `video/episodes/parking02.py` | `output/parking02-x1.5.mp4` | 유튜브 https://www.youtube.com/watch?v=YqpyXDKlYnQ · 인스타 https://www.instagram.com/reel/DgKIXkcp8C1/ |
-| 3 | 전기차 충전 자리 차지한 기름차 빌런의 최후 | `video/episodes/parking03.py` | `output/parking03-x1.5.mp4` | 유튜브 https://www.youtube.com/watch?v=slezT-_obV8 · 인스타 post_ac9588c49c6193f3 |
-| 4 | 주차장에 캠핑카 버려둔 주인, 알고 보니 그 사람이었다(최사장) | `video/episodes/parking04.py` | `output/parking04-x1.5.mp4` | 유튜브 https://www.youtube.com/watch?v=RLbqDZDJfsA · 인스타 post_56105a1de9482e73 |
+| 3 | 전기차 충전 자리 차지한 기름차 빌런의 최후 | `video/episodes/parking03.py` | `output/parking03-x1.5.mp4` | 유튜브 https://www.youtube.com/watch?v=slezT-_obV8 · 인스타 https://www.instagram.com/reel/DgKIm0_sijb/ |
+| 4 | 주차장에 캠핑카 버려둔 주인, 알고 보니 그 사람이었다(최사장) | `video/episodes/parking04.py` | `output/parking04-x1.5.mp4` | 유튜브 https://www.youtube.com/watch?v=RLbqDZDJfsA · 인스타 https://www.instagram.com/reel/DgKIkavzoMp/ |
 | 5 | 최사장의 복수? ("이번엔 건물을 통째로 사버릴 테니까") | 아직 — 만들어두고 반응 보고 게시 | | |
 - 틱톡용 1~4화 합본: `output/parking-ep1-4-compilation.mp4`(3분 28초).
 - 배경 bg="parking": cars=[(x,색,번호판)], cones=[x...], stones=[x...], night_park=True(밤), sign="간판 글자". CCTV는 phone="blackbox"에 bb_car=색, bb_cones=[x].
