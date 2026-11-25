@@ -6,7 +6,7 @@
 
 ## 사용자
 - **시리즈는 절대 완결 내지 않는다.** 매 화 끝은 항상 다음 화 떡밥. "최종화/완결" 금지.
-- **그림체:** 주차 빌런 시리즈까지는 지금 블록 캐릭터 유지. 그 다음 새 대본/시리즈부터는 실사에 가까운 캐릭터로 바꾸기 원함(방법은 사용자와 정하는 중).
+- **그림체:** 주차 빌런 시리즈는 블록 캐릭터 유지. 그 외 새 시리즈는 **AI 실사(B)** 로 (사용자가 시험본 보고 선택, 2026-11-25).
 - 주제 취향: 배려 없이 사는 사람에게 상식을 직접 알려주는 이야기(배려하는 사람이 손해 보는 게 싫음).
 - 한국어, 쉬운 말. 코딩 모름. 터미널 명령을 시키지 말고 내가 직접 한다.
 - 쉽게 지친다. 선택지 나열 대신 하나 추천하고 바로 해준다.
@@ -85,7 +85,11 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 
 ## 다음 할 일
 1. (틱톡은 사용자가 직접 올림. 확인할 것 없음)
-2. **다음 새 시리즈: 보복운전 빌런 참교육** — 1화 대본 `scripts/road01.md` 완성. 그림체는 사용자가 시험본(웹툰풍 A / AI 실사 B, `output/style-test/`)을 보고 고르면 그 방식으로 영상화.
+2. **보복운전 빌런 1화** AI 실사 영상 완성 `output/road01-x1.5.mp4`(48초), 게시 승인 대기. 그림 `output/photos/road01/`.
+   **AI 실사 만드는 법:** 편 파일 장면에 photo="영어 설명", move=zoomin/zoomout/panl/panr/shake, sfx=[(글자,x,y,크기,기울기)].
+   `EP=episodes/xx.py HF_HUB_DISABLE_XET=1 python3 gen_photos.py <그림폴더>` (한 장 약 40초) → tts_karma.py → `PHOTO_DIR=<그림폴더> VOICE_DIR=... make_karma.py`.
+   인물 생김새는 편 파일 맨 위 변수(예: SANG="...")로 매 장면 같은 문장을 넣어 비슷하게 유지. 유튜브 containsSyntheticMedia=true.
+   다음 대본들: `scripts/series-batch-01.md`(알박기, 새치기, 종량제, 악플, AI커닝, 시집살이, 돈지랄, 허세, 바람둥이) — 순서대로 AI 실사로 만들기.
    그다음 시리즈 후보(Claude 제안): 식당 별점 협박 진상 손님 (scripts/ideas.md 맨 아래).
    - 웹툰풍 시험 코드 `video/style_test_webtoon.py`, AI 시험 코드 `video/style_test_ai.py`(LCM_Dreamshaper_v7, MIT, CPU. pip install torch diffusers transformers accelerate 필요). AI 실사로 가면 유튜브 containsSyntheticMedia=true.
 3. 주차 빌런 2화 만들기 → 1.5배 → 사용자 OK → 유튜브·인스타 게시, 틱톡은 파일+글 전달.
