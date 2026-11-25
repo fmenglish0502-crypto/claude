@@ -23,15 +23,21 @@ pipe = DiffusionPipeline.from_pretrained("SimianLuo/LCM_Dreamshaper_v7", safety_
                                          requires_safety_checker=False, torch_dtype=torch.float32)
 pipe.set_progress_bar_config(disable=True)
 
+REF = getattr(ep, "STYLE", "") == "ref"
+W_, H_ = (504, 896) if REF else (512, 768)  # ref 스타일은 화면 꽉 차는 9:16
+jobs = []
 for i, sc in enumerate(ep.S):
-    prompt = sc.get("photo")
-    path = f"{OUT}/{i:02d}.png"
-    if not prompt or os.path.exists(path):
+    if sc.get("photo"):
+        jobs.append((f"{OUT}/{i:02d}.png", sc["photo"], sc.get("seed", 1000 + i)))
+    for k, pr in enumerate(sc.get("photos", [])):  # 빠른 컷: 장면 하나에 그림 여러 장
+        jobs.append((f"{OUT}/{i:02d}_{k}.png", pr, 1000 + i * 10 + k))
+for path, prompt, seed in jobs:
+    if os.path.exists(path):
         continue
     t = time.time()
-    g = torch.Generator().manual_seed(sc.get("seed", 1000 + i))
-    img = pipe(f"{STYLE}, {prompt}", num_inference_steps=6, guidance_scale=8.0, width=512, height=768,
+    g = torch.Generator().manual_seed(seed)
+    img = pipe(f"{STYLE}, {prompt}", num_inference_steps=6, guidance_scale=8.0, width=W_, height=H_,
                generator=g).images[0]
     img.save(path)
-    print(f"{i:02d} {time.time() - t:.0f}s {prompt[:70]}", flush=True)
+    print(f"{os.path.basename(path)} {time.time() - t:.0f}s {prompt[:70]}", flush=True)
 print("done")

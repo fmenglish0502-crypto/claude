@@ -512,11 +512,61 @@ if os.environ.get("EP"):
         _sc["_idx"] = _i
     LOBBY_TEXT = getattr(_ep, "LOBBY_TEXT", LOBBY_TEXT)
     ROOM_TEXT = getattr(_ep, "ROOM_TEXT", ROOM_TEXT)
+    STYLE = getattr(_ep, "STYLE", "")
+else:
+    STYLE = ""
 
 
 @lru_cache(None)
 def _photo(idx):
     return Image.open(f"{os.environ['PHOTO_DIR']}/{idx:02d}.png").convert("RGB").resize((1080, 1620), Image.LANCZOS)
+
+
+@lru_cache(None)
+def _cut(idx, k):
+    return Image.open(f"{os.environ['PHOTO_DIR']}/{idx:02d}_{k}.png").convert("RGB").resize((W, H), Image.LANCZOS)
+
+
+CUT_MOVES = ["zoomin", "panr", "zoomout", "panl"]
+
+
+def cuts_frame(sc, lt):
+    """참조 스타일: 장면 시간을 그림 수로 나눠 1~2초마다 컷을 바꾸고, 컷마다 살짝 움직인다. 화면 꽉 채움."""
+    n = len(sc["photos"])
+    seg = sc["dur"] / n
+    k = min(n - 1, int(lt / seg))
+    kt = min(1.0, (lt - k * seg) / seg)
+    im = _cut(sc["_idx"], k)
+    mv = CUT_MOVES[(sc["_idx"] + k) % len(CUT_MOVES)]
+    z = {"zoomin": 1.0 + 0.10 * kt, "zoomout": 1.10 - 0.10 * kt}.get(mv, 1.08)
+    cw, ch = int(W / z), int(H / z)
+    x0, y0 = (W - cw) // 2, (H - ch) // 2
+    if mv == "panl":
+        x0 = int((W - cw) * (1 - kt))
+    elif mv == "panr":
+        x0 = int((W - cw) * kt)
+    out = im.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H), Image.BILINEAR)
+    if lt - k * seg < 0.08 and k > 0:  # 컷 바뀔 때 아주 짧은 번쩍임
+        out = Image.blend(out, Image.new("RGB", (W, H), "white"), 0.25)
+    return out
+
+
+def caption_ref(img, speaker, text, lt):
+    """참조 스타일 자막: 화면 아래 가운데, 흰색 기울임 글씨, 얇은 검은 외곽선. 이름표 없음."""
+    f = font(64, "XB")
+    lines = wrap(text, f, 900)
+    lh = 84
+    top = 1500 - (len(lines) * lh) // 2
+    pop = min(1.0, lt / 0.12)
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ld = ImageDraw.Draw(layer)
+    for i, ln in enumerate(lines):
+        y = top + i * lh + lh // 2 + int((1 - pop) * 14)
+        ld.text((540, y), ln, font=f, fill=(255, 255, 255, 255), anchor="mm", stroke_width=3, stroke_fill=(0, 0, 0, 255))
+    yc = top + len(lines) * lh / 2
+    a = 0.21  # 기울임 정도
+    layer = layer.transform((W, H), Image.AFFINE, (1, a, -a * yc, 0, 1, 0), Image.BICUBIC)
+    img.paste(layer, (0, 0), layer)
 
 
 def photo_frame(sc, lt):
@@ -555,7 +605,15 @@ def render_scene(sc, lt):
     CUR_SC.update(sc)
     img = Image.new("RGB", (W, H))
     d = ImageDraw.Draw(img)
-    if sc.get("photo") is not None and os.environ.get("PHOTO_DIR"):
+    if sc.get("photos") and os.environ.get("PHOTO_DIR"):
+        img.paste(cuts_frame(sc, lt), (0, 0))  # 참조 스타일: 화면 가득 빠른 컷
+        sh = Image.new("RGBA", (W, H), (0, 0, 0, 0))  # 자막 잘 보이게 아래쪽만 살짝 어둡게
+        sd = ImageDraw.Draw(sh)
+        for yy in range(1250, H, 10):
+            sd.rectangle((0, yy, W, yy + 10), fill=(0, 0, 0, int(150 * (yy - 1250) / (H - 1250))))
+        img.paste(sh, (0, 0), sh)
+        d = ImageDraw.Draw(img)
+    elif sc.get("photo") is not None and os.environ.get("PHOTO_DIR"):
         img.paste(photo_frame(sc, lt), (0, 300))  # AI 실사 장면: 천천히 확대/이동하는 사진
         d = ImageDraw.Draw(img)
     else:
@@ -613,7 +671,10 @@ def render_scene(sc, lt):
     if lines and sc.get("starts"):
         idx = max(i for i, s in enumerate(sc["starts"]) if s <= lt)
         spk, txt = lines[idx]
-        caption(d, spk, txt, lt - sc["starts"][idx])
+        if STYLE == "ref":
+            caption_ref(img, spk, txt, lt - sc["starts"][idx])
+        else:
+            caption(d, spk, txt, lt - sc["starts"][idx])
     elif lines:
         split = sc.get("lt_split")
         if split and len(lines) == 2:
@@ -624,8 +685,12 @@ def render_scene(sc, lt):
             idx = min(len(lines) - 1, int(lt / seg))
             start = idx * seg
         spk, txt = lines[idx]
-        caption(d, spk, txt, lt - start)
-    title_bar(d, lt)
+        if STYLE == "ref":
+            caption_ref(img, spk, txt, lt - start)
+        else:
+            caption(d, spk, txt, lt - start)
+    if STYLE != "ref":
+        title_bar(d, lt)
     return img
 
 
