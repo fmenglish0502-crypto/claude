@@ -23,7 +23,7 @@
 | 03 | 할머니 밀친 여자의 복수, 라이브로 자폭하다 | `video/episodes/ep03.py` | `output/03-jimin-revenge.mp4` | 유튜브 https://www.youtube.com/watch?v=jlTr04L14mo · 인스타 https://www.instagram.com/reel/DgHzJXiGbzD/ · 틱톡: 아래 참고 |
 | 04 | 목걸이 도둑으로 몰린 신입, 회장님의 충격 고백 | `video/episodes/ep04.py` | `output/04-chairman-secret-x1.5.mp4`(1.5배 63초) | 유튜브 https://www.youtube.com/watch?v=U5N_-yPZQho · 인스타 https://www.instagram.com/reel/DgJkYWNI0ss/ · 틱톡: 사용자가 직접 |
 | 05 | 후계자 쫓아내려던 손자, 이사회에서 벌어진 일 | `video/episodes/ep05.py` | `output/05-grandson-revenge-x1.5.mp4`(1.5배 51초) | 유튜브 https://www.youtube.com/watch?v=P8ohcR7NP-Q · 인스타 https://www.instagram.com/reel/DgJsffih4AS/ · 틱톡: 사용자가 직접 |
-| 06 | 손잡은 두 악녀? (05편 엔딩: 사모님이 지민에게 전화 "이제 네 차례야") | 아직 | | |
+| 06 | 두 악녀의 AI 조작 영상 [최종화·완결] | `video/episodes/ep06.py` | `output/06-finale-ai-fake-x1.5.mp4`(1.5배 59초) | **아직 안 올림** (사용자가 "만들어두기만" 요청). 올리라고 하면 유튜브·인스타는 Uplika, 틱톡은 파일+글 전달 |
 
 별도: `scripts/01-no-name-on-the-door.md`(좀비 벙커, 영상 없음), 소재 목록 `scripts/ideas.md`.
 
@@ -72,5 +72,6 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 
 ## 다음 할 일
 1. (틱톡은 사용자가 직접 올림. 확인할 것 없음)
-2. 06편 「손잡은 두 악녀?」(사모님+지민) 대본+영상 → 1.5배 → 승인 → 게시.
+2. 06편(5화, 최종화)은 완성됨. 사용자가 올리라고 하면 게시 (설명글은 output/tiktok-captions.txt 맨 아래).
+3. 인과응보 시리즈는 06으로 **완결**. 다음 시리즈: **주차 빌런 참교육** (설정은 scripts/ideas.md 맨 아래). 같은 영상 도구로 새 episodes 파일을 만들면 됨(새 배경: 주차장 필요).
 4. 반응 보기: 게시 후 하루 지나면 get_insights / list_replies로 조회수·댓글 정리해서 알려주기.
