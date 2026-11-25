@@ -196,7 +196,7 @@ def bg_room(d, t):
     d.line((280, 430, 280, 860), fill=(250, 250, 250), width=10)
     d.rectangle((820, 620, 1020, 1250), fill=(140, 100, 70))
     d.ellipse((835, 950, 860, 975), fill=(230, 200, 90))
-    d.text((540, 380), "면접실", font=font(46, "XB"), fill=(90, 100, 120), anchor="mm")
+    d.text((540, 380), ROOM_TEXT, font=font(46, "XB"), fill=(90, 100, 120), anchor="mm")
 
 
 def fg_table(d, t):
@@ -225,7 +225,7 @@ def bg_night(d, t):
     d.rectangle((0, 1250, W, H), fill=(40, 35, 45))
     d.rectangle((640, 520, 980, 760), fill=(90, 200, 255))
     d.rectangle((700, 760, 920, 800), fill=(60, 60, 70))
-    d.text((810, 640), "편집중…", font=font(44, "XB"), fill=(20, 30, 60), anchor="mm")
+    d.text((810, 640), CUR_SC.get("monitor", "편집중…"), font=font(44, "XB"), fill=(20, 30, 60), anchor="mm")
     d.polygon([(640, 760), (980, 760), (1080, 1250), (540, 1250)], fill=(45, 60, 95))
 
 
@@ -325,8 +325,9 @@ def overlay_phone(d, kind, lt, sc=None):
             for l2 in wrap(ln, font(34), 540):
                 d.text((275, y), l2, font=font(34), fill=(50, 50, 50))
                 y += 50
-        likes = int(min(1, lt / 1.2) * sc.get("post_likes", 0))
-        d.text((275, 1220), f"추천 {likes:,}   댓글 {likes // 3:,}", font=font(34, "XB"), fill=(220, 50, 60))
+        if sc.get("post_likes"):
+            likes = int(min(1, lt / 1.2) * sc["post_likes"])
+            d.text((275, 1220), f"추천 {likes:,}   댓글 {likes // 3:,}", font=font(34, "XB"), fill=(220, 50, 60))
 
 
 # ---------- 자막 ----------
@@ -364,9 +365,10 @@ def caption(d, speaker, text, lt):
 
 
 SPK_COLOR = {"지민": (200, 40, 60), "서연": (50, 110, 210), "할머니": (120, 70, 160), "회장": (120, 70, 160),
-             "비서": (40, 40, 50), "팀장": (90, 90, 100), "사모님": (30, 30, 35), "태준": (40, 90, 70)}
+             "비서": (40, 40, 50), "팀장": (90, 90, 100), "사모님": (30, 30, 35), "태준": (40, 90, 70), "경찰": (30, 50, 110)}
 TITLE = ("할머니를 밀친 여자의", "충격적인 최후")
 LOBBY_TEXT = "한결그룹 최종 면접 대기실"
+ROOM_TEXT = "면접실"
 END = ("다음 편", "지민의 복수?", "팔로우하고 다음 편 보기")
 
 
@@ -451,6 +453,7 @@ if os.environ.get("EP"):
     CHARS.update(getattr(_ep, "CHARS", {}))
     S, TITLE, END = _ep.S, _ep.TITLE, _ep.END
     LOBBY_TEXT = getattr(_ep, "LOBBY_TEXT", LOBBY_TEXT)
+    ROOM_TEXT = getattr(_ep, "ROOM_TEXT", ROOM_TEXT)
 
 
 def render_scene(sc, lt):
