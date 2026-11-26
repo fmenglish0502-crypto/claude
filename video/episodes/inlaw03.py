@@ -9,7 +9,7 @@ TITLE = ("", "")
 PART = ("시집살이", "3부")
 END = ("4부 예고", "아버님의 유언장?", "팔로우하고 다음 편 보기")
 
-GO = "korean woman in her early 60s, sharp narrow face, tight short dark permed hair, red lipstick, burgundy cardigan, gold necklace"
+GO = "elderly korean old lady aged 65, wrinkled aged face, graying short tight permed hair, red lipstick, burgundy cardigan, gold necklace"
 EUN = "korean woman in her early 30s, low ponytail, gentle face, beige blouse"
 JUN = "korean man in his mid 30s, short neat hair, round face, navy polo shirt"
 AUNT = "korean woman in her late 60s, gray hair in a bun, green quilted jacket"
