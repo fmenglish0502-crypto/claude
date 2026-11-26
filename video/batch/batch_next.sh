@@ -1,6 +1,6 @@
+until grep -q "FIX ALL DONE" $SCRATCH/batch_fix.log; do sleep 30; done
 cd /home/user/claude/video
 export HF_HUB_DISABLE_XET=1
-until grep -q "TROLL ALL DONE" $SCRATCH/batch_troll.log; do sleep 30; done
 for ep in inlaw01 inlaw02 inlaw03 inlaw04 trash05; do
   export EP=episodes/$ep.py PHOTO_DIR=../output/photos/$ep
   mkdir -p ../output/photos/$ep

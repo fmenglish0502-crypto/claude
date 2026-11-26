@@ -19,8 +19,8 @@ SERA = "korean woman in her 30s, bleached blonde long hair, heavy makeup, pink t
 YUN = "korean man in his 50s, neatly combed silver hair, three-piece navy suit, gold rimmed glasses"
 
 S = [
-    dict(dur=3.0, photos=[f"{YUN} pushing a contract across a glass desk toward {SO} in a luxury office",
-                          f"close-up portrait of {YUN}, arrogant smile, single person!*"],
+    dict(dur=3.0, photos=[f"wide shot, an older silver-haired man in a navy suit sitting behind a glass desk pushing a contract toward a young woman in a cream sweater, luxury office, {YUN}",
+                          f"upper body portrait of {YUN}, arrogant smile, single person, solo!"],
          lines=[("윤대표", "사인만 하면 구독자 백만, 내가 만들어 줄게.")]),
     dict(dur=2.5, photos=[f"close-up portrait of {SO}, hesitant, single person"],
          lines=[("소담", "계약서… 집에서 읽어 봐도 될까요?")]),
@@ -55,7 +55,7 @@ S = [
          lines=[("윤대표", "다 나가! 당장!")]),
     dict(dur=2.5, photos=[f"close-up portrait of {FR}, embarrassed, single person"],
          lines=[("하린", "소담아… 내가 괜히 하라고 했다. 미안해.")]),
-    dict(dur=3.0, photos=[f"{SO} tearing the contract in half in front of the office building, sunny",
+    dict(dur=3.0, photos=[f"{SO} tearing a paper contract in half in front of an office building, sunny, single person, solo",
                           f"close-up portrait of {SO}, confident smile, single person"],
          lines=[("소담", "읽지 않은 계약서엔, 사인하지 않아요.")]),
     # --- 떡밥 ---

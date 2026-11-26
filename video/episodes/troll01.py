@@ -20,12 +20,12 @@ YUN = "korean man in his 50s, neatly combed silver hair, three-piece navy suit, 
 
 S = [
     # --- 첫 장면: 맞붙기 ---
-    dict(dur=3.0, photos=[f"{SO} confronting {CHOI} face to face in a police station hallway, tense",
-                          f"close-up portrait of {CHOI}, smug sneer, single person!*"],
+    dict(dur=3.0, photos=[f"wide shot, a young woman and a thin young man in a gray hoodie arguing face to face in a police station hallway, {SO}, tense",
+                          f"upper body portrait of {CHOI}, smug sneer, single person, solo!"],
          lines=[("최도윤", "익명인데 네가 어쩔 건데?")]),
     dict(dur=2.5, photos=[f"close-up portrait of {SO}, cold calm stare, single person"],
          lines=[("소담", "이제 익명 아니잖아요. 최도윤 씨.")]),
-    dict(dur=2.5, photos=[f"close-up portrait of {CHOI}, shocked, eyes wide, single person!"],
+    dict(dur=2.5, photos=[f"upper body portrait of {CHOI}, shocked, eyes wide, single person, solo!"],
          lines=[("최도윤", "내… 내 이름을 어떻게?!")]),
     # --- 회상 ---
     dict(dur=3.0, sepia=True, photos=[f"{CHOI} typing on a keyboard in a dark messy room, face lit by monitor glow",
