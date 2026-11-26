@@ -94,7 +94,15 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 1. **참조 스타일 2차 시험판(배우 사진 + 대화 훅) → 사용자 반응 받기.** 생활 민폐 5화 「구태만이 이사 왔다?」(독서실 자리 맡기)
    `video/episodes/line05.py`, 영상 `output/line05-ref-x1.5.mp4`(55초). **게시 안 함(5화 보류 규칙).**
    - 사용자가 "좋다"고 하면 이후 새 시리즈는 STYLE="ref"로 만든다. "별로"면 무엇이 별로인지 듣고 고친다.
-1-2. **종량제 봉투 빌런 1~4화 완성 (2026-11-25 저녁) → 사용자에게 보냄, 반응 대기.** 영상 `output/trash0X-x1.5.mp4`(각 53~55초), 합본 `output/trash-ep1-4-compilation.mp4`(3분 34초), 틱톡 글은 tiktok-captions.txt 끝. 사용자가 좋다고 하면 인스타 1~4화 + 유튜브 합본 게시(승인 후). 이상한 컷은 `video/redraw.py`로 다시 그림(얼굴 겹침은 "extreme close-up" 대신 "close-up portrait of …, single person!*"으로 해결, 물건 컷엔 꼭 "no people"). 아래는 제작 메모.
+1-2. **종량제 봉투 빌런 1~4부 게시 예약 완료 (2026-11-26, 사용자 승인).** 인스타 1~4부 11-26 08:59/11:59/14:59/17:59Z
+   (post_469c670c1eaf3301, post_df8315d55d969e9e, post_d5623643e9166523, post_ec339f45bc9ae975), 유튜브 합본 11-28 10:00Z post_2e65fcb6aaeb0bef.
+   틱톡 합본+글(`output/tiktok-trash-caption.txt`)은 사용자에게 보냄. 사용자 말: 틱톡은 생활 민폐(새치기)까지 올라가 있었음.
+   - **새 기본 (2026-11-26):** 드라마처럼 "N부" 표시(편 파일 `PART = ("시리즈", "1부")`, 왼쪽 위 배지, 끝 화면 "N+1부 예고")
+     + 직접 만든 긴장 BGM `output/bgm/tension.wav`(`video/make_bgm.py`)를 1.5배 변환 때 대사 밑으로 깔기(대사 나오면 자동으로 작아짐).
+     변환 명령은 스크래치 batch_troll.sh와 같음: atempo=1.5 → asplit → BGM volume 0.22 + sidechaincompress → amix.
+   - **다음: 악플러 참교육 1~4부** `video/episodes/troll01~04.py` (소담·최도윤·하린·서변호사·형사·오세라·윤대표), 5부 떡밥 「윤대표 뒤의 진짜 보스?」.
+     그림 `output/photos/troll0X/`, 영상 `output/troll0X-x1.5.mp4`. 다 되면 이상한 컷 redraw → 합본 → 사용자 확인 → 게시 승인.
+   (지난 메모) **종량제 봉투 빌런 1~4화 완성 (2026-11-25 저녁) → 사용자에게 보냄, 반응 대기.** 영상 `output/trash0X-x1.5.mp4`(각 53~55초), 합본 `output/trash-ep1-4-compilation.mp4`(3분 34초), 틱톡 글은 tiktok-captions.txt 끝. 사용자가 좋다고 하면 인스타 1~4화 + 유튜브 합본 게시(승인 후). 이상한 컷은 `video/redraw.py`로 다시 그림(얼굴 겹침은 "extreme close-up" 대신 "close-up portrait of …, single person!*"으로 해결, 물건 컷엔 꼭 "no people"). 아래는 제작 메모.
    (원래 항목) **종량제 봉투 빌런 1~4화 제작 (2026-11-26).** `video/episodes/trash01~04.py`, 영상 `output/trash0X-x1.5.mp4`, 그림 `output/photos/trash0X/`.
    - **사용자 결정:** 고정된 배우 사진(output/cast) 방식은 "인물이 고정돼서 더 별로" → **폐기.** 장면마다 인물이 행동하는 그림을 새로 그리는 방식으로 돌아가되,
      얼굴이 선명하게 **`PHOTO_MODEL = "rv"`** (Realistic Vision 5.1 + LCM-LoRA, 1장 약 80초)로 그린다. 대사·대화 훅(첫 장면 두 사람 맞붙기)은 좋다고 함.
