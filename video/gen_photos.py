@@ -19,8 +19,22 @@ spec.loader.exec_module(ep)
 
 STYLE = getattr(ep, "PHOTO_STYLE", "realistic photo, korean drama still, cinematic lighting, sharp focus, high detail")
 torch.set_num_threads(os.cpu_count() or 4)
-pipe = DiffusionPipeline.from_pretrained("SimianLuo/LCM_Dreamshaper_v7", safety_checker=None,
-                                         requires_safety_checker=False, torch_dtype=torch.float32)
+MODEL = getattr(ep, "PHOTO_MODEL", "dreamshaper")
+NEG = None
+if MODEL == "rv":  # 얼굴이 선명한 사진풍 (Realistic Vision 5.1 + LCM-LoRA). 1장 약 80초.
+    from diffusers import LCMScheduler, StableDiffusionPipeline
+    pipe = StableDiffusionPipeline.from_pretrained("SG161222/Realistic_Vision_V5.1_noVAE", torch_dtype=torch.float32,
+                                                   safety_checker=None, requires_safety_checker=False)
+    pipe.scheduler = LCMScheduler.from_config(pipe.scheduler.config)
+    pipe.load_lora_weights("latent-consistency/lcm-lora-sdv1-5")
+    pipe.fuse_lora()
+    STEPS, GS = 7, 1.5
+    NEG = "blurry, deformed face, cartoon, painting, lowres, bad eyes, text, watermark"
+    STYLE = getattr(ep, "PHOTO_STYLE", "realistic photo, korean drama still, cinematic lighting, sharp focus, detailed face, high detail")
+else:
+    pipe = DiffusionPipeline.from_pretrained("SimianLuo/LCM_Dreamshaper_v7", safety_checker=None,
+                                             requires_safety_checker=False, torch_dtype=torch.float32)
+    STEPS, GS = 6, 8.0
 pipe.set_progress_bar_config(disable=True)
 
 REF = getattr(ep, "STYLE", "") == "ref"
@@ -38,8 +52,13 @@ for path, prompt, seed in jobs:
         continue
     t = time.time()
     g = torch.Generator().manual_seed(seed)
-    img = pipe(f"{STYLE}, {prompt}", num_inference_steps=6, guidance_scale=8.0, width=W_, height=H_,
-               generator=g).images[0]
+    kw = {"negative_prompt": NEG} if NEG else {}
+    style = STYLE
+    if "no people" in prompt and NEG:  # 물건·배경만: 얼굴 강조 설정을 빼고 사람이 안 나오게
+        style = "realistic photo, cinematic lighting, sharp focus, high detail, still life, empty scene"
+        kw = {"negative_prompt": NEG + ", person, people, woman, man, face, human"}
+    img = pipe(f"{style}, {prompt}", num_inference_steps=STEPS, guidance_scale=GS, width=W_, height=H_,
+               generator=g, **kw).images[0]
     img.save(path)
     print(f"{os.path.basename(path)} {time.time() - t:.0f}s {prompt[:70]}", flush=True)
 print("done")

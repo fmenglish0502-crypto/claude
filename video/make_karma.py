@@ -514,8 +514,9 @@ if os.environ.get("EP"):
     ROOM_TEXT = getattr(_ep, "ROOM_TEXT", ROOM_TEXT)
     STYLE = getattr(_ep, "STYLE", "")
     CAST = getattr(_ep, "CAST", {})
+    PART = getattr(_ep, "PART", None)
 else:
-    STYLE, CAST = "", {}
+    STYLE, CAST, PART = "", {}, None
 
 
 @lru_cache(None)
@@ -559,9 +560,28 @@ def _split(a, b):
     return out
 
 
+def _flags(entry):
+    """끝 글자 표시: ! 흔들림, < 좌우 뒤집기, * 얼굴 크게(눈·얼굴 클로즈업)."""
+    e = entry
+    while e and e[-1] in "!<*":
+        e = e[:-1]
+    return e, entry[len(e):]
+
+
 @lru_cache(None)
 def _cut_img(idx, k, entry):
-    e = entry.rstrip("!")
+    e, fl = _flags(entry)
+    im = _cut_base(idx, k, e)
+    if "*" in fl:
+        cw, ch = int(W / 1.7), int(H / 1.7)
+        cx, cy = W // 2, int(H * 0.30)
+        im = im.crop((cx - cw // 2, cy - ch // 2, cx + cw // 2, cy + ch // 2)).resize((W, H), Image.LANCZOS)
+    if "<" in fl:
+        im = ImageOps.mirror(im)
+    return im
+
+
+def _cut_base(idx, k, e):
     if e.startswith("@") and "|" in e:
         a, b = e.split("|")
         return _split(a[1:], b[1:].lstrip("@"))
@@ -578,14 +598,14 @@ CUT_MOVES = ["zoomin", "panr", "zoomout", "panl"]
 def cuts_frame(sc, lt):
     """참조 스타일: 장면 시간을 그림 수로 나눠 컷을 바꾸고, 컷마다 살짝 움직인다. 화면 꽉 채움.
     photos 항목: "@배우"=배우 사진, "@a|@b"=두 사람 위아래 대화 화면, "=02_0"=그려둔 그림, 그 외=영어 설명(새로 그림).
-    끝에 "!"를 붙이면 흔들림(화내는 장면)."""
+    끝 표시: "!"=흔들림(화내는 장면), "<"=좌우 뒤집기, "*"=얼굴 크게."""
     n = len(sc["photos"])
     seg = sc["dur"] / n
     k = min(n - 1, int(lt / seg))
     kt = min(1.0, (lt - k * seg) / seg)
     entry = sc["photos"][k]
     im = _cut_img(sc["_idx"], k, entry)
-    mv = "shake" if entry.endswith("!") else CUT_MOVES[(sc["_idx"] + k) % len(CUT_MOVES)]
+    mv = "shake" if "!" in _flags(entry)[1] else CUT_MOVES[(sc["_idx"] + k) % len(CUT_MOVES)]
     if "|" in entry:
         mv = "zoomin"
     z = {"zoomin": 1.0 + 0.10 * kt, "zoomout": 1.10 - 0.10 * kt, "shake": 1.06 + 0.10 * kt}.get(mv, 1.08)
@@ -753,7 +773,21 @@ def render_scene(sc, lt):
             caption(d, spk, txt, lt - start)
     if STYLE != "ref":
         title_bar(d, lt)
+    elif PART and not sc.get("end"):
+        part_badge(img)
     return img
+
+
+def part_badge(img):
+    """드라마처럼 왼쪽 위에 '시리즈 이름 · N부' 표시. 편 파일에 PART = ("종량제 빌런", "1부")."""
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    f1, f2 = font(34, "XB"), font(52, "XB")
+    w = max(d.textlength(PART[0], font=f1), d.textlength(PART[1], font=f2)) + 56
+    d.rounded_rectangle((40, 70, 40 + w, 214), 18, fill=(0, 0, 0, 130))
+    d.text((68, 88), PART[0], font=f1, fill=(235, 235, 235))
+    d.text((68, 132), PART[1], font=f2, fill=(255, 210, 60))
+    img.paste(layer, (0, 0), layer)
 
 
 def apply_voice(vdir):
