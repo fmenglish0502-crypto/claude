@@ -110,7 +110,9 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
      스크립트 사본 `video/batch/batch_troll.sh`, `batch_next.sh` (SCRATCH=스크래치 폴더, 그 안에 fonts/ 필요). 컨테이너가 재시작되면 멈추니
      새 세션은 `output/photos/<편>/` 그림 수와 `output/<편>-x1.5.mp4` 유무로 어디까지 됐는지 보고 남은 편만 다시 돌린다(gen_photos는 있는 그림을 건너뜀).
      영상이 나오면 컨택트시트로 이상한 컷 확인 → redraw.py → 다시 렌더 → 합본 → 사용자 확인.
-   - **다음: 악플러 참교육 1~4부** `video/episodes/troll01~04.py` (소담·최도윤·하린·서변호사·형사·오세라·윤대표), 5부 떡밥 「윤대표 뒤의 진짜 보스?」.
+   - **악플러 1~4부 완성 (2026-11-26 13Z), 사용자에게 보냄 → 게시 승인 대기.** 제안: 인스타 1~4부 11-27 08:59/11:59/14:59/17:59Z, 유튜브 합본 11-29 10:00Z(제목은 각 파일 맨 위 바이럴 제목). 합본 `output/troll-ep1-4-compilation.mp4`, 틱톡 글 `output/tiktok-troll-caption.txt`.
+     시집살이 1~4부 + 종량제 5부는 batch_next.sh로 자동 제작 중(로그 스크래치 batch_next.log).
+   - (지난 메모) **악플러 참교육 1~4부** `video/episodes/troll01~04.py` (소담·최도윤·하린·서변호사·형사·오세라·윤대표), 5부 떡밥 「윤대표 뒤의 진짜 보스?」.
      그림 `output/photos/troll0X/`, 영상 `output/troll0X-x1.5.mp4`. 다 되면 이상한 컷 redraw → 합본 → 사용자 확인 → 게시 승인.
    (지난 메모) **종량제 봉투 빌런 1~4화 완성 (2026-11-25 저녁) → 사용자에게 보냄, 반응 대기.** 영상 `output/trash0X-x1.5.mp4`(각 53~55초), 합본 `output/trash-ep1-4-compilation.mp4`(3분 34초), 틱톡 글은 tiktok-captions.txt 끝. 사용자가 좋다고 하면 인스타 1~4화 + 유튜브 합본 게시(승인 후). 이상한 컷은 `video/redraw.py`로 다시 그림(얼굴 겹침은 "extreme close-up" 대신 "close-up portrait of …, single person!*"으로 해결, 물건 컷엔 꼭 "no people"). 아래는 제작 메모.
    (원래 항목) **종량제 봉투 빌런 1~4화 제작 (2026-11-26).** `video/episodes/trash01~04.py`, 영상 `output/trash0X-x1.5.mp4`, 그림 `output/photos/trash0X/`.
