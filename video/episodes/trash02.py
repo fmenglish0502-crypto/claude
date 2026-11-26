@@ -7,7 +7,8 @@
 STYLE = "ref"
 PHOTO_MODEL = "rv"
 TITLE = ("", "")
-END = ("다음 편", "빌라 관리비의 비밀?", "팔로우하고 다음 편 보기")
+PART = ("종량제 빌런", "2부")
+END = ("3부 예고", "빌라 관리비의 비밀?", "팔로우하고 다음 편 보기")
 
 HAN = "middle-aged korean woman in her late 50s, wrinkled aged face, sagging cheeks, short curly permed hair, leopard print blouse"
 MJ = "rich elderly korean woman in her 60s, wrinkled face, elegant gray bob hair, fur coat, pearl earrings, arrogant"

@@ -514,8 +514,9 @@ if os.environ.get("EP"):
     ROOM_TEXT = getattr(_ep, "ROOM_TEXT", ROOM_TEXT)
     STYLE = getattr(_ep, "STYLE", "")
     CAST = getattr(_ep, "CAST", {})
+    PART = getattr(_ep, "PART", None)
 else:
-    STYLE, CAST = "", {}
+    STYLE, CAST, PART = "", {}, None
 
 
 @lru_cache(None)
@@ -772,7 +773,21 @@ def render_scene(sc, lt):
             caption(d, spk, txt, lt - start)
     if STYLE != "ref":
         title_bar(d, lt)
+    elif PART and not sc.get("end"):
+        part_badge(img)
     return img
+
+
+def part_badge(img):
+    """드라마처럼 왼쪽 위에 '시리즈 이름 · N부' 표시. 편 파일에 PART = ("종량제 빌런", "1부")."""
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    f1, f2 = font(34, "XB"), font(52, "XB")
+    w = max(d.textlength(PART[0], font=f1), d.textlength(PART[1], font=f2)) + 56
+    d.rounded_rectangle((40, 70, 40 + w, 214), 18, fill=(0, 0, 0, 130))
+    d.text((68, 88), PART[0], font=f1, fill=(235, 235, 235))
+    d.text((68, 132), PART[1], font=f2, fill=(255, 210, 60))
+    img.paste(layer, (0, 0), layer)
 
 
 def apply_voice(vdir):

@@ -8,7 +8,8 @@ photos 끝 표시: ! 흔들림, < 좌우 뒤집기, * 얼굴 크게. "=번호"�
 STYLE = "ref"
 PHOTO_MODEL = "rv"
 TITLE = ("", "")
-END = ("다음 편", "건물주 언니의 등장?", "팔로우하고 다음 편 보기")
+PART = ("종량제 빌런", "1부")
+END = ("2부 예고", "건물주 언니의 등장?", "팔로우하고 다음 편 보기")
 
 HAN = "middle-aged korean woman in her late 50s, wrinkled aged face, sagging cheeks, short curly permed hair, leopard print blouse"
 JI = "korean woman in her 20s, long straight black hair, white shirt"
