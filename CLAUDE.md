@@ -171,3 +171,9 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 - 반응 보기: get_insights / list_replies로 조회수·댓글 정리해서 알려주기 (특히 5화 보류분 판단용).
 - 매 작업 끝에 인계 메모 업데이트 + 커밋 + push.
 - 새 세션 시작 문장은 `START.md`.
+
+## 공모전 모아보기 아티팩트 (https://claude.ai/artifact/GcYniVSp3RPY44i6TErs8N)
+- 데이터는 artifact 안의 `contests.json`(items: id,title,host,field,targets,start,end,prize,prizeTotal(만원),url,note). 마감 지난 건 자동 숨김.
+- 2026-11-26: '코딩·해커톤' 분야 추가(10개). 공모전 사이트 접속 허용함: linkareer.com, www.contestkorea.com, www.wevity.com (all-con은 인증서 오류).
+  콘테스트코리아 IT 목록 `sub/list.php?int_gbn=1&Txt_bcode=030310001&page=N` → 각 `view.php?...str_no=` 에서 참가대상·접수기간·상금 확인.
+- 다른 분야(문학·사진 등)는 11-17 이후로 새로 긁지 않음.
