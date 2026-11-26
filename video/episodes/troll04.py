@@ -21,7 +21,7 @@ YUN = "korean man in his 50s, neatly combed silver hair, three-piece navy suit, 
 NB = "korean woman in her 50s, short permed hair, apron, annoyed"
 S = [
     dict(dur=3.0, photos=[f"{NB} scolding {SO} at an apartment entrance, crowd of strangers with phones behind",
-                          f"close-up portrait of {NB}, irritated, yelling, single person!*"],
+                          f"upper body portrait of {NB}, irritated, yelling, single person, solo!"],
          lines=[("아주머니", "유튜버 아가씨 때문에 동네가 난리잖아!")]),
     dict(dur=2.5, photos=[f"close-up portrait of {SO}, scared, single person"],
          lines=[("소담", "저도… 제 주소가 왜 퍼졌는지 몰라요.")]),
@@ -46,7 +46,7 @@ S = [
     dict(dur=3.0, photos=[f"close-up portrait of {COP}, firm, holding a document, single person"],
          lines=[("형사", "남의 주소를 퍼뜨리고 따라다니게 하면, 처벌받을 수 있습니다.")]),
     dict(dur=3.0, photos=["close-up of a smartphone screen showing a chat message conversation, no people",
-                          f"close-up portrait of {COP}, serious, showing a phone, single person"],
+                          f"upper body portrait of {COP}, serious, showing a phone, single person, solo"],
          lines=[("형사", "윤대표랑 나눈 메시지도 다 확인했고요.")]),
     dict(dur=2.5, photos=[f"close-up portrait of {CHOI}, desperate, single person"],
          lines=[("최도윤", "대표님이 시킨 거예요! 저는 돈만…")]),
