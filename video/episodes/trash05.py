@@ -21,7 +21,7 @@ AG = "kind korean man in his 40s, real estate agent, navy suit, glasses"
 
 S = [
     dict(dur=3.0, photos=[f"{MJ} waving a sale contract in front of {JI} at a villa entrance, neighbors behind",
-                          f"close-up portrait of {MJ}, triumphant sneer, single person!*"],
+                          f"upper body portrait of {MJ}, triumphant sneer, single person, solo!"],
          lines=[("한미자", "이 빌라 팔렸어! 새 주인이 다 비우래!")]),
     dict(dur=2.5, photos=[f"close-up portrait of {JI}, calm, single person"],
          lines=[("지원", "집이 팔려도, 제 계약은 그대로예요.")]),
@@ -33,7 +33,7 @@ S = [
     dict(dur=3.0, sepia=True, photos=[f"{MJ} and {HAN} shaking hands with {BUY} at a real estate office, fake smiles"],
          lines=[("한미자", "문제요? 이 빌라엔 아무 문제 없어요~")]),
     dict(dur=3.0, sepia=True, photos=[f"{HAN} stuffing papers into a drawer, looking around nervously",
-                                      "close-up of a fire safety violation notice and an unpaid fee lawsuit paper hidden in a drawer, no people"],
+                                      "close-up of official paper documents with red stamps hidden in an open wooden drawer, no people, no fire"],
          lines=[("한미숙", "소방 위반이랑 관리비 소송은… 숨겨야지.")]),
     dict(dur=2.5, sepia=True, photos=[f"close-up portrait of {JI}, thinking, reading a phone, single person"],
          lines=[("지원", "전입신고 하고 살고 있으면… 새 주인한테도 계약을 주장할 수 있어.")]),
