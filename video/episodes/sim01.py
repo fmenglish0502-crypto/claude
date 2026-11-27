@@ -26,7 +26,7 @@ S = [
     P(f"{ME} seen from behind sitting on a sofa watching a big TV with a red emergency warning screen, city window at night", "당신에게 남은 시간은 [7일].", 2.8),
     P("TV news studio, a calm female anchor at a desk, red breaking news banner, glowing sun graphic on the screen behind her", "[역대급 태양폭풍]이 온다는 속보.", 2.8),
     P("giant glowing orange sun throwing a huge solar flare toward planet earth in dark space", "변압기가 타 버리면, 전국이 [정전]됩니다.", 3.0),
-    P("korean government briefing room, an official in a gray suit at a podium with microphones, flags behind", "정부 발표: [복구까지 최소 몇 주].", 3.0),
+    P("press briefing room with a plain blue backdrop, an asian official in a gray suit at a podium with many microphones, no flags", "정부 발표: [복구까지 최소 몇 주].", 3.0),
     P(f"{ME} sitting on a sofa frozen, holding a phone, shocked face, dark living room lit by TV", "[대피 명령]은 없습니다.", 2.6, flash=True),
     P("group of four office workers in coats laughing together on a city street at dusk, one holding a coffee", "사람들은 웃습니다. [또 훈련이겠지].", 2.8),
     P("busy seoul subway platform, people looking at phones, nobody worried", "아무도 [준비]하지 않습니다.", 2.6),
@@ -47,12 +47,12 @@ S = [
     P("old wooden shed full of firewood stacked neatly, axe on a stump, autumn afternoon, no people", "장작도 [겨울 치]를 쌓습니다.", 2.6),
     P(f"{ME} watching TV news in a farmhouse room, screen shows a crowded supermarket", "[D-3]. 뉴스가 바뀝니다.", 2.6, flash=True),
     P("crowded city supermarket, people fighting over the last water bottles, empty shelves, chaos", "그제야 사람들이 [마트]로 몰립니다.", 2.8),
-    P("completely empty supermarket shelves under bright lights, a fallen price tag, no people", "생수 진열대는 [텅] 비었습니다.", 2.6),
+    P("bare empty metal store shelves with nothing on them at all, cardboard boxes torn open on the floor, no people", "생수 진열대는 [텅] 비었습니다.", 2.6),
     P("long line of cars stuck at a gas station at night, red tail lights", "주유소엔 [몇 킬로] 줄이 섭니다.", 2.6),
     P(f"{GP} sitting on a wooden porch at night drinking tea, looking at the stars, calm", "할아버지가 말합니다. \"이제부턴 [시간] 싸움이다.\"", 3.2),
     P("big analog clock on a farmhouse wall at 11:59 pm, dim light, no people", "그리고 [D-day] 밤 11시 59분.", 2.8, flash=True),
     P("night view of a countryside village with warm house lights, a city glow on the horizon", "멀리 도시의 [불빛]이 보입니다.", 2.6),
-    P("the same village and city horizon suddenly pitch black, only stars in the sky", "그리고 [한순간에].", 3.0, flash=True),
+    P("completely dark countryside village silhouette at night, every window dark, no lights at all, only stars in the sky", "그리고 [한순간에].", 3.0, flash=True),
     dict(dur=3.0, end=True, lines=[]),
 ]
 for _s in S:
