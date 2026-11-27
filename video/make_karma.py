@@ -655,26 +655,24 @@ def caption_ref(img, speaker, text, lt):
 def caption_sim(img, text, lt):
     """가상 시나리오 자막: 화면 가운데 아래쪽, 아주 큰 굵은 흰 글씨 + 두꺼운 검은 외곽선.
     [대괄호] 안 낱말은 주황색으로 강조. 짧게(한 줄 8~10자) 쓰는 게 원칙."""
-    parts = re.split(r"(\[[^\]]*\])", text)
-    words = []  # (글자, 강조?)
-    for pt in parts:
-        if not pt:
+    # 띄어쓰기 단위로 낱말을 나누되, [강조]와 바로 붙은 조사(예: [전기]가)는 한 덩어리로 둔다.
+    words = []  # 덩어리 = [(글자, 강조?), ...]
+    for chunk in text.split(" "):
+        if not chunk:
             continue
-        hi = pt.startswith("[")
-        for w in pt.strip("[]").split(" "):
-            if w:
-                words.append((w, hi))
+        segs = [(s.strip("[]"), s.startswith("[")) for s in re.split(r"(\[[^\]]*\])", chunk) if s]
+        words.append(segs)
     size = 108
     while True:
         f = font(size, "XB")
         sp = f.getlength(" ")
         lines, cur, cw = [], [], 0
-        for w, hi in words:
-            wl = f.getlength(w)
+        for w in words:
+            wl = sum(f.getlength(s) for s, _ in w)
             if cur and cw + sp + wl > 960:
                 lines.append(cur); cur, cw = [], 0
             cw += (sp if cur else 0) + wl
-            cur.append((w, hi, wl))
+            cur.append((w, None, wl))
         if cur:
             lines.append(cur)
         if len(lines) <= 2 or size <= 72:
@@ -690,11 +688,13 @@ def caption_sim(img, text, lt):
         tw = sum(wl for _, _, wl in ln) + sp * (len(ln) - 1)
         x = 540 - tw / 2
         y = top + i * lh + lh // 2
-        for w, hi, wl in ln:
-            col = (255, 150, 20) if hi else (255, 255, 255)
-            ld.text((x + 6, y + 8), w, font=f, fill=(0, 0, 0, 150), anchor="lm", stroke_width=9, stroke_fill=(0, 0, 0, 150))
-            ld.text((x, y), w, font=f, fill=col, anchor="lm", stroke_width=9, stroke_fill=(20, 20, 20))
-            x += wl + sp
+        for w, _, wl in ln:
+            for s, hi in w:
+                col = (255, 150, 20) if hi else (255, 255, 255)
+                ld.text((x + 6, y + 8), s, font=f, fill=(0, 0, 0, 150), anchor="lm", stroke_width=9, stroke_fill=(0, 0, 0, 150))
+                ld.text((x, y), s, font=f, fill=col, anchor="lm", stroke_width=9, stroke_fill=(20, 20, 20))
+                x += f.getlength(s)
+            x += sp
     if sc_ < 1:
         layer = layer.resize((int(W * sc_), int(H * sc_)))
         big = Image.new("RGBA", (W, H), (0, 0, 0, 0))

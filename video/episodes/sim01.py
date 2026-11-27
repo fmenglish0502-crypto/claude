@@ -5,8 +5,8 @@
 
 STYLE = "sim"
 PHOTO_MODEL = "dreamshaper"
-PHOTO_STYLE = ("flat design vector art illustration, adobe illustrator, 2d motion graphics animation still, bold flat colors, "
-               "dark navy blue and warm orange palette, simple geometric shapes, cel shading, clean lines, detailed background, no text")
+PHOTO_STYLE = ("2d animated film still, flat vector illustration, simple cel shading, cinematic wide shot, muted colors, "
+               "dark navy blue shadows with warm amber lamp light, detailed environment, single scene, no text")
 TITLE = ("", "")
 
 ME = "a young korean man in his 20s with short black hair and a dark navy hoodie, simple flat cartoon character"
