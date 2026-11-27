@@ -132,6 +132,8 @@ docs.vibemake.kr 자료(PDF 76개)는 사용자에게 zip으로 줬음. 남의 �
 - 사용자 요청: 틱톡 "가상 시나리오" 생존 쇼츠를 한국어로, 4편 합쳐 약 5분(정전·화장실·할아버지 시골·벙커·사재기).
 - 편 파일 `video/episodes/sim01~04.py`, STYLE="sim"(그림 꽉 차게, 화면 가운데 큰 흰 자막, [낱말]=주황 강조, 해설 목소리 "해설"=M3),
   PHOTO_MODEL="dreamshaper"(플랫 애니 그림체). 속도는 **1.3배**(해설이 빨라서). 그림 `output/photos/sim0X/`, 영상 `output/sim0X-x1.3.mp4`, 합본 `output/sim-ep1-4-compilation.mp4`.
+- **그림체 (2026-11-27 사용자 피드백 "눈코입이 작아서 불쾌한 골짜기"):** 사람 나오는 컷을 눈 큰 귀여운 만화풍으로 다시 그림(PHOTO_STYLE "cute 2d cartoon …, big round eyes, simple faces").
+  주의: "webtoon"이라고 쓰면 칸이 여러 개로 쪼개짐. 휴대폰·랜턴 컷은 둥둥 떠 있는 얼굴이 생김 → "no people" 물건 컷이나 "portrait of one …, single person, solo"로. 두 사람 한 컷은 할아버지가 둘로 나와서 피함.
 - 5부 떡밥: 「할아버지가 숨긴 철문의 비밀?」. 게시 제목 안은 각 파일 맨 위. 게시는 사용자 확인 후(인스타 각 부 + 유튜브 합본 12-01 이후 빈 날).
 
 ### 참조 스타일(STYLE="ref") 만드는 법 — 2026-11-25 구현
