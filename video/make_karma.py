@@ -657,11 +657,20 @@ def caption_sim(img, text, lt):
     [대괄호] 안 낱말은 주황색으로 강조. 짧게(한 줄 8~10자) 쓰는 게 원칙."""
     # 띄어쓰기 단위로 낱말을 나누되, [강조]와 바로 붙은 조사(예: [전기]가)는 한 덩어리로 둔다.
     words = []  # 덩어리 = [(글자, 강조?), ...]
+    hi = False  # [강조] 안에 띄어쓰기가 있어도(예: [먹을 게]) 괄호가 남지 않게 글자 단위로 상태를 이어간다
     for chunk in text.split(" "):
-        if not chunk:
-            continue
-        segs = [(s.strip("[]"), s.startswith("[")) for s in re.split(r"(\[[^\]]*\])", chunk) if s]
-        words.append(segs)
+        segs, buf = [], ""
+        for ch in chunk:
+            if ch in "[]":
+                if buf:
+                    segs.append((buf, hi))
+                buf, hi = "", (ch == "[")
+            else:
+                buf += ch
+        if buf:
+            segs.append((buf, hi))
+        if segs:
+            words.append(segs)
     size = 108
     while True:
         f = font(size, "XB")
