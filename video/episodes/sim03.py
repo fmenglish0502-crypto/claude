@@ -37,7 +37,7 @@ S = [
     P("simple wooden outhouse with a small door being built in a countryside yard, tools on the ground, no people", "나무판으로 [간이 화장실]을 세웁니다.", 2.8),
     P("bucket with a plastic bag inside and a sack of sawdust and a scoop next to it, simple, no people", "볼일 뒤엔 [톱밥]이나 흙을 덮습니다.", 2.8),
     P("lime powder bag and a scoop next to an outhouse, clean, no people", "[석회]를 뿌리면 냄새와 벌레가 줄어요.", 2.8),
-    P(f"{GP} washing hands with soap over a basin using water from a ladle, outdoor", "그리고 [손 씻기]. 물이 귀해도요.", 2.8),
+    P("a metal basin with a bar of soap and a water ladle on an outdoor wooden table, morning, no people", "그리고 [손 씻기]. 물이 귀해도요.", 2.8),
     P(f"{ME} setting big plastic barrels under the roof gutter of a farmhouse, cloudy sky", "지붕 물받이 밑엔 [빗물 통]을 놓습니다.", 2.8),
     P("rain pouring from a roof gutter into a blue plastic barrel, close-up, no people", "빗물은 [변기·빨래]용으로 씁니다.", 2.8),
     P(f"{GP} boiling water in a big pot over a wood fire, steam rising", "마실 물은 꼭 [끓여서].", 2.6),

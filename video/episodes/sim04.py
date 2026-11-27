@@ -24,7 +24,7 @@ END = ("5부 예고", "할아버지가 숨긴 철문의 비밀?", "팔로우하�
 S = [
     P("silhouettes of several people with flashlights at a stone wall gate at night, tense", "[정전 6일] 밤. 대문 밖에 사람들이 서 있습니다.", 3.0),
     P("dark farmhouse at night, a hand turning off a lantern behind a paper window, no people visible", "할아버지가 [불]부터 끕니다.", 2.6),
-    P(f"{GP} holding a finger to his lips, whispering, dark farmhouse room, lantern", "\"우리 집에 [먹을 게] 있는 걸 알면 안 된다.\"", 3.0),
+    P(f"portrait of one {GP}, finger on his lips, single person, solo, dark room, lantern", "\"우리 집에 [먹을 게] 있는 걸 알면 안 된다.\"", 3.0),
     P(f"{GP} kneeling and pulling up wooden floor planks in a dark barn, a square black hole in the floor with a wooden ladder going down, lantern on the floor", "할아버지가 창고 바닥을 [뜯습니다].", 2.8, flash=True),
     P("old underground earthen cellar with wooden beams, shelves and jars, lit by one lantern, no people", "옛날 [김치 저장고]. 땅속 2미터.", 2.8),
     P(f"{ME} carrying boxes of food down a ladder into an underground cellar, lantern light", "비축품을 [반으로] 나눠 숨깁니다.", 2.8),

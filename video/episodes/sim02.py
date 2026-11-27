@@ -47,8 +47,8 @@ S = [
     P(f"{ME} and {GP} sitting by a warm wood stove in a farmhouse room at night, firelight", "시골집은 [장작 난로] 하나로 따뜻합니다.", 2.8),
     P(f"{ME} listening to an old portable radio on the floor, serious face, lantern light", "[정전 3일]. 라디오만 들립니다.", 2.6, flash=True),
     P("close-up of an old silver portable radio with a glowing dial on a wooden floor, lantern light, no people", "\"복구 시점은 [미정]입니다.\"", 2.8),
-    P(f"{ME} staring at the phone with the last message on screen, worried face, lantern light", "마지막으로 온 친구 문자 한 통.", 2.8),
-    P(f"{ME} reading a text message on his phone in the dark, shocked face, lantern light", "\"야… 우리 집 [화장실]이 이상해.\"", 3.2),
+    P(f"portrait of one {ME}, worried face, holding a phone, single person, solo, dark room, lantern", "마지막으로 온 친구 문자 한 통.", 2.8),
+    P("a smartphone lying on a blanket glowing in the dark with one message notification, no people", "\"야… 우리 집 [화장실]이 이상해.\"", 3.2),
     dict(dur=3.0, end=True, lines=[]),
 ]
 for _s in S:
