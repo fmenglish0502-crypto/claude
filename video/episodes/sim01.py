@@ -1,6 +1,6 @@
-"""만약에 시뮬레이션 1편: 서울에 72시간 대정전이 온다면. 지어낸 가상 시나리오(정보는 실제 정전 대비 상식).
-형식: '당신' 시점 해설 + 플랫 일러스트 빠른 컷 + 화면 가운데 큰 자막([ ] 낱말은 주황색 강조).
-게시 제목 안: "서울에 72시간 정전이 온다면, 당신은 버틸 수 있을까?"
+"""만약에 시뮬레이션 「7일 뒤 대정전」 1부: 경보 → 무시하는 사람들 → 할아버지 시골집으로 → 사재기. 지어낸 가상 시나리오.
+형식: "당신" 시점 해설 + 플랫 일러스트 빠른 컷 + 화면 가운데 큰 자막([ ] 낱말 주황 강조). 4부 합쳐 약 5분.
+게시 제목 안: "7일 뒤 전국 전기가 끊긴다면, 당신은 뭘 하겠습니까?"
 """
 
 STYLE = "sim"
@@ -8,64 +8,51 @@ PHOTO_MODEL = "dreamshaper"
 PHOTO_STYLE = ("flat design vector art illustration, adobe illustrator, 2d motion graphics animation still, bold flat colors, "
                "dark navy blue and warm orange palette, simple geometric shapes, cel shading, clean lines, detailed background, no text")
 TITLE = ("", "")
-PART = None
-END = ("다음 편 예고", "라디오 속 목소리의 정체?", "팔로우하고 2편 보기")
 
-ME = "a young korean man in a dark gray hoodie, simple flat cartoon character"
+ME = "a young korean man in his 20s with short black hair and a dark navy hoodie, simple flat cartoon character"
+GP = "an old korean grandfather in his 70s with short white hair, tanned wrinkled face, brown work vest, simple flat cartoon character"
+HOUSE = "a traditional korean countryside house with a tiled roof, stone wall, persimmon tree, mountains behind"
+
+
+def P(prompt, line, dur=2.6, **kw):
+    """장면 하나 = 그림 한 장(또는 여러 장) + 해설 한 줄."""
+    photos = prompt if isinstance(prompt, list) else [prompt]
+    return dict(dur=dur, photos=photos, lines=[("해설", line)], **kw)
+
+PART = ("7일 뒤 대정전", "1부")
+END = ("2부 예고", "불이 꺼진 첫날 밤", "팔로우하고 다음 편 보기")
 
 S = [
-    dict(dur=2.5, photos=["night skyline of seoul with namsan tower, every building light switched off, dark city, orange dusk sky"],
-         lines=[("해설", "지금부터 [72시간] 동안")]),
-    dict(dur=2.5, photos=[f"{ME} seen from behind standing at an apartment window looking at a dark city with no lights"],
-         lines=[("해설", "서울 전체에 [전기]가 끊깁니다.")]),
-    dict(dur=2.5, photos=[f"{ME} sitting on a sofa in a dark living room holding a phone with flashlight on"],
-         lines=[("해설", "당신은 [고층 아파트] 18층에 삽니다.")]),
-    dict(dur=2.5, photos=["apartment hallway at night, several neighbors holding flashlights chatting and smiling, simple cartoon people"],
-         lines=[("해설", "다들 금방 돌아올 거라며 [웃습니다].")]),
-    dict(dur=2.5, photos=["closed metal elevator doors in a dark apartment lobby, flashlight beam, nobody around"],
-         lines=[("해설", "그런데 [엘리베이터]가 멈췄고")]),
-    dict(dur=2.5, photos=["close-up of a kitchen faucet turned on with no water coming out, dark kitchen, no people"],
-         lines=[("해설", "수돗물도 [안 나옵니다].")]),
-    dict(dur=3.0, photos=["cross-section diagram of a tall apartment building with a water pump in the basement and pipes going up, simple infographic, no text"],
-         lines=[("해설", "고층은 [펌프]로 물을 올리거든요.")]),
-    dict(dur=2.5, flash=True, photos=["big analog wall clock in a dark room, hands moving, dramatic shadow, no people"],
-         lines=[("해설", "[6시간] 뒤.")]),
-    dict(dur=2.5, photos=["hand holding a smartphone with a nearly empty red battery icon, dark background"],
-         lines=[("해설", "휴대폰 배터리 [31%].")]),
-    dict(dur=3.0, photos=["cell phone tower on a rooftop at night with its lights going dark, gloomy sky, no people"],
-         lines=[("해설", "기지국 비상전원까지 [바닥]나면")]),
-    dict(dur=2.5, photos=[f"{ME} frowning at a phone screen with no signal, dark room"],
-         lines=[("해설", "[전화]도 인터넷도 끊깁니다.")]),
-    dict(dur=2.5, photos=["dark convenience store at night, cashier shaking head at a customer holding a credit card, simple cartoon people"],
-         lines=[("해설", "편의점에선 [카드]가 안 됩니다.")]),
-    dict(dur=2.5, photos=["hand holding korean paper money bills buying bottled water at a counter, flashlight light"],
-         lines=[("해설", "[현금] 있는 사람만 물을 삽니다.")]),
-    dict(dur=2.5, flash=True, photos=["open refrigerator with no light inside in a dark kitchen, food going bad, no people"],
-         lines=[("해설", "[12시간] 뒤, 냉장고.")]),
-    dict(dur=3.0, photos=["spoiled food containers and milk carton on a kitchen counter, flies, dark mood, no people"],
-         lines=[("해설", "4시간 넘게 꺼진 음식은 [위험]합니다.")]),
-    dict(dur=2.5, photos=["frosty apartment window with snow falling outside at night, cold blue tones, no people"],
-         lines=[("해설", "게다가 [겨울]이라면")]),
-    dict(dur=2.5, photos=[f"{ME} wrapped in a thick blanket shivering next to a wall mounted gas boiler that is off"],
-         lines=[("해설", "가스보일러도 [전기]가 있어야 돕니다.")]),
-    dict(dur=2.5, photos=["many lit candles on a table in a dark apartment, warm glow, no people"],
-         lines=[("해설", "사람들이 [촛불]을 켜기 시작합니다.")]),
-    dict(dur=2.5, photos=["window of an apartment building at night with orange fire glow and smoke, fire trucks below"],
-         lines=[("해설", "정전 때 [불]이 자주 나는 이유죠.")]),
-    dict(dur=3.0, photos=["small gasoline generator running on an enclosed apartment balcony, grey fumes, dark night, no people"],
-         lines=[("해설", "옆집은 [발전기]를 베란다 안에서 돌립니다.")]),
-    dict(dur=2.5, photos=["invisible grey gas drifting under a door into a dark room, eerie, no people"],
-         lines=[("해설", "[일산화탄소]는 냄새도 없습니다.")]),
-    dict(dur=3.0, photos=[f"{ME} facing the viewer in a dark room, serious expression, flashlight under the chin"],
-         lines=[("해설", "당신이라면 [지금] 뭘 챙기겠습니까?")]),
-    dict(dur=3.0, photos=["flat lay of survival items on a table: water bottles, cash, flashlight, power bank, radio, simple icons style"],
-         lines=[("해설", "[물] 3일 치, [현금], [손전등].")]),
-    dict(dur=2.5, photos=["portable power bank charging a smartphone on a wooden table, cozy light, no people"],
-         lines=[("해설", "그리고 [보조배터리].")]),
-    dict(dur=2.5, flash=True, photos=["dark city skyline under a starry sky, total silence, one tiny window glowing, no people"],
-         lines=[("해설", "그런데 [72시간]째 밤.")]),
-    dict(dur=3.5, photos=["old portable radio on a windowsill glowing faintly in a dark room, mysterious, no people"],
-         lines=[("해설", "꺼져 있던 [라디오]에서 목소리가 들립니다.")]),
+    P(f"{ME} seen from behind sitting on a sofa watching a big TV with a red emergency warning screen, city window at night", "당신에게 남은 시간은 [7일].", 2.8),
+    P("TV news studio, a calm female anchor at a desk, red breaking news banner, glowing sun graphic on the screen behind her", "[역대급 태양폭풍]이 온다는 속보.", 2.8),
+    P("giant glowing orange sun throwing a huge solar flare toward planet earth in dark space", "변압기가 타 버리면, 전국이 [정전]됩니다.", 3.0),
+    P("korean government briefing room, an official in a gray suit at a podium with microphones, flags behind", "정부 발표: [복구까지 최소 몇 주].", 3.0),
+    P(f"{ME} sitting on a sofa frozen, holding a phone, shocked face, dark living room lit by TV", "[대피 명령]은 없습니다.", 2.6, flash=True),
+    P("group of four office workers in coats laughing together on a city street at dusk, one holding a coffee", "사람들은 웃습니다. [또 훈련이겠지].", 2.8),
+    P("busy seoul subway platform, people looking at phones, nobody worried", "아무도 [준비]하지 않습니다.", 2.6),
+    P(f"{ME} at a desk at night writing a list in a notebook, focused, lamp light", "하지만 당신은 [달랐습니다].", 2.6),
+    P("close-up of a smartphone screen showing an incoming call from grandpa with an old man photo, dark room", "시골에 혼자 사는 [할아버지].", 2.6),
+    P(f"{GP} standing in front of {HOUSE}, holding an old phone to his ear, sunset", "\"내려와라. 여기는 [우물]이 있다.\"", 3.0),
+    P(f"{ME} packing a big backpack on the floor of a small apartment, determined face", "남은 [6일]. 당신은 짐을 쌉니다.", 2.8, flash=True),
+    P("korean highway at dawn, a small car driving toward green mountains, empty road", "서울을 떠나 [3시간].", 2.6),
+    P(f"{HOUSE}, wide view, morning mist, a small car parked by the stone wall", "할아버지의 [시골집].", 2.6),
+    P(f"{GP} and {ME} standing side by side in a farmhouse yard looking at a checklist, morning", "할아버지가 묻습니다. \"뭐부터 살래?\"", 3.0),
+    P("flat lay of stacked water bottles, a big rice sack, ramen packs and canned food on a wooden floor, no people", "[물], [쌀], [통조림].", 2.8),
+    P("flat lay of portable butane gas canisters, a camping stove, batteries and candles on a wooden floor, no people", "[부탄가스]와 [건전지].", 2.6),
+    P("hand holding a thick stack of korean paper money bills, close-up, warm light", "그리고 [현금]. 카드는 곧 쓸모없어지니까.", 3.0),
+    P("small rural hardware store, shelves with buckets, shovels and rope, an old shopkeeper, no customers", "읍내 철물점. 아직 [조용]합니다.", 2.6),
+    P(f"{ME} pushing a shopping cart full of water bottles and rice sacks in a small grocery store", "당신은 [카트 세 대]를 채웁니다.", 2.6),
+    P("grocery store cashier woman staring at a cart piled high, surprised face", "\"전쟁이라도 나요?\"", 2.6),
+    P(f"{GP} pouring water from a bucket into big plastic water tanks next to an old stone well", "할아버지는 [우물]을 다시 손봅니다.", 2.8),
+    P("old wooden shed full of firewood stacked neatly, axe on a stump, autumn afternoon, no people", "장작도 [겨울 치]를 쌓습니다.", 2.6),
+    P(f"{ME} watching TV news in a farmhouse room, screen shows a crowded supermarket", "[D-3]. 뉴스가 바뀝니다.", 2.6, flash=True),
+    P("crowded city supermarket, people fighting over the last water bottles, empty shelves, chaos", "그제야 사람들이 [마트]로 몰립니다.", 2.8),
+    P("completely empty supermarket shelves under bright lights, a fallen price tag, no people", "생수 진열대는 [텅] 비었습니다.", 2.6),
+    P("long line of cars stuck at a gas station at night, red tail lights", "주유소엔 [몇 킬로] 줄이 섭니다.", 2.6),
+    P(f"{GP} sitting on a wooden porch at night drinking tea, looking at the stars, calm", "할아버지가 말합니다. \"이제부턴 [시간] 싸움이다.\"", 3.2),
+    P("big analog clock on a farmhouse wall at 11:59 pm, dim light, no people", "그리고 [D-day] 밤 11시 59분.", 2.8, flash=True),
+    P("night view of a countryside village with warm house lights, a city glow on the horizon", "멀리 도시의 [불빛]이 보입니다.", 2.6),
+    P("the same village and city horizon suddenly pitch black, only stars in the sky", "그리고 [한순간에].", 3.0, flash=True),
     dict(dur=3.0, end=True, lines=[]),
 ]
 for _s in S:
