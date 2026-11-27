@@ -30,7 +30,7 @@ S = [
     P("group of four office workers in coats laughing together on a city street at dusk, one holding a coffee", "사람들은 웃습니다. [또 훈련이겠지].", 2.8),
     P("busy seoul subway platform, people looking at phones, nobody worried", "아무도 [준비]하지 않습니다.", 2.6),
     P(f"{ME} at a desk at night writing a list in a notebook, focused, lamp light", "하지만 당신은 [달랐습니다].", 2.6),
-    P("close-up of a smartphone screen showing an incoming call from grandpa with an old man photo, dark room", "시골에 혼자 사는 [할아버지].", 2.6),
+    P(f"{ME} answering a phone call in a dark room, surprised face", "시골에 혼자 사는 [할아버지].", 2.6),
     P(f"{GP} standing in front of {HOUSE}, holding an old phone to his ear, sunset", "\"내려와라. 여기는 [우물]이 있다.\"", 3.0),
     P(f"{ME} packing a big backpack on the floor of a small apartment, determined face", "남은 [6일]. 당신은 짐을 쌉니다.", 2.8, flash=True),
     P("korean highway at dawn, a small car driving toward green mountains, empty road", "서울을 떠나 [3시간].", 2.6),

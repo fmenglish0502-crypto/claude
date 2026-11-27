@@ -30,7 +30,7 @@ S = [
     P("apartment hallway at night with people covering their noses, trash bags piled up", "복도엔 [냄새]가 가득합니다.", 2.6),
     P("park at night next to apartments with people digging small holes in the dark, flashlights", "사람들이 [화단]에 몰래 볼일을 봅니다.", 2.8),
     P("glowing green germs and bacteria floating in murky dirty water, close-up, dark, no people, no text", "이게 진짜 위험입니다. [전염병].", 2.8),
-    P("busy hospital entrance at night with no lights, people waiting outside", "단전된 병원은 [발전기]로 겨우 버팁니다.", 2.8),
+    P("hospital building at night with only a few emergency lights on, ambulance, crowd waiting outside", "단전된 병원은 [발전기]로 겨우 버팁니다.", 2.8),
     P(f"{ME} reading a message on the phone in a farmhouse room, shocked face, lantern light", "친구의 문자를 본 당신은 [얼어붙습니다].", 2.8),
     P(f"{GP} pointing at a corner of the farmhouse yard behind the shed, morning, explaining", "할아버지가 말합니다. \"[뒷간]부터 만들자.\"", 3.0, flash=True),
     P(f"{ME} digging a deep hole with a shovel behind a wooden shed, morning sunlight", "집에서 [멀리], 우물에서 더 멀리.", 2.8),

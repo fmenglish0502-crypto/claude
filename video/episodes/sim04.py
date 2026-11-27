@@ -24,7 +24,7 @@ END = ("5부 예고", "할아버지가 숨긴 철문의 비밀?", "팔로우하�
 S = [
     P("silhouettes of several people with flashlights at a stone wall gate at night, tense", "[정전 6일] 밤. 대문 밖에 사람들이 서 있습니다.", 3.0),
     P("dark farmhouse at night, a hand turning off a lantern behind a paper window, no people visible", "할아버지가 [불]부터 끕니다.", 2.6),
-    P(f"{GP} whispering to {ME} in a dark farmhouse room, the old man holding a finger to his lips, an old man and a young man", "\"우리 집에 [먹을 게] 있는 걸 알면 안 된다.\"", 3.0),
+    P(f"{GP} holding a finger to his lips, whispering, dark farmhouse room, lantern", "\"우리 집에 [먹을 게] 있는 걸 알면 안 된다.\"", 3.0),
     P(f"{GP} kneeling and pulling up wooden floor planks in a dark barn, a square black hole in the floor with a wooden ladder going down, lantern on the floor", "할아버지가 창고 바닥을 [뜯습니다].", 2.8, flash=True),
     P("old underground earthen cellar with wooden beams, shelves and jars, lit by one lantern, no people", "옛날 [김치 저장고]. 땅속 2미터.", 2.8),
     P(f"{ME} carrying boxes of food down a ladder into an underground cellar, lantern light", "비축품을 [반으로] 나눠 숨깁니다.", 2.8),
@@ -37,7 +37,7 @@ S = [
     P("close-up of a small child's face, pale, tired eyes, wrapped in a scarf", "\"애가 이틀째 [물]을 못 마셨어요.\"", 3.0),
     P(f"{ME} standing behind the gate, conflicted face, holding a water bottle", "당신이라면 [문]을 열겠습니까?", 2.8),
     P(f"{GP} at an open wooden gate handing water bottles to a young mother holding a child, dawn light", "할아버지는 [문]을 엽니다.", 2.6),
-    P(f"{GP} talking kindly to the mother, pointing toward the village hall, warm morning light", "\"[나누는] 집이 오래 버티는 법이다.\"", 3.0),
+    P(f"{GP} smiling kindly, pointing toward a village hall, warm morning light", "\"[나누는] 집이 오래 버티는 법이다.\"", 3.0),
     P("village hall yard in the morning, villagers bringing pots, firewood and water barrels together", "마을 회관에 [공동 부엌]이 차려집니다.", 2.8),
     P("villagers taking turns guarding the village entrance with flashlights at night, organized", "밤엔 [돌아가며] 마을을 지킵니다.", 2.8),
     P("a crowd of people sharing hot soup at long tables outdoors, warm atmosphere", "혼자 숨은 집보다 [함께]가 셌습니다.", 2.8),

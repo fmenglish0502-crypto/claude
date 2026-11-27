@@ -28,7 +28,7 @@ S = [
     P("dark apartment stairwell, tired people climbing stairs with flashlights and water bottles", "[엘리베이터]가 멈췄습니다. 25층까지 계단.", 3.0),
     P("close-up of a kitchen faucet turned on with no water coming out, dark kitchen, no people", "그리고 [수돗물]도 끊깁니다.", 2.6),
     P("cross-section of a tall apartment building with a water pump in the basement and pipes going up, simple infographic, no text", "고층은 [전기 펌프]로 물을 올리거든요.", 3.0),
-    P("close-up of a glowing smartphone screen showing a big red low battery icon, held in a hand in total darkness", "[정전 6시간]. 배터리 31%.", 2.6, flash=True),
+    P(f"{ME} looking worried at his phone in a dark room, phone shows a red battery", "[정전 6시간]. 배터리 31%.", 2.6, flash=True),
     P("cell phone tower on a rooftop at night with its lights going dark, gloomy sky, no people", "기지국 비상전원이 [바닥]납니다.", 2.8),
     P("close-up of a smartphone on a wooden table, screen shows a big no signal cross icon, dark room, no people", "[전화]도, 인터넷도 끊깁니다.", 2.6),
     P("dark convenience store at night, cashier shaking head at a customer holding a credit card", "편의점 카드기는 [먹통].", 2.6),
@@ -48,7 +48,7 @@ S = [
     P(f"{ME} listening to an old portable radio on the floor, serious face, lantern light", "[정전 3일]. 라디오만 들립니다.", 2.6, flash=True),
     P("close-up of an old silver portable radio with a glowing dial on a wooden floor, lantern light, no people", "\"복구 시점은 [미정]입니다.\"", 2.8),
     P(f"{ME} staring at the phone with the last message on screen, worried face, lantern light", "마지막으로 온 친구 문자 한 통.", 2.8),
-    P("close-up of a hand holding a smartphone in the dark, screen showing one white text message bubble", "\"야… 우리 집 [화장실]이 이상해.\"", 3.2),
+    P(f"{ME} reading a text message on his phone in the dark, shocked face, lantern light", "\"야… 우리 집 [화장실]이 이상해.\"", 3.2),
     dict(dur=3.0, end=True, lines=[]),
 ]
 for _s in S:
