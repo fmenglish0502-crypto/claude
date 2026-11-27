@@ -5,12 +5,11 @@
 
 STYLE = "sim"
 PHOTO_MODEL = "dreamshaper"
-PHOTO_STYLE = ("2d animated film still, flat vector illustration, simple cel shading, cinematic wide shot, muted colors, "
-               "dark navy blue shadows with warm amber lamp light, detailed environment, single scene, no text")
+PHOTO_STYLE = "cute 2d cartoon animated movie still, single frame, big round eyes, simple faces, bold outlines, flat colors, wide shot, detailed background"
 TITLE = ("", "")
 
-ME = "a young korean man in his 20s with short black hair and a dark navy hoodie, simple flat cartoon character"
-GP = "an old korean grandfather in his 70s with short white hair, tanned wrinkled face, brown work vest, simple flat cartoon character"
+ME = "cartoon young korean man with big round eyes, black hair, navy hoodie"
+GP = "cartoon korean grandpa with big round eyes, white hair, brown vest"
 HOUSE = "a traditional korean countryside house with a tiled roof, stone wall, persimmon tree, mountains behind"
 
 
