@@ -1,3 +1,4 @@
+import re
 """02편 '할머니를 밀친 여자의 최후' 자막 애니메이션 영상 만들기 (1080x1920, 30fps).
 
 사용법: python3 make_karma.py <폰트폴더> <출력.mp4>
@@ -651,6 +652,57 @@ def caption_ref(img, speaker, text, lt):
     img.paste(layer, (0, 0), layer)
 
 
+def caption_sim(img, text, lt):
+    """가상 시나리오 자막: 화면 가운데 아래쪽, 아주 큰 굵은 흰 글씨 + 두꺼운 검은 외곽선.
+    [대괄호] 안 낱말은 주황색으로 강조. 짧게(한 줄 8~10자) 쓰는 게 원칙."""
+    parts = re.split(r"(\[[^\]]*\])", text)
+    words = []  # (글자, 강조?)
+    for pt in parts:
+        if not pt:
+            continue
+        hi = pt.startswith("[")
+        for w in pt.strip("[]").split(" "):
+            if w:
+                words.append((w, hi))
+    size = 108
+    while True:
+        f = font(size, "XB")
+        sp = f.getlength(" ")
+        lines, cur, cw = [], [], 0
+        for w, hi in words:
+            wl = f.getlength(w)
+            if cur and cw + sp + wl > 960:
+                lines.append(cur); cur, cw = [], 0
+            cw += (sp if cur else 0) + wl
+            cur.append((w, hi, wl))
+        if cur:
+            lines.append(cur)
+        if len(lines) <= 2 or size <= 72:
+            break
+        size -= 8
+    pop = min(1.0, lt / 0.1)
+    sc_ = 0.85 + 0.15 * pop
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ld = ImageDraw.Draw(layer)
+    lh = int(size * 1.15)
+    top = 1330 - (len(lines) * lh) // 2
+    for i, ln in enumerate(lines):
+        tw = sum(wl for _, _, wl in ln) + sp * (len(ln) - 1)
+        x = 540 - tw / 2
+        y = top + i * lh + lh // 2
+        for w, hi, wl in ln:
+            col = (255, 150, 20) if hi else (255, 255, 255)
+            ld.text((x + 6, y + 8), w, font=f, fill=(0, 0, 0, 150), anchor="lm", stroke_width=9, stroke_fill=(0, 0, 0, 150))
+            ld.text((x, y), w, font=f, fill=col, anchor="lm", stroke_width=9, stroke_fill=(20, 20, 20))
+            x += wl + sp
+    if sc_ < 1:
+        layer = layer.resize((int(W * sc_), int(H * sc_)))
+        big = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        big.paste(layer, ((W - layer.width) // 2, int(1330 * (1 - sc_))))
+        layer = big
+    img.paste(layer, (0, 0), layer)
+
+
 def photo_frame(sc, lt):
     """사진 한 장에 움직임 주기: zoomin(기본) / zoomout / panl / panr / shake."""
     im = _photo(sc["_idx"])
@@ -691,8 +743,9 @@ def render_scene(sc, lt):
         img.paste(cuts_frame(sc, lt), (0, 0))  # 참조 스타일: 화면 가득 빠른 컷
         sh = Image.new("RGBA", (W, H), (0, 0, 0, 0))  # 자막 잘 보이게 아래쪽만 살짝 어둡게
         sd = ImageDraw.Draw(sh)
-        for yy in range(1250, H, 10):
-            sd.rectangle((0, yy, W, yy + 10), fill=(0, 0, 0, int(150 * (yy - 1250) / (H - 1250))))
+        if STYLE != "sim":
+            for yy in range(1250, H, 10):
+                sd.rectangle((0, yy, W, yy + 10), fill=(0, 0, 0, int(150 * (yy - 1250) / (H - 1250))))
         img.paste(sh, (0, 0), sh)
         d = ImageDraw.Draw(img)
     elif sc.get("photo") is not None and os.environ.get("PHOTO_DIR"):
@@ -753,7 +806,9 @@ def render_scene(sc, lt):
     if lines and sc.get("starts"):
         idx = max(i for i, s in enumerate(sc["starts"]) if s <= lt)
         spk, txt = lines[idx]
-        if STYLE == "ref":
+        if STYLE == "sim":
+            caption_sim(img, txt, lt - sc["starts"][idx])
+        elif STYLE == "ref":
             caption_ref(img, spk, txt, lt - sc["starts"][idx])
         else:
             caption(d, spk, txt, lt - sc["starts"][idx])
@@ -767,11 +822,13 @@ def render_scene(sc, lt):
             idx = min(len(lines) - 1, int(lt / seg))
             start = idx * seg
         spk, txt = lines[idx]
-        if STYLE == "ref":
+        if STYLE == "sim":
+            caption_sim(img, txt, lt - start)
+        elif STYLE == "ref":
             caption_ref(img, spk, txt, lt - start)
         else:
             caption(d, spk, txt, lt - start)
-    if STYLE != "ref":
+    if STYLE not in ("ref", "sim"):
         title_bar(d, lt)
     elif PART and not sc.get("end"):
         part_badge(img)

@@ -37,7 +37,7 @@ else:
     STEPS, GS = 6, 8.0
 pipe.set_progress_bar_config(disable=True)
 
-REF = getattr(ep, "STYLE", "") == "ref"
+REF = getattr(ep, "STYLE", "") in ("ref", "sim")
 W_, H_ = (504, 896) if REF else (512, 768)  # ref 스타일은 화면 꽉 차는 9:16
 jobs = []
 for i, sc in enumerate(ep.S):
